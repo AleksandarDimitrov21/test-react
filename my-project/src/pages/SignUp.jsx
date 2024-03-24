@@ -1,54 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import UserInput from "../components/ui/UserInput";
-import Buttom from "../components/ui/Buttom";
-import { useNavigate } from "react-router-dom";
-import { isAlphanumeric } from "../validation/Validation";
 import { Link } from "react-router-dom";
-
-const Login = ({ isLoggedIn }) => {
+import Buttom from "../components/ui/Buttom";
+import { isValidEmail } from "../validation/Validation";
+import { useState } from "react";
+const SignUp = () => {
   const [values, setValues] = useState({
     username: "",
     password: "",
+    email: "",
   });
-  const navigate = useNavigate();
-
   const [showCaution, setShowCaution] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === "username") {
-      setShowCaution(!isAlphanumeric(value));
-    }
-    if (name === "password") {
-      setShowCaution(!isAlphanumeric(value));
-    }
     setValues({ ...values, [name]: value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, password } = values;
-
-    if (username === "user" && password === "123456") {
-      isLoggedIn(true);
-      navigate("/");
-    } else {
-      console.log("No match");
-      setShowCaution(true);
-    }
   };
-
   return (
     <>
       <div className="bg-gradient-to-r from-pink-100 to-orange-200">
-        <div className="flex justify-center items-center h-screen ">
+        <div className="flex justify-center items-center h-screen">
           <div className="border-x-1 shadow-lg w-auto rounded-xl py-5 bg-white">
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col w-auto mx-auto px-8"
+              className="flex flex-col w-auto mx-auto px-16"
             >
-              <h1 className="text-3xl font-bold text-black mb-4">Log in:</h1>
+              <h1 className="text-3xl font-bold text-black mb-4">Sign Up:</h1>{" "}
               <UserInput
                 type={"text"}
                 placeholder={"Username:"}
@@ -57,24 +37,31 @@ const Login = ({ isLoggedIn }) => {
                 onChange={handleChange}
               />
               <UserInput
+                type={"text"}
+                placeholder={"Email:"}
+                name={"email"}
+                value={values.email}
+                onChange={handleChange}
+              />
+              <UserInput
                 type={"password"}
-                placeholder={"Passsword:"}
+                placeholder={"Password:"}
                 name={"password"}
                 value={values.password}
                 onChange={handleChange}
               />
-              <h6 className="text-xs">
-                Don't have an account?{" "}
-                <Link to="/signup" className="text-pink-500">
-                  Sign Up
-                </Link>
-              </h6>
               {showCaution && (
                 <p className="text-red-500 text-xs">
                   Incorrect Username or Password.
                 </p>
               )}
-              <Buttom textMessage={"Login now"} />
+              <p className="text-xs">
+                Already have an account?{" "}
+                <Link to="/login" className="text-pink-500">
+                  Log in
+                </Link>
+              </p>
+              <Buttom textMessage={"Sign Up now"} />{" "}
             </form>
           </div>
         </div>
@@ -83,4 +70,4 @@ const Login = ({ isLoggedIn }) => {
   );
 };
 
-export default Login;
+export default SignUp;

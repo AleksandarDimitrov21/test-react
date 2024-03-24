@@ -6,7 +6,7 @@ const WholePagePhoto = () => {
       <div className="relative">
         <div className="w-full h-screen absolute bg-black bg-opacity-20" />
         <img
-          src="src/assets/mainPhoto.jpg"
+          src="src/assets/try.jpg"
           alt="Product"
           className="w-full h-screen object-cover"
         />

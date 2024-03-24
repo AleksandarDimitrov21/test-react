@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 
 const Buttom = ({ textMessage }) => {
-  const [color, setColor] = useState("");
-
-  const handleClick = () => {
-    setColor("bg-green-700");
-    setTimeout(() => {
-      setColor("black");
-    }, 1000);
-  };
   return (
-    <button className={`btn ${color} text-white mt-5`} onClick={handleClick}>
+    <button className="btn bg-black text-white hover:bg-violet-500 mt-5">
       {textMessage}
     </button>
   );

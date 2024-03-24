@@ -23,34 +23,37 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="bg-base-200 rounded-xl px-28 py-12 mb-5">
-        <h1 className="flex justify-center text-3xl font-bold text-neutral-400">
-          Contact us:
+    <div className="flex justify-center bg-white mt-5">
+      <div className="bg-gray-100 rounded-xl px-28 py-12 mb-5 ">
+        <h1 className="flex justify-center text-3xl font-bold text-black  ">
+          <span className="border-b border-black pb-1">Contact us:</span>
         </h1>
         <form
           ref={form}
           onSubmit={sendEmail}
           className="flex flex-col w-80 rounded-xl "
         >
-          <label className="text-neutral-400">Name:</label>
+          <label>Name:</label>
           <input
             type="text"
             name="from_name"
-            className="rounded-md h-12 text-white pl-2"
+            className="rounded-md h-12 text-black bg-white hover:bg-neutral-100 pl-2"
           />
           <label>Email:</label>
           <input
             type="email"
             name="from_email"
-            className="h-12 rounded-md pl-2 text-white "
+            className="h-12 rounded-md pl-2 bg-white hover:bg-neutral-100 text-black "
           />
           <label>Message:</label>
           <textarea
             name="message"
-            className="rounded-md h-32 pl-2 text-white"
+            className="rounded-md h-32 pl-2 bg-white hover:bg-neutral-100 text-black"
           />
-          <Buttom textMessage={"Send"} />
+          <Buttom
+            textMessage={"Send"}
+            className="btn bg-white hover:bg-neutral-100"
+          />
         </form>
       </div>
     </div>

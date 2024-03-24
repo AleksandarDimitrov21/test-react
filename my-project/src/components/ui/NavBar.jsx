@@ -2,13 +2,49 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
+  const scrollToTop = (top) => {
+    window.scrollTo({
+      top: top,
+      behavior: "smooth",
+    });
+  };
   return (
-    <div className="navbar bg-stone-800">
-      <div className="flex-1">
-        <a className="btn btn-ghost text-xl">HomeAI</a>
+    <div className="navbar bg-transparent fixed z-50 flex items-center justify-between">
+      <div>
+        <a
+          className="btn btn-ghost bg-transparent text-xl"
+          onClick={() => scrollToTop(0)}
+        >
+          HomeAI
+        </a>
+      </div>
+      <div className="flex items-center">
+        {/* Five "Hello" messages with reduced margin between them */}
+        <div className="mx-2">
+          <a className=" text-xl cursor-pointer" onClick={() => scrollToTop(0)}>
+            Home
+          </a>
+        </div>
+        <div className="mx-2">
+          <h1 className="text-xl cursor-pointer">Products</h1>
+        </div>
+        <div className="mx-2">
+          <h1 className="text-xl cursor-pointer">About us</h1>
+        </div>
+        <div className="mx-2">
+          <h1 className="text-xl cursor-pointer">Contacts</h1>
+        </div>
+        <div className="mx-2">
+          <h1
+            className="text-xl cursor-pointer"
+            onClick={() => scrollToTop(850)}
+          >
+            FAQs
+          </h1>
+        </div>
       </div>
       <div className="flex-none">
-        <div className="mr-3">
+        <div className="btn mr-3 text-black text-xl btn-ghost">
           {!isLoggedIn && <Link to="/login">Login</Link>}
         </div>
         {isLoggedIn && (
