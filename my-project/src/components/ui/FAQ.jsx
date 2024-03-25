@@ -14,6 +14,7 @@ const FAQ = () => {
       [accordionKey]: !prevState[accordionKey],
     }));
   };
+
   return (
     <>
       <div className="bg-gray-100 my-5 mx-4 rounded-xl pb-10">

@@ -1,59 +1,33 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import { Link as Scroll } from "react-scroll";
 
-const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
+const NavBarDiff = ({ isLoggedIn, setIsLoggedIn }) => {
+  const scrollToTop = (top) => {
+    window.scrollTo({
+      top: top,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="navbar bg-transparent fixed z-50 flex items-center justify-between">
       <div>
         <a
           className="btn btn-ghost bg-transparent text-xl text-black"
-          onClick={() => scrollToElement("top")}
+          onClick={() => scrollToTop(0)}
         >
           HomeAI
         </a>
       </div>
-      <div className="flex items-center">
-        <div className="mx-2">
-          <a
-            href="/"
-            className="text-xl text-black cursor-pointer"
-            onClick={() => scrollToElement("top")}
-          >
-            Home
-          </a>
-        </div>
-        <div className="mx-2">
-          <Link to="/product">
-            <h1 className="text-xl text-black cursor-pointer">Products</h1>
-          </Link>
-        </div>
-        <div className="mx-2">
-          <h1 className="text-xl text-black cursor-pointer">About us</h1>
-        </div>
-        <div className="mx-2">
-          <h1 className="text-xl text-black cursor-pointer">Contacts</h1>
-        </div>
-        <div className="mx-2">
-          <Scroll
-            activeClass="active"
-            to="FAQs"
-            spy={true}
-            smooth={true}
-            offset={-260}
-            duration={500}
-          >
-            <h1
-              name="FAQs"
-              className="element text-xl cursor-pointer text-black"
-            >
-              FAQs
-            </h1>
-          </Scroll>
-        </div>
-      </div>
       <div className="flex-none">
-        <div className="btn mr-3 text-black text-xl btn-ghost">
-          {!isLoggedIn && <Link to="/login">Login</Link>}
+        <div className=" mr-3 text-black text-xl">
+          <Link to="/" className="mr-5 font-bold">
+            Home
+          </Link>
+          {!isLoggedIn && (
+            <Link to="/login" className="font-bold">
+              Login
+            </Link>
+          )}
         </div>
         {isLoggedIn && (
           <div className="dropdown dropdown-end">
@@ -105,11 +79,12 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Profile"
+                  alt="Tailwind CSS Navbar component"
                   src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                 />
               </div>
             </div>
+
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
@@ -134,4 +109,4 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
   );
 };
 
-export default NavBar;
+export default NavBarDiff;

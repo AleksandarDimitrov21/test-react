@@ -8,17 +8,28 @@ import Carousel from "../components/ui/Carousel";
 import FAQ from "../components/ui/FAQ";
 import Countdown from "../components/ui/Countdown";
 import ScrollVelocity from "../components/ui/animation/ScrollVelocity";
+import { Element } from "react-scroll";
+import SeeProduct from "../components/ui/SeeProduct";
+import Location from "../components/ui/Location";
+import About from "../components/ui/About";
 const Home = ({ status, setStatus }) => {
   return (
     <>
-      <div className="overflow-hidden h-screen">
-        <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
-        <WholePagePhoto />
+      <div className="bg-white">
+        <div className="overflow-hidden h-screen">
+          <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
+          <WholePagePhoto />
+        </div>
+        <SeeProduct />
+        <About />
+        <Element name="FAQs" className="element">
+          <FAQ />
+        </Element>
+        <ContactForm />
+        <Countdown />
+        <Location />
+        <Footer />
       </div>
-      <FAQ />
-      <ContactForm />
-      <Countdown />
-      <Footer />
     </>
   );
 };
