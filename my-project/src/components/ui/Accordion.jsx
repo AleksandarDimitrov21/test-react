@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Accordion = ({ onAccordionChange }) => {
+const Accordion = ({ onAccordionChange, title, message }) => {
   const [selectedAccordion, setSelectedAccordion] = useState(null);
 
   const handleAccordionChange = (index) => {
