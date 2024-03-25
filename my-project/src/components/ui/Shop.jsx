@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 const Shop = () => {
   return (
-    <div className="card w-96 shadow-xl">
+    <div className="card w-96 h-fit shadow-xl">
       <figure className="m-0">
         <img src="src/assets/Samsung.png" alt="Shoes" className="w-full" />
       </figure>
-      <div className="card-body bg-white rounded-lg">
+      <div className="card-body rounded-lg">
         <h2 className="card-title">
           Samsung M70B
           <div className="badge badge-secondary">NEW</div>
           <div className="badge badge-error">PROMO</div>
         </h2>
-        <p>1500 lv.</p>
+        <p className="h-12">1000</p>
         <div className="card-actions justify-end">
           <div>
             <button className="btn bg-black hover:bg-violet-500 border-0 text-white">

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SeeProduct = () => {
   return (
-    <div className="mt-5 mb-5">
+    <div className="mt-5">
       <div
         className="hero h-60"
         style={{
@@ -18,7 +18,7 @@ const SeeProduct = () => {
               Interested in exploring more products?
             </h1>
             <Link to="/product">
-              <button className="btn btn-primary bg-violet-500">
+              <button className="btn  btn-primary text-white bg-violet-500">
                 Click here
               </button>
             </Link>

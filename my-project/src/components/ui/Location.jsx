@@ -8,7 +8,7 @@ const Location = () => {
       height="450"
       className="hero h-70"
       loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
+      referrerPolicy="no-referrer-when-downgrade"
     ></iframe>
   );
 };

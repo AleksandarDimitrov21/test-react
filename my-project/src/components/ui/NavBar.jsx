@@ -16,7 +16,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="mx-2">
           <a
             href="/"
-            className="text-xl text-black cursor-pointer"
+            className="text-xl text-black cursor-pointer font-semibold"
             onClick={() => scrollToElement("top")}
           >
             Home
@@ -24,14 +24,20 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
         </div>
         <div className="mx-2">
           <Link to="/product">
-            <h1 className="text-xl text-black cursor-pointer">Products</h1>
+            <h1 className="text-xl text-black cursor-pointer font-semibold">
+              Products
+            </h1>
           </Link>
         </div>
         <div className="mx-2">
-          <h1 className="text-xl text-black cursor-pointer">About us</h1>
+          <h1 className="text-xl text-black cursor-pointer font-semibold">
+            About us
+          </h1>
         </div>
         <div className="mx-2">
-          <h1 className="text-xl text-black cursor-pointer">Contacts</h1>
+          <h1 className="text-xl text-black cursor-pointer font-semibold">
+            Contacts
+          </h1>
         </div>
         <div className="mx-2">
           <Scroll
@@ -44,7 +50,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           >
             <h1
               name="FAQs"
-              className="element text-xl cursor-pointer text-black"
+              className="element text-xl cursor-pointer text-black font-semibold"
             >
               FAQs
             </h1>
@@ -65,7 +71,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
               <div className="indicator">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="h-5 w-5 text-black"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -77,7 +83,9 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span className="badge badge-sm indicator-item">8</span>
+                <span className="badge badge-sm indicator-item text-white border-none bg-violet-600">
+                  8
+                </span>
               </div>
             </div>
             <div

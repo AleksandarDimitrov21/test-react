@@ -1,4 +1,3 @@
-import React from "react";
 import NavBar from "../components/ui/NavBar";
 import WholePagePhoto from "../components/ui/WholePagePhoto";
 import Tester from "../components/ui/Tester";
@@ -12,24 +11,37 @@ import { Element } from "react-scroll";
 import SeeProduct from "../components/ui/SeeProduct";
 import Location from "../components/ui/Location";
 import About from "../components/ui/About";
+import Loading from "../components/ui/Loading";
+import { useEffect, useState } from "react";
+
 const Home = ({ status, setStatus }) => {
+  const [isLoading, setIsLoaded] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(false);
+    });
+  }, []);
   return (
     <>
-      <div className="bg-white">
-        <div className="overflow-hidden h-screen">
-          <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
-          <WholePagePhoto />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="bg-white">
+          <div className="overflow-hidden h-screen">
+            <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
+            <WholePagePhoto />
+          </div>
+          <SeeProduct />
+          <About />
+          <Element name="FAQs" className="element">
+            <FAQ />
+          </Element>
+          <ContactForm />
+          <Countdown />
+          <Location />
+          <Footer />
         </div>
-        <SeeProduct />
-        <About />
-        <Element name="FAQs" className="element">
-          <FAQ />
-        </Element>
-        <ContactForm />
-        <Countdown />
-        <Location />
-        <Footer />
-      </div>
+      )}
     </>
   );
 };

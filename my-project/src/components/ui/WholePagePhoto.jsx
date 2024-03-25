@@ -5,9 +5,13 @@ const WholePagePhoto = () => {
     <>
       <div className="relative ">
         <div className="w-full h-screen absolute bg-black bg-opacity-20" />
-        <img
-          src="src/assets/try.jpg"
+        <video
+          src="src\assets\video.mp4"
           alt="Product"
+          autoPlay
+          loop
+          muted
+          type="video/mp4"
           className="w-full h-screen object-cover"
         />
 

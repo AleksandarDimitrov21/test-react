@@ -44,7 +44,7 @@ const About = () => {
         <div>
           <h1 className="text-5xl font-bold mb-5 text-violet-500">About us:</h1>
           <Accordion onAccordionChange={handleAccordionChange} />
-          <button className="btn btn-primary mt-10">Get Started</button>
+          <button className="btn btn-primary mt-10">Learn more</button>
         </div>
       </div>
     </div>
