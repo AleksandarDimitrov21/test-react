@@ -14,6 +14,7 @@ import About from "../components/ui/About";
 import Loading from "../components/ui/Loading";
 import { useEffect, useState } from "react";
 import ScrollButton from "../components/ui/ScrollButton";
+import PromoSlide from "../components/ui/PromoSlide";
 
 const Home = ({ status, setStatus }) => {
   const [isLoading, setIsLoaded] = useState(true);
@@ -34,6 +35,7 @@ const Home = ({ status, setStatus }) => {
           </div>
           <SeeProduct />
           <About />
+          <PromoSlide />
           <ScrollButton />
           <Element name="FAQs" className="element">
             <FAQ />

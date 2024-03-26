@@ -16,16 +16,17 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
       </div>
       <div className="flex items-center bg-gray-200 opacity-90 rounded-full  py-1.5 shadow">
         <div className="ml-2 mr-2">
-          <a
-            href="/"
-            className={`btn ${
-              currentPage === "/"
-                ? "bg-white text-black"
-                : "bg-transparent text-black"
-            } border-none text-xl cursor-pointer hover:bg-white font-semibold rounded-full shadow-none`}
-          >
-            Home
-          </a>
+          <Link to="/">
+            <h1
+              className={`btn ${
+                currentPage === "/"
+                  ? "bg-white text-black"
+                  : "bg-transparent text-black"
+              } border-none text-xl cursor-pointer hover:bg-white font-semibold rounded-full shadow-none`}
+            >
+              Home
+            </h1>
+          </Link>
         </div>
         <div className="mx-2">
           <Link to="/product">

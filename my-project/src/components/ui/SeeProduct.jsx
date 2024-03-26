@@ -16,7 +16,7 @@ const SeeProduct = () => {
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md">
             <h1 className="mb-5 text-4xl font-bold text-white">
-              Interested in exploring more products?
+              Interested in exploring our products?
             </h1>
             <Link to="/product">
               <button className="btn  btn-primary text-white bg-violet-500">
