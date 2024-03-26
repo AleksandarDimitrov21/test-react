@@ -21,12 +21,12 @@ const SignUp = () => {
   };
   return (
     <>
-      <div className="bg-gradient-to-r from-pink-100 to-orange-200">
+      <div className="bg-gradient-to-r from-indigo-300 to-violet-200">
         <div className="flex justify-center items-center h-screen">
           <div className="border-x-1 shadow-lg w-auto rounded-xl py-5 bg-white">
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col w-auto mx-auto px-16"
+              className="flex flex-col w-auto mx-auto px-8"
             >
               <h1 className="text-3xl font-bold text-black mb-4">Sign Up:</h1>{" "}
               <UserInput
@@ -57,7 +57,7 @@ const SignUp = () => {
               )}
               <p className="text-xs">
                 Already have an account?{" "}
-                <Link to="/login" className="text-pink-500">
+                <Link to="/login" className="text-violet-700">
                   Log in
                 </Link>
               </p>

@@ -13,6 +13,7 @@ import Location from "../components/ui/Location";
 import About from "../components/ui/About";
 import Loading from "../components/ui/Loading";
 import { useEffect, useState } from "react";
+import ScrollButton from "../components/ui/ScrollButton";
 
 const Home = ({ status, setStatus }) => {
   const [isLoading, setIsLoaded] = useState(true);
@@ -33,6 +34,7 @@ const Home = ({ status, setStatus }) => {
           </div>
           <SeeProduct />
           <About />
+          <ScrollButton />
           <Element name="FAQs" className="element">
             <FAQ />
           </Element>

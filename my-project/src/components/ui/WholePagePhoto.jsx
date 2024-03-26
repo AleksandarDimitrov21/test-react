@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const WholePagePhoto = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const [fadeOpacity, setFadeOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      const opacity = 1 - currentScrollY / (window.innerHeight / 2);
+      setFadeOpacity(opacity < 0 ? 0 : opacity);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const text = "Welcome to Smart Home".split(" ");
+
   return (
     <>
       <div className="relative ">
@@ -17,7 +36,10 @@ const WholePagePhoto = () => {
           className="w-full h-screen object-cover"
         />
 
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ opacity: fadeOpacity }}
+        >
           <h1 className="text-white font-sans text-6xl font-bold ">
             {text.map((el, i) => (
               <motion.span
@@ -29,7 +51,7 @@ const WholePagePhoto = () => {
                   delay: i / 5,
                 }}
                 className={
-                  el === "Smart" || el === "Home" ? "text-violet-700" : ""
+                  el === "Welcome" || el === "to" ? "text-violet-700" : ""
                 }
               >
                 {el}{" "}

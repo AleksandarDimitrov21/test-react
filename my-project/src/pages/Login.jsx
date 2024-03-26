@@ -41,7 +41,7 @@ const Login = ({ isLoggedIn }) => {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-pink-100 to-orange-200">
+      <div className="bg-gradient-to-r from-indigo-300 to-violet-200">
         <div className="flex justify-center items-center h-screen ">
           <div className="border-x-1 shadow-lg w-auto rounded-xl py-5 bg-white">
             <form
@@ -65,7 +65,7 @@ const Login = ({ isLoggedIn }) => {
               />
               <h6 className="text-xs">
                 Don't have an account?{" "}
-                <Link to="/signup" className="text-pink-500">
+                <Link to="/signup" className="text-violet-700">
                   Sign Up
                 </Link>
               </h6>

@@ -6,17 +6,16 @@ import FAQAccordion from "./FAQAccordion";
 const FAQ = () => {
   return (
     <>
-      <div className="flex justify-center bg-gray-100 my-5 mx-4 rounded-xl">
+      <div className="flex justify-center  bg-gray-100 my-5 mx-4 rounded-xl">
         <div className="py-8">
           <h3 className="flex font-bold text-violet-500 justify-center ">
             FAQs
           </h3>
-          <h1 className="flex text-4xl font-semibold text-black justify-center">
+          <h1 className="flex text-4xl  font-semibold text-black justify-center">
             Frequently asked questions
           </h1>
           <h2 className="text-lg font-medium text-slate-500 flex justify-center pt-3 pb-16">
-            Need help with something? Here are our most frequently asked
-            questions.
+            Here are our most frequently asked questions.
           </h2>
           <div className="flex flex-col">
             <FAQAccordion
