@@ -6,6 +6,8 @@ import { useState } from "react";
 import SignUp from "./pages/SignUp";
 import Shop from "./components/ui/Shop";
 import Product from "./pages/Product";
+import AboutPage from "./pages/AboutPage";
+import Profile from "./pages/Profile";
 
 function App() {
   const [userData, setUserData] = useState(false);
@@ -20,8 +22,17 @@ function App() {
           path="/product"
           element={<Product status={userData} setStatus={setUserData} />}
         />
+        <Route
+          path="/about"
+          element={<AboutPage status={userData} setStatus={setUserData} />}
+        />
         {userData ? (
-          <>{/* STATISTIKA SHTE E  TUKA */}</>
+          <>
+            <Route
+              path="/profile"
+              element={<Profile isLoggedIn={setUserData} />}
+            />
+          </>
         ) : (
           <>
             <Route path="/login" element={<Login isLoggedIn={setUserData} />} />

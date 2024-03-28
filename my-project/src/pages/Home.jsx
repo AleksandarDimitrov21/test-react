@@ -35,13 +35,13 @@ const Home = ({ status, setStatus }) => {
           </div>
           <SeeProduct />
           <About />
-          <PromoSlide />
+
           <ScrollButton />
           <Element name="FAQs" className="element">
             <FAQ />
           </Element>
           <ContactForm />
-          <Countdown />
+
           <Location />
           <Footer />
         </div>

@@ -12,7 +12,7 @@ const Product = ({ status, setStatus }) => {
           <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
         </div>
         <div className="flex flex-col flex-grow ">
-          <h1 className="flex justify-start mt-5 pl-10 text-4xl text-violet-500">
+          <h1 className="flex justify-start mt-20 pl-10 text-4xl text-violet-500">
             Products:
           </h1>
           <ScrollButton />
