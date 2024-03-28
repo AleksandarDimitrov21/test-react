@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Card = () => {
   return (
@@ -34,9 +35,11 @@ const Card = () => {
             Subtotal: <span className="text-violet-600">BGN 300</span>
           </span>
           <div className="card-actions">
-            <button className="btn btn-primary text-white btn-block">
-              View cart
-            </button>
+            <Link to="/card">
+              <button className="btn btn-primary text-white btn-block">
+                View cart
+              </button>
+            </Link>
           </div>
         </div>
       </div>
