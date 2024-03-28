@@ -72,7 +72,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
         </div>
         {isLoggedIn && (
           <div className="mr-2">
-            <Card />
+            <Card quantity={1} price={300} />
           </div>
         )}
         {isLoggedIn && (

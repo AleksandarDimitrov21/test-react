@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = ({ quantity, price }) => {
   return (
     <div className="dropdown dropdown-end items-center">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle ">
@@ -30,9 +30,9 @@ const Card = () => {
         className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-gray-200 shadow"
       >
         <div className="card-body">
-          <span className="font-bold text-lg text-black">8 Items</span>
+          <span className="font-bold text-lg text-black">{quantity} Items</span>
           <span className=" text-black">
-            Subtotal: <span className="text-violet-600">BGN 300</span>
+            Subtotal: <span className="text-violet-600">BGN {price}</span>
           </span>
           <div className="card-actions">
             <Link to="/card">
