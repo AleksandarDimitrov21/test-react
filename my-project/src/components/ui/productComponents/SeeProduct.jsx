@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FadeAwayText from "./animation/FadeAwayText";
+import FadeAwayText from "../animation/FadeAwayText";
 
 const SeeProduct = () => {
   return (

@@ -35,15 +35,14 @@ const Avatar = () => {
           alt="avatar"
           onClick={handleImageClick}
         />
-        <input
-          ref={fileInputRef}
-          id="fileInput"
-          type="file"
-          className="hidden"
-          onChange={handleFileChange}
-          onClick={(e) => (e.target.value = null)} // Clear input value on click
-        />
       </label>
+      <input
+        ref={fileInputRef}
+        id="fileInput"
+        type="file"
+        className="hidden"
+        onChange={handleFileChange}
+      />
     </div>
   );
 };

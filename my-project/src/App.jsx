@@ -1,10 +1,8 @@
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import ProductList from "./pages/ProductList";
 import { useState } from "react";
 import SignUp from "./pages/SignUp";
-import Shop from "./components/ui/Shop";
 import Product from "./pages/Product";
 import AboutPage from "./pages/AboutPage";
 import Profile from "./pages/Profile";

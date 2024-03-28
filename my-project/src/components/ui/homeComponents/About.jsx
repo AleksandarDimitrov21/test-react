@@ -1,5 +1,5 @@
 import React from "react";
-import Accordion from "./Accordion";
+import Accordion from "../homeComponents/Accordion";
 import { useState } from "react";
 
 const About = () => {

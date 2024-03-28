@@ -1,6 +1,5 @@
 import React from "react";
-import NavBar from "../components/ui/NavBar";
-import PromoSlide from "../components/ui/PromoSlide";
+import NavBar from "../components/ui/navigation/NavBar";
 
 const AboutPage = ({ status, setStatus }) => {
   return (
@@ -10,9 +9,7 @@ const AboutPage = ({ status, setStatus }) => {
           <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
         </div>
         <div>
-          <div className="flex  justify-center items-center w-full ">
-            <PromoSlide />
-          </div>
+          <div className="flex  justify-center items-center w-full "></div>
         </div>
       </div>
     </>

@@ -1,20 +1,17 @@
-import NavBar from "../components/ui/NavBar";
-import WholePagePhoto from "../components/ui/WholePagePhoto";
-import Tester from "../components/ui/Tester";
-import Footer from "../components/ui/Footer";
+import NavBar from "../components/ui/navigation/NavBar";
+
+import WholePagePhoto from "../components/ui/photoComponents/WholePagePhoto";
+import Footer from "../components/ui/homeComponents/Footer";
 import ContactForm from "../contact/ContactForm";
-import Carousel from "../components/ui/Carousel";
-import FAQ from "../components/ui/FAQ";
-import Countdown from "../components/ui/Countdown";
-import ScrollVelocity from "../components/ui/animation/ScrollVelocity";
+import FAQ from "../components/ui/FAQ/FAQ";
+
 import { Element } from "react-scroll";
-import SeeProduct from "../components/ui/SeeProduct";
-import Location from "../components/ui/Location";
-import About from "../components/ui/About";
-import Loading from "../components/ui/Loading";
+import SeeProduct from "../components/ui/productComponents/SeeProduct";
+import Location from "../components/ui/homeComponents/Location";
+import About from "../components/ui/homeComponents/About";
+import Loading from "../components/ui/loading/Loading";
 import { useEffect, useState } from "react";
 import ScrollButton from "../components/ui/ScrollButton";
-import PromoSlide from "../components/ui/PromoSlide";
 
 const Home = ({ status, setStatus }) => {
   const [isLoading, setIsLoaded] = useState(true);

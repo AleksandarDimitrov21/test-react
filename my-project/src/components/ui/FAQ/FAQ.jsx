@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Buttom from "./Buttom";
+import Buttom from "../Buttom";
 import FAQAccordion from "./FAQAccordion";
 
 const FAQ = () => {

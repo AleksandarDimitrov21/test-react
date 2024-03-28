@@ -1,9 +1,8 @@
 import React from "react";
-import Shop from "../components/ui/Shop";
-import NavBar from "../components/ui/NavBar";
-import Drawer from "../components/ui/Drawer";
+import Shop from "../components/ui/productComponents/Shop";
+import NavBar from "../components/ui/navigation/NavBar";
+import Drawer from "../components/ui/productComponents/Drawer";
 import ScrollButton from "../components/ui/ScrollButton";
-import PromoSlide from "../components/ui/PromoSlide";
 const Product = ({ status, setStatus }) => {
   return (
     <>
