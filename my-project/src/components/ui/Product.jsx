@@ -12,8 +12,8 @@ function Product(props) {
         />
       </div>
       <div className="p-4">
-        <h2 className="text-xl font-bold">{productName}</h2>
-        <p className="text-lg font-semibold">${price}</p>
+        <h2 className="text-xl font-bold text-black">{productName}</h2>
+        <p className="text-lg font-semibold text-black">${price}</p>
       </div>
     </div>
   );
