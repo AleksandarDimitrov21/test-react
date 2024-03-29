@@ -2,7 +2,7 @@ import React from "react";
 import BackgroundPhoto from "../components/ui/photoComponents/BackgroundPhoto";
 import Avatar from "../components/ui/photoComponents/Avatar";
 import Stat from "../components/profileComponents/Stat";
-import Order from "../components/profileComponents/Order";
+import Order from "../components/profileComponents/PreviousOrder";
 const Profile = () => {
   return (
     <>
@@ -36,7 +36,24 @@ const Profile = () => {
               </div>
             </div>
             <div class="mt-4 ">
-              <Order />
+              <Order
+                status={"Delivered"}
+                title={"Robot"}
+                description={"It cleans."}
+                price={"BGN 200"}
+                image={
+                  "https://s1.kaercher-media.com/mam/12696200/mainproduct/205903/d3.jpg"
+                }
+              />
+              <Order
+                status={"Delivered"}
+                title={"Robot"}
+                description={"It cleans."}
+                price={"BGN 200"}
+                image={
+                  "https://s1.kaercher-media.com/mam/12696200/mainproduct/205903/d3.jpg"
+                }
+              />
             </div>
           </div>
         </div>
