@@ -27,9 +27,30 @@ const CartPage = () => {
                   </h1>
                 </div>
                 <div className="gap-3">
-                  <InsideCart />
-                  <InsideCart />
-                  <InsideCart />
+                  <InsideCart
+                    title={"Dog"}
+                    image={
+                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+                    }
+                    description={"Golden retirver"}
+                    price={999}
+                  />
+                  <InsideCart
+                    title={"Dog"}
+                    image={
+                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+                    }
+                    description={"Golden retirver"}
+                    price={999}
+                  />
+                  <InsideCart
+                    title={"Dog"}
+                    image={
+                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+                    }
+                    description={"Golden retirver"}
+                    price={999}
+                  />
                 </div>
               </div>
               <div className="right bg-gray-200 p-4 w-96 rounded-r-lg shadow-md flex flex-col justify-between">
