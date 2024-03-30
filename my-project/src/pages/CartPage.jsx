@@ -14,7 +14,7 @@ const CartPage = () => {
 
           <div className="absolute inset-0 ">
             <Link to="/">
-              <button className="absolute top-0 right-0 m-4 text-lg text-black font-bold">
+              <button className="absolute top-0 right-0 m-4 text-md text-black bg-white hover:bg-violet-700 border-none font-bold rounded-full p-3">
                 Home
               </button>
             </Link>
