@@ -25,20 +25,16 @@ const CartPage = () => {
             </div>
             <div className="summary-text">
               <p className="text-lg font-medium text-black mb-3">
-                Subtotal:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp; 1230$
+                Subtotal: 1230$
               </p>
               <p className="text-lg font-medium text-black mb-6">
-                Estimated Delivery & Handling: &nbsp; &nbsp; Free
+                Estimated Delivery & Handling: Free
               </p>
-              <hr className="border-t-2 border-gray-300"></hr>
-              <p className="text-lg font-medium text-black mb-6 mt-5">
-                Total:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1230$
+
+              <p className="text-lg font-medium text-black mb-6 mt-5 border-y-2 py-2">
+                Total: 1230$
               </p>
-              <hr className="border-t-2 border-gray-300"></hr>
+
               <button className="bg-black hover:bg-zinc-700 text-white font-semibold py-5 px-5 text-lg rounded-full w-80 mt-5">
                 Checkout
               </button>
