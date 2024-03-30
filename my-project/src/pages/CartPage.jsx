@@ -37,7 +37,7 @@ const CartPage = () => {
               <div className="right bg-gray-200 p-4 w-96 rounded-r-lg shadow-md flex flex-col justify-between">
                 {/* Summary */}
                 <div>
-                  <h1 className="text-black text-2xl font-bold mb-4">
+                  <h1 className="text-black  text-2xl font-bold mb-4">
                     Summary
                   </h1>
                   <div className="flex justify-between mb-2">
