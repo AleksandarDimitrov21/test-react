@@ -13,7 +13,7 @@ const CartPage = () => {
         <div className="text-black font-bold text-4xl">CartPage</div>
         <div className="flex justify-center h-auto mt-10">
           {/*Container*/}
-          <div className="left bg-slate-200 p-4 w-2/5">
+          <div className="left bg-slate-200 p-4 w-2/5 rounded-l-lg">
             {/*Bag*/}
             <div>
               <h1 className="text-black text-2xl font-bold mb-4">Bag</h1>
@@ -94,7 +94,7 @@ const CartPage = () => {
               </div>
             </div>
           </div>
-          <div className="right bg-slate-200 p-4 w-1/5">
+          <div className="right bg-slate-200 p-4 w-1/5 rounded-r-lg">
             {/*Summary*/}
             <div>
               <h1 className="text-black text-2xl font-bold mb-4">Summary</h1>
