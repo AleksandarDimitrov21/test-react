@@ -11,6 +11,11 @@ const Product = ({ status, setStatus }) => {
           <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
         </div>
         <div className="flex flex-col flex-grow ">
+          {!status && (
+            <h1 className="flex justify-center mt-20 pl-10 text-4xl text-violet-500">
+              Please log in to add products to the card.
+            </h1>
+          )}
           <h1 className="flex justify-start mt-20 pl-10 text-4xl text-violet-500">
             Products:
           </h1>
@@ -28,6 +33,7 @@ const Product = ({ status, setStatus }) => {
                     "https://image-us.samsung.com/SamsungUS/home/television-home-theater/tvs/samsung-neo-qled-8k/03162023/QN65QN900CFXZA_003_L-Perspective_Titan-Black-1600x1200-1.jpg?$product-details-jpg$"
                   }
                   price={2300}
+                  status={status}
                 />
                 <Shop
                   title={"V-Tac"}
@@ -35,6 +41,7 @@ const Product = ({ status, setStatus }) => {
                     "https://www.smart-house.bg/4986-thickbox_default/smart-robotic-vacuum-cleaner.jpg"
                   }
                   price={800}
+                  status={status}
                 />
                 <Shop
                   title={"LG 27"}
@@ -42,6 +49,7 @@ const Product = ({ status, setStatus }) => {
                     "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1650555585-screen-shot-2022-04-21-at-11-39-20-am-1650555572.png?crop=0.9342359767891683xw:1xh;center,top&resize=980:*"
                   }
                   price={1900}
+                  status={status}
                 />
                 <Shop
                   title={"Yale"}
@@ -49,6 +57,7 @@ const Product = ({ status, setStatus }) => {
                     "https://media.cnn.com/api/v1/images/stellar/prod/yale-assure-lock-2-product-card-cnnu.jpeg?c=16x9&q=h_720,w_1280,c_fill"
                   }
                   price={65}
+                  status={status}
                 />
                 <Shop
                   title={"LG 27"}
@@ -56,6 +65,7 @@ const Product = ({ status, setStatus }) => {
                     "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1650555585-screen-shot-2022-04-21-at-11-39-20-am-1650555572.png?crop=0.9342359767891683xw:1xh;center,top&resize=980:*"
                   }
                   price={1900}
+                  status={status}
                 />
                 <Shop
                   title={"LG 27"}
@@ -63,6 +73,7 @@ const Product = ({ status, setStatus }) => {
                     "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1650555585-screen-shot-2022-04-21-at-11-39-20-am-1650555572.png?crop=0.9342359767891683xw:1xh;center,top&resize=980:*"
                   }
                   price={1900}
+                  status={status}
                 />
                 <Shop
                   title={"LG 27"}
@@ -70,6 +81,7 @@ const Product = ({ status, setStatus }) => {
                     "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1650555585-screen-shot-2022-04-21-at-11-39-20-am-1650555572.png?crop=0.9342359767891683xw:1xh;center,top&resize=980:*"
                   }
                   price={1900}
+                  status={status}
                 />
               </div>
             </div>

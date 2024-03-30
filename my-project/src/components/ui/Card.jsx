@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Card = ({ quantity, price }) => {
+const Card = ({ cartQuantity, cartPrice }) => {
   return (
     <div className="dropdown dropdown-end items-center">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle ">
@@ -21,7 +21,7 @@ const Card = ({ quantity, price }) => {
             />
           </svg>
           <span className="badge badge-sm indicator-item text-white border-none bg-violet-600">
-            8
+            {cartQuantity}
           </span>
         </div>
       </div>
@@ -30,9 +30,11 @@ const Card = ({ quantity, price }) => {
         className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-gray-200 shadow"
       >
         <div className="card-body">
-          <span className="font-bold text-lg text-black">{quantity} Items</span>
+          <span className="font-bold text-lg text-black">
+            {cartQuantity} Items
+          </span>
           <span className=" text-black">
-            Subtotal: <span className="text-violet-600">BGN {price}</span>
+            Subtotal: <span className="text-violet-600">BGN {cartPrice}</span>
           </span>
           <div className="card-actions">
             <Link to="/card">

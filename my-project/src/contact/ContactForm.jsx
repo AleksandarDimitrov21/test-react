@@ -48,7 +48,7 @@ const ContactForm = () => {
           <label>Message:</label>
           <textarea
             name="message"
-            className="rounded-md h-32 pl-2 bg-white hover:bg-neutral-100 text-black"
+            className="rounded-md h-32 max-h-80 pl-2 bg-white hover:bg-neutral-100 text-black"
           />
           <Buttom
             textMessage={"Send"}

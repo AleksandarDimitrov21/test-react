@@ -1,6 +1,7 @@
 import React from "react";
 import Accordion from "../homeComponents/Accordion";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const About = () => {
   const [selectedAccordionIndex, setSelectedAccordionIndex] = useState(0);
@@ -44,7 +45,11 @@ const About = () => {
         <div>
           <h1 className="text-5xl font-bold mb-5 text-violet-500">About us:</h1>
           <Accordion onAccordionChange={handleAccordionChange} />
-          <button className="btn btn-primary mt-10">Learn more</button>
+          <Link to="/about">
+            <button className="btn bg-violet-500 hover:bg-violet-700 text-white mt-10">
+              Learn more
+            </button>
+          </Link>
         </div>
       </div>
     </div>
