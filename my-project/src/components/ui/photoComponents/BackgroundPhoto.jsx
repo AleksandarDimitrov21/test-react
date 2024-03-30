@@ -1,5 +1,5 @@
 import React from "react";
-import Avatar from "./Avatar";
+import Avatar from "../photoComponents/Avatar";
 import { Link } from "react-router-dom";
 
 const BackgroundPhoto = () => {
@@ -7,7 +7,7 @@ const BackgroundPhoto = () => {
     <div>
       <div className="relative">
         <Link to="/">
-          <button className="absolute top-0 right-0 m-4 text-lg text-white font-bold">
+          <button className="absolute top-0 right-0 m-4 text-md text-white bg-black hover:bg-violet-700 border-none font-bold rounded-full p-3">
             Home
           </button>
         </Link>

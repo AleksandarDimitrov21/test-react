@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FadeAwayText from "./animation/FadeAwayText";
+import FadeAwayText from "../animation/FadeAwayText";
 
 const SeeProduct = () => {
   return (
@@ -19,7 +19,7 @@ const SeeProduct = () => {
               Interested in exploring our products?
             </h1>
             <Link to="/product">
-              <button className="btn  btn-primary text-white bg-violet-500">
+              <button className="btn  btn-primary text-white bg-violet-500 hover:bg-violet-700 border-none">
                 Click here
               </button>
             </Link>

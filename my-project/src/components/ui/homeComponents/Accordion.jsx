@@ -15,7 +15,7 @@ const Accordion = ({ onAccordionChange, title, message }) => {
         <div className="collapse collapse-arrow bg-white">
           <input
             type="radio"
-            name="my-accordion-2"
+            name="accordion-see-1"
             checked={selectedAccordion === 0}
             onChange={() => handleAccordionChange(0)}
           />
@@ -32,7 +32,7 @@ const Accordion = ({ onAccordionChange, title, message }) => {
         <div className="collapse collapse-arrow bg-white">
           <input
             type="radio"
-            name="my-accordion-2"
+            name="accordion-see-2"
             checked={selectedAccordion === 1}
             onChange={() => handleAccordionChange(1)}
           />
@@ -49,7 +49,7 @@ const Accordion = ({ onAccordionChange, title, message }) => {
         <div className="collapse collapse-arrow bg-white ">
           <input
             type="radio"
-            name="my-accordion-2"
+            name="accordion-see-3"
             checked={selectedAccordion === 2}
             onChange={() => handleAccordionChange(2)}
           />
