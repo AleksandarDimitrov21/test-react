@@ -18,6 +18,7 @@ const SideBarFilter = ({ title, children }) => {
         <span className="ml-3 ">{title}</span>
       </h1>
       <ul className={`ml-9 py-4  ${isOpen ? "block" : "hidden"}`}>
+        <input type="checkbox" checked={isOpen} onChange={toggleAccordion} />
         {children}
       </ul>
     </li>

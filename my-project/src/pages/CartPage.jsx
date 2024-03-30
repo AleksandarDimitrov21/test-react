@@ -12,18 +12,18 @@ const CartPage = () => {
         </Link>
         <div className="text-black font-bold text-4xl">CartPage</div>
         <div className="flex w-full justify-center h-screen">
-          <div className="cart w-2/5">
+          <div className="w-2/5">
             <div>
               <h1 className="text-black text-2xl font-bold mb-4 mt-12">Bag</h1>
             </div>
           </div>
-          <div className="summary ml-8 w-80">
+          <div className="ml-8 w-80">
             <div>
               <h1 className="text-black text-2xl font-bold mb-4 mt-12">
                 Summary
               </h1>
             </div>
-            <div className="summary-text">
+            <div className="">
               <p className="text-lg font-medium text-black mb-3">
                 Subtotal: 1230$
               </p>
@@ -41,6 +41,8 @@ const CartPage = () => {
             </div>
           </div>
         </div>
+
+
       </div>
     </>
   );

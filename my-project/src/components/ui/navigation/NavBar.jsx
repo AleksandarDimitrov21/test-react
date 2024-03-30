@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import ProfileNav from "./ProfileNav";
-import Card from "./Card";
+import Card from "../Card";
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
   const location = useLocation();
@@ -72,7 +72,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
         </div>
         {isLoggedIn && (
           <div className="mr-2">
-            <Card />
+            <Card cartQuantity={0} cartPrice={0} />
           </div>
         )}
         {isLoggedIn && (

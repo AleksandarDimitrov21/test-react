@@ -2,9 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 
 const Avatar = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(
-    "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-  );
+  const [imageUrl, setImageUrl] = useState(() => {
+    // Load the image URL from localStorage if available
+    return (
+      localStorage.getItem("avatarImageUrl") ||
+      "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+    );
+  });
 
   const fileInputRef = useRef(null);
 
@@ -17,6 +21,8 @@ const Avatar = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImageUrl(reader.result);
+        // Save the new image URL to localStorage
+        localStorage.setItem("avatarImageUrl", reader.result);
       };
       reader.readAsDataURL(selectedFile);
     }
@@ -35,15 +41,14 @@ const Avatar = () => {
           alt="avatar"
           onClick={handleImageClick}
         />
-        <input
-          ref={fileInputRef}
-          id="fileInput"
-          type="file"
-          className="hidden"
-          onChange={handleFileChange}
-          onClick={(e) => (e.target.value = null)} // Clear input value on click
-        />
       </label>
+      <input
+        ref={fileInputRef}
+        id="fileInput"
+        type="file"
+        className="hidden"
+        onChange={handleFileChange}
+      />
     </div>
   );
 };
