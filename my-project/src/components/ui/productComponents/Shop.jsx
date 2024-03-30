@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Shop = ({ title, price, image, status }) => {
-  // const [cartQuantity, setCartQuantity] = useState(0);
-  // const [cartPrice, setCartPrice] = useState(0);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const [cartPrice, setCartPrice] = useState(0);
 
   const handleAddToCart = () => {
     setCartQuantity((prevQuantity) => prevQuantity + 1);

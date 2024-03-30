@@ -7,7 +7,7 @@ const BackgroundPhoto = () => {
     <div>
       <div className="relative">
         <Link to="/">
-          <button className="absolute top-0 right-0 m-4 text-2xl text-white font-bold">
+          <button className="absolute top-0 right-0 m-4 text-md text-white bg-black hover:bg-violet-700 border-none font-bold rounded-full p-3">
             Home
           </button>
         </Link>

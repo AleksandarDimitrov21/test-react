@@ -23,11 +23,11 @@ const Order = ({ status, title, description, price, image }) => {
           </div>
         </div>
         <div className="flex flex-col ml-auto mr-8 mt-2 gap-1">
-          <button className="btn bg-violet-400 hover:bg-violet-600 text-white px-6">
+          <button className="btn bg-violet-400 hover:bg-violet-600 text-white px-6 border-none">
             View
           </button>
           <Link to="/product">
-            <button className="btn bg-violet-400 hover:bg-violet-600 text-white px-6">
+            <button className="btn bg-violet-400 hover:bg-violet-600 text-white px-6 border-none">
               Shop
             </button>
           </Link>
