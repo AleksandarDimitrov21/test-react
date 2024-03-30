@@ -4,7 +4,7 @@ import NavBar from "../components/ui/navigation/NavBar";
 const AboutPage = ({ status, setStatus }) => {
   return (
     <>
-      <div className="bg-white flex h-screen">
+      <div className="bg-white flex h-svh">
         <div className="overflow-hidden h-16 ">
           <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
         </div>

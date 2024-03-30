@@ -6,7 +6,7 @@ import Order from "../components/profileComponents/PreviousOrder";
 const Profile = () => {
   return (
     <>
-      <div className="bg-white h-screen">
+      <div className="bg-white h-max">
         <BackgroundPhoto />
         <div className="w-full h-0 flex justify-center items-center">
           <Avatar />
@@ -36,6 +36,7 @@ const Profile = () => {
               </div>
             </div>
             <div className="mt-4 ">
+              <h1>Recently bought:</h1>
               <Order
                 status={"Delivered"}
                 title={"Robot"}
