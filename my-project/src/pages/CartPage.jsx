@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import Scrollbar from "smooth-scrollbar";
 import InsideCart from "../components/ui/productComponents/InsideCart";
+
 const CartPage = () => {
   const Products = [
     {
@@ -11,6 +13,22 @@ const CartPage = () => {
       price: 99,
     },
   ];
+
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const scrollbar = Scrollbar.init(scrollRef.current, {
+      damping: 0.1,
+      thumbMinSize: 20,
+      renderByPixels: true,
+      alwaysShowTracks: true,
+    });
+
+    return () => {
+      scrollbar.destroy();
+    };
+  }, []);
+
   return (
     <>
       <div className="relative h-screen">
@@ -18,6 +36,7 @@ const CartPage = () => {
           <img
             src="src\assets\mainPhoto.jpg"
             className="h-full w-full object-cover filter blur-sm"
+            alt="Main Background"
           />
 
           <div className="absolute inset-0 ">
@@ -28,63 +47,52 @@ const CartPage = () => {
             </Link>
 
             <div className="flex justify-center mt-32">
-              <div className="left bg-gray-100 p-4 w-2/5 rounded-l-lg">
+              <div
+                className="left bg-gray-100 p-4 w-2/5 rounded-l-lg"
+                ref={scrollRef}
+              >
                 <div>
                   <h1 className="text-violet-500 text-2xl font-bold mb-4">
                     Bag
                   </h1>
                 </div>
-                <div className="gap-3 h-[560px] overflow-y-auto  custom-scrollbar">
-                  {Products.map((product) => {
-                    return (
-                      <InsideCart
-                        title={product.title}
-                        image={product.image}
-                        price={product.price}
-                        description={product.description}
-                      />
-                    );
-                  })}
-                  <InsideCart
-                    title={"Dog"}
-                    image={
-                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-                    }
-                    description={"Golden retirver"}
-                    price={999}
-                  />
-                  <InsideCart
-                    title={"Dog"}
-                    image={
-                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-                    }
-                    description={"Golden retirver"}
-                    price={999}
-                  />
-                  <InsideCart
-                    title={"Dog"}
-                    image={
-                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-                    }
-                    description={"Golden retirver"}
-                    price={999}
-                  />
-                  <InsideCart
-                    title={"Dog"}
-                    image={
-                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-                    }
-                    description={"Golden retirver"}
-                    price={999}
-                  />
-                  <InsideCart
-                    title={"Dog"}
-                    image={
-                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
-                    }
-                    description={"Golden retirver"}
-                    price={999}
-                  />
+                <div className="gap-3 h-[560px] overflow-y-auto">
+                  {Products.map((product, index) => (
+                    <InsideCart
+                      key={index}
+                      title={product.title}
+                      image={product.image}
+                      price={product.price}
+                      description={product.description}
+                    />
+                  ))}
+                  {Products.map((product, index) => (
+                    <InsideCart
+                      key={index}
+                      title={product.title}
+                      image={product.image}
+                      price={product.price}
+                      description={product.description}
+                    />
+                  ))}
+                  {Products.map((product, index) => (
+                    <InsideCart
+                      key={index}
+                      title={product.title}
+                      image={product.image}
+                      price={product.price}
+                      description={product.description}
+                    />
+                  ))}
+                  {Products.map((product, index) => (
+                    <InsideCart
+                      key={index}
+                      title={product.title}
+                      image={product.image}
+                      price={product.price}
+                      description={product.description}
+                    />
+                  ))}
                 </div>
               </div>
               <div className="right bg-gray-200 p-4 w-96 rounded-r-lg shadow-md flex flex-col justify-between">
