@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import InsideCart from "../components/ui/productComponents/InsideCart";
-
 const CartPage = () => {
   return (
     <>

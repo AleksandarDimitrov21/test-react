@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Order = ({ status, title, description, price, image }) => {
   return (
-    <div className="py-12 border-y">
+    <div className="py-12 border-t">
       <div className="flex flex-wrap ">
         <div className="pr-3">
           <img

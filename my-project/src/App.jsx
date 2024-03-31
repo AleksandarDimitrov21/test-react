@@ -7,6 +7,7 @@ import Product from "./pages/Product";
 import AboutPage from "./pages/AboutPage";
 import Profile from "./pages/Profile";
 import CartPage from "./pages/CartPage";
+import ShopInside from "./components/ui/productComponents/ShopInside";
 
 function App() {
   const [userData, setUserData] = useState(false);
@@ -24,6 +25,11 @@ function App() {
         <Route
           path="/about"
           element={<AboutPage status={userData} setStatus={setUserData} />}
+        />
+
+        <Route
+          path="/product/product-info"
+          element={<ShopInside status={userData} setStatus={setUserData} />}
         />
         {userData ? (
           <>

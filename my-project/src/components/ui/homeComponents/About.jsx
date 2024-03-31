@@ -15,21 +15,21 @@ const About = () => {
       case 0:
         return (
           <img
-            src="src\assets\glupost4.jpg" // Replace with your second image URL
+            src="src\assets\glupost4.jpg"
             className="max-w-sm rounded-lg shadow-2xl"
           />
         );
       case 1:
         return (
           <img
-            src="src\assets\glupost3.jpg" // Replace with your second image URL
+            src="src\assets\glupost3.jpg"
             className="max-w-sm rounded-lg shadow-2xl"
           />
         );
       case 2:
         return (
           <img
-            src="src\assets\glupost.jpg" // Replace with your third image URL
+            src="src\assets\glupost.jpg"
             className="max-w-sm rounded-lg shadow-2xl"
           />
         );
@@ -46,7 +46,7 @@ const About = () => {
           <h1 className="text-5xl font-bold mb-5 text-violet-500">About us:</h1>
           <Accordion onAccordionChange={handleAccordionChange} />
           <Link to="/about">
-            <button className="btn bg-violet-500 hover:bg-violet-700 text-white mt-10">
+            <button className="btn bg-violet-500 hover:bg-violet-700 text-white mt-1 border-none">
               Learn more
             </button>
           </Link>

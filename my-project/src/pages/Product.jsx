@@ -3,10 +3,12 @@ import Shop from "../components/ui/productComponents/Shop";
 import NavBar from "../components/ui/navigation/NavBar";
 import Drawer from "../components/ui/productComponents/Drawer";
 import ScrollButton from "../components/ui/ScrollButton";
+import { Link } from "react-router-dom";
+
 const Product = ({ status, setStatus }) => {
   return (
     <>
-      <div className="bg-white flex">
+      <div className="bg-white flex h-screen">
         <div className="overflow-hidden h-16 ">
           <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
         </div>
@@ -35,44 +37,13 @@ const Product = ({ status, setStatus }) => {
                   price={2300}
                   status={status}
                 />
+
                 <Shop
                   title={"V-Tac"}
                   image={
                     "https://www.smart-house.bg/4986-thickbox_default/smart-robotic-vacuum-cleaner.jpg"
                   }
                   price={800}
-                  status={status}
-                />
-                <Shop
-                  title={"LG 27"}
-                  image={
-                    "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1650555585-screen-shot-2022-04-21-at-11-39-20-am-1650555572.png?crop=0.9342359767891683xw:1xh;center,top&resize=980:*"
-                  }
-                  price={1900}
-                  status={status}
-                />
-                <Shop
-                  title={"Yale"}
-                  image={
-                    "https://media.cnn.com/api/v1/images/stellar/prod/yale-assure-lock-2-product-card-cnnu.jpeg?c=16x9&q=h_720,w_1280,c_fill"
-                  }
-                  price={65}
-                  status={status}
-                />
-                <Shop
-                  title={"LG 27"}
-                  image={
-                    "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1650555585-screen-shot-2022-04-21-at-11-39-20-am-1650555572.png?crop=0.9342359767891683xw:1xh;center,top&resize=980:*"
-                  }
-                  price={1900}
-                  status={status}
-                />
-                <Shop
-                  title={"LG 27"}
-                  image={
-                    "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1650555585-screen-shot-2022-04-21-at-11-39-20-am-1650555572.png?crop=0.9342359767891683xw:1xh;center,top&resize=980:*"
-                  }
-                  price={1900}
                   status={status}
                 />
                 <Shop
