@@ -3,6 +3,15 @@ import { Link } from "react-router-dom";
 import InsideCart from "../components/ui/productComponents/InsideCart";
 
 const CartPage = () => {
+  const Products = [
+    {
+      image:
+        "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
+      title: "ProductDog",
+      description: "Tva e ot Products",
+      price: 99,
+    },
+  ];
   return (
     <>
       <div className="relative h-screen">
@@ -19,14 +28,40 @@ const CartPage = () => {
               </button>
             </Link>
 
-            <div className="flex justify-center mt-10">
+            <div className="flex justify-center mt-32">
               <div className="left bg-gray-100 p-4 w-2/5 rounded-l-lg">
                 <div>
                   <h1 className="text-violet-500 text-2xl font-bold mb-4">
                     Bag
                   </h1>
                 </div>
-                <div className="gap-3">
+                <div className="gap-3 h-[560px] overflow-y-auto  custom-scrollbar">
+                  {Products.map((product) => {
+                    return (
+                      <InsideCart
+                        title={product.title}
+                        image={product.image}
+                        price={product.price}
+                        description={product.description}
+                      />
+                    );
+                  })}
+                  <InsideCart
+                    title={"Dog"}
+                    image={
+                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+                    }
+                    description={"Golden retirver"}
+                    price={999}
+                  />
+                  <InsideCart
+                    title={"Dog"}
+                    image={
+                      "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*"
+                    }
+                    description={"Golden retirver"}
+                    price={999}
+                  />
                   <InsideCart
                     title={"Dog"}
                     image={
