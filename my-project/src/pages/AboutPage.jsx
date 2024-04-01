@@ -3,6 +3,8 @@ import NavBar from "../components/ui/navigation/NavBar";
 import Pagination from "../components/ui/aboutcomponent/Pagination";
 import { useState } from "react";
 import InfoCart from "../components/ui/aboutcomponent/InfoCart";
+import Timeline from "../components/ui/aboutcomponent/Timeline";
+import Technologies from "../components/ui/aboutcomponent/Technologies";
 
 const AboutPage = ({ status, setStatus }) => {
   const [image, setImage] = useState(0);
@@ -16,43 +18,43 @@ const AboutPage = ({ status, setStatus }) => {
       case 0:
         return (
           <img
-            src="src\assets\Elena.jpg"
-            className="max-w-sm rounded-lg shadow-2xl"
+            src="src\assets\Elana2.jpg"
+            className="max-w-sm rounded-lg shadow-2xl max-h-96"
           />
         );
       case 1:
         return (
           <img
-            src="src\assets\glupost3.jpg"
-            className="max-w-sm rounded-lg shadow-2xl"
+            src="src\assets\Hristo2.jpg"
+            className="max-w-sm rounded-lg shadow-2xl max-h-96"
           />
         );
       case 2:
         return (
           <img
-            src="src\assets\glupost.jpg"
-            className="max-w-sm rounded-lg shadow-2xl"
+            src="src\assets\Martin.jpg"
+            className="max-w-sm rounded-lg shadow-2xl max-h-96 "
           />
         );
       case 3:
         return (
           <img
-            src="src\assets\glupost.jpg"
-            className="max-w-sm rounded-lg shadow-2xl"
+            src="src\assets\sasho.jpg"
+            className="max-w-sm rounded-lg shadow-2xl  max-h-96"
           />
         );
       case 4:
         return (
           <img
             src="src\assets\glupost.jpg"
-            className="max-w-sm rounded-lg shadow-2xl"
+            className="max-w-sm rounded-lg shadow-2xl max-h-96"
           />
         );
       case 5:
         return (
           <img
-            src="src\assets\glupost.jpg"
-            className="max-w-sm rounded-lg shadow-2xl"
+            src="src\assets\angel3.jpg"
+            className="max-w-sm rounded-lg shadow-2xl max-h-96"
           />
         );
       default:
@@ -65,7 +67,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 0:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500">
+            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
               Elena Dobreva
             </h1>
             <InfoCart
@@ -78,7 +80,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 1:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500">
+            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
               Hristo Sotirov
             </h1>
             <InfoCart
@@ -93,7 +95,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 2:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500">
+            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
               Martin Venev
             </h1>
             <InfoCart
@@ -108,7 +110,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 3:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500">
+            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
               Alexandar Dimitrov
             </h1>
             <InfoCart
@@ -123,7 +125,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 4:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500">
+            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
               Stoyan Ivanov
             </h1>
             <InfoCart
@@ -136,7 +138,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 5:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500">
+            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
               Angel Stoynov
             </h1>
             <InfoCart
@@ -161,20 +163,16 @@ const AboutPage = ({ status, setStatus }) => {
         </div>
         <div className="w-full">
           <div>
-            <div
-              className="hero h-80 w-full relative"
-              style={{
-                backgroundImage:
-                  "url(https://static.vecteezy.com/system/resources/previews/001/815/239/non_2x/corporate-office-flat-illustration-vector.jpg)",
-              }}
-            >
-              <div className="hero-overlay bg-opacity-10 absolute inset-0"></div>
-              <div className="hero-content flex justify-center items-center text-white">
-                <div className="max-w-md text-center">
-                  <h1 className="mb-5 text-5xl font-bold font-serif text-zinc-700">
-                    About
-                  </h1>
-                </div>
+            <div className="relative">
+              <img
+                src="src\assets\pexel3.jpg"
+                alt="Background"
+                className="w-full h-screen object-cover"
+              />
+              <div className="absolute inset-0 flex justify-center items-center">
+                <h1 className="text-5xl font-bold font-serif text-white">
+                  About
+                </h1>
               </div>
             </div>
           </div>
@@ -187,20 +185,18 @@ const AboutPage = ({ status, setStatus }) => {
               interact with technology.
             </h2>
             <h2>We embarked on this journey to create something meaningful.</h2>
+            <h1 className="text-3xl mt-10 mb-5 font-semibold font-serif text-zinc-800">
+              Our Mission
+            </h1>
 
-            <img
-              src="https://static.vecteezy.com/system/resources/thumbnails/025/003/630/original/corporate-team-building-animation-animated-cartoon-office-people-give-high-five-isolated-colour-flat-line-2d-characters-4k-footage-white-background-alpha-channel-transparency-for-web-design-video.jpg"
-              className="h-72 w-3/6 "
-            />
-            <div className="w-3/6 flex justify-center text-center">
-              <h2 className="font bold text-2xl  text-black font-serif">
-                Our aim is to provide accessible devices to everyone in need.
-              </h2>
-            </div>
+            <Timeline />
+
+            <Technologies />
+            <div className="w-3/6 flex justify-center text-center"></div>
             <h1 className="text-4xl mt-10 mb-5 font-semibold font-serif text-zinc-800">
               Meet our members
             </h1>
-            <div className="rounded-lg">
+            <div className="rounded-lg flex-col justify-center">
               <div className="hero-content flex-col lg:flex-row-reverse">
                 {renderImage()}
                 <div>{renderText()}</div>
