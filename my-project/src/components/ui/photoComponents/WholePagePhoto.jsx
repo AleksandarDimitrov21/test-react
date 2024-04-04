@@ -25,7 +25,7 @@ const WholePagePhoto = () => {
   return (
     <>
       <div className="relative ">
-        <div className="w-full h-screen absolute bg-black bg-opacity-20" />
+        <div className="w-full h-screen absolute bg-black bg-opacity-20 border-none shadow-md shadow-gray-100" />
         <video
           src="src\assets\video.mp4"
           alt="Product"

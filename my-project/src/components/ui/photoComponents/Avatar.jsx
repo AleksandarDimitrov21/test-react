@@ -32,10 +32,18 @@ const Avatar = () => {
   };
 
   return (
-    <div className="avatar">
-      <label className="cursor-pointer w-48 h-48 rounded-full overflow-hidden">
+    <div className="avatar ">
+      <label
+        className="cursor-pointer w-48 h-48 rounded-full overflow-hidden border border-transparent hover:border-gray-300"
+        onMouseEnter={() => {
+          fileInputRef.current.classList.add("opacity-100");
+        }}
+        onMouseLeave={() => {
+          fileInputRef.current.classList.remove("opacity-100");
+        }}
+      >
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover "
           src={imageUrl}
           alt="avatar"
           onClick={handleImageClick}

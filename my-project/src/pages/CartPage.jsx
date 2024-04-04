@@ -56,7 +56,7 @@ const CartPage = () => {
                     Bag
                   </h1>
                 </div>
-                <div className="gap-3 h-[560px] overflow-y-auto">
+                <div className="gap-3 h-[480px] overflow-y-auto">
                   {Products.map((product, index) => (
                     <InsideCart
                       key={index}

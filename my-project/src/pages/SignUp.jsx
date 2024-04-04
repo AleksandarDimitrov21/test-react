@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import UserInput from "../components/ui/UserInput";
 import { Link } from "react-router-dom";
 import Buttom from "../components/ui/Buttom";
 import { isValidEmail } from "../validation/Validation";
-import { useState } from "react";
+
 const SignUp = () => {
-  const [values, setValues] = useState({
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
     username: "",
     password: "",
-    email: "",
   });
   const [showCaution, setShowCaution] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:8080/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        console.log("User signed up successfully!");
+      } else {
+        setShowCaution(true);
+        console.error("Error signing up:", response);
+      }
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
   };
+
   return (
     <>
       <div className="bg-gradient-to-r from-indigo-300 to-violet-200">
@@ -29,39 +49,46 @@ const SignUp = () => {
               className="flex flex-col w-auto mx-auto px-8"
             >
               <h1 className="text-3xl font-bold text-black mb-4">Sign Up:</h1>{" "}
-              <UserInput
+              {/* <UserInput
                 type={"text"}
                 placeholder={"Username:"}
                 name={"username"}
-                value={values.username}
+                value={formData.username}
+                onChange={handleChange}
+              />
+              <UserInput
+                type={"text"}
+                placeholder={"Name:"}
+                name={"name"}
+                value={formData.name}
                 onChange={handleChange}
               />
               <UserInput
                 type={"text"}
                 placeholder={"Email:"}
                 name={"email"}
-                value={values.email}
+                value={formData.email}
                 onChange={handleChange}
               />
               <UserInput
                 type={"password"}
                 placeholder={"Password:"}
                 name={"password"}
-                value={values.password}
+                value={formData.password}
                 onChange={handleChange}
-              />
+              /> */}
               {showCaution && (
                 <p className="text-red-500 text-xs">
                   Incorrect Username or Password.
                 </p>
               )}
               <p className="text-xs">
-                Already have an account?{" "}
+                Already have an account?
                 <Link to="/login" className="text-violet-700">
                   Log in
                 </Link>
               </p>
-              <Buttom textMessage={"Sign Up now"} />{" "}
+              <Buttom textMessage="Sign Up now" />
             </form>
           </div>
         </div>

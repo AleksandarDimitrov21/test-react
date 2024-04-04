@@ -43,7 +43,7 @@ const Timeline = () => {
         </div>
         <div className="timeline-end mb-10">
           <div className="text-lg ">
-            Empowering businesses with AI-driven insights
+            Empowering businesses with IoT-driven insights
           </div>
         </div>
         <hr />
@@ -65,8 +65,8 @@ const Timeline = () => {
           </svg>
         </div>
         <div className="timeline-start md:text-end mb-10">
-          <div className="text-lg ">
-            Simplifying complex processes through intelligent automation
+          <div>
+            <div className="text-lg ">Enhancing user experience</div>
           </div>
         </div>
         <hr />
@@ -87,10 +87,9 @@ const Timeline = () => {
             />
           </svg>
         </div>
-        <div className="timeline-end mb-10">
-          <div className="text-lg ">
-            Enhancing user experiences with personalized AI solutions
-          </div>
+
+        <div className="timeline-end text-lg mb-10 ">
+          Simplifying complex processes through intelligent automation
         </div>
         <hr />
       </li>
@@ -112,7 +111,7 @@ const Timeline = () => {
         </div>
         <div className="timeline-start md:text-end mb-10">
           <div className="text-lg ">
-            Advancing AI research to shape the future of technology
+            Advancing IoT research to shape the future of technology
           </div>
         </div>
       </li>

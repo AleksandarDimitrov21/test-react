@@ -181,8 +181,8 @@ const AboutPage = ({ status, setStatus }) => {
               Who are we?
             </h1>
             <h2>
-              We specialise in AI-powered devices, revolutionizing how you
-              interact with technology.
+              We provide IoT-powered devices, transforming the way you interact
+              with technology.
             </h2>
             <h2>We embarked on this journey to create something meaningful.</h2>
             <h1 className="text-3xl mt-10 mb-5 font-semibold font-serif text-zinc-800">

@@ -18,6 +18,7 @@ function App() {
           path="/"
           element={<Home status={userData} setStatus={setUserData} />}
         />
+
         <Route
           path="/product"
           element={<Product status={userData} setStatus={setUserData} />}

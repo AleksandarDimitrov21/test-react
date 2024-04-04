@@ -28,7 +28,7 @@ const Product = ({ status, setStatus }) => {
               <Drawer />
             </div>
             <div className="container mx-auto px-4">
-              <div className="grid grid-cols-3 px-20 gap-5">
+              <div className="grid grid-cols-3 px-20 ">
                 <Shop
                   title={"Samsung M70B"}
                   image={

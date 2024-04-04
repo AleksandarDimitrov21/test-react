@@ -12,8 +12,8 @@ const Profile = () => {
           <Avatar />
         </div>
         <div className="h-auto text-center mt-32">
-          <h1 className="text-4xl font-semibold text-black">Angel Sasho</h1>
-          <h2>Smart Home member since May 2022</h2>
+          <h1 className="text-4xl font-semibold text-black">Angel Stoynov</h1>
+          <h2>Upload your own picture</h2>
         </div>
         <div className="mt-5">
           <div>

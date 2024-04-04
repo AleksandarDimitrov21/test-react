@@ -22,8 +22,9 @@ const Accordion = ({ onAccordionChange, title, message }) => {
           <div className="collapse-title text-xl font-medium">Mission:</div>
           <div className="collapse-content">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Our mission is to seamlessly integrate IoT products into everyday
+              life, enhancing convenience, efficiency, and connectivity for our
+              users.
             </p>
           </div>
         </div>
@@ -39,8 +40,9 @@ const Accordion = ({ onAccordionChange, title, message }) => {
           <div className="collapse-title text-xl font-medium">Future:</div>
           <div className="collapse-content">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              IoT products revolutionize industries, homes, and daily
+              experiences, ushering in unprecedented levels of efficiency and
+              convenience.
             </p>
           </div>
         </div>
@@ -56,8 +58,8 @@ const Accordion = ({ onAccordionChange, title, message }) => {
           <div className="collapse-title text-xl font-medium">Our team:</div>
           <div className="collapse-content">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Our team is committed to provide user-friendly IoT products that
+              make your life easier and more enjoyable.
             </p>
           </div>
         </div>

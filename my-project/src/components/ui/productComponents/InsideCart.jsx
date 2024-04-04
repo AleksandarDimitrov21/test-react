@@ -29,19 +29,19 @@ const InsideCart = ({ image, title, description, price }) => {
         <div className="flex items-center">
           <p className="text-black mr-2">Quantity:</p>
           <button
-            onClick={incrementQuantity}
+            onClick={decrementQuantity}
             className="bg-violet-500 text-white p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
           >
-            <PlusIcon className="h-5 w-5" />
+            <MinusIcon className="h-5 w-5" />
           </button>
           <span className="bg-gray-200 text-black py-1  px-4 mx-2 rounded-full">
             {quantity}
           </span>
           <button
-            onClick={decrementQuantity}
+            onClick={incrementQuantity}
             className="bg-violet-500 text-white p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
           >
-            <MinusIcon className="h-5 w-5" />
+            <PlusIcon className="h-5 w-5" />
           </button>
         </div>
       </div>

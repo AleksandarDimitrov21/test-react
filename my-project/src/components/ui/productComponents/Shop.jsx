@@ -11,9 +11,9 @@ const Shop = ({ title, price, image, status }) => {
             <img src={image} alt="Products" className="w-full" />
           </figure>
           <div className="card-body rounded-lg">
-            <h2 className="card-title text-2xl text-black">
+            <h2 className="card-title text-lg text-black">
               {title}
-              <div className="badge badge-secondary">NEW</div>
+
               <div className="badge badge-error">PROMO</div>
             </h2>
 
