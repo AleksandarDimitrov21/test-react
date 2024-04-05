@@ -15,7 +15,7 @@ const Pagination = ({ diff }) => {
         <button
           key={index}
           className={`join-item h-2 w-10 bg-gray-400 hover:bg-violet-500 rounded-full focus:bg-violet-500 active:bg-violet-500 ${
-            selectButton === index
+            selectButton === index ? "bg-violet-500" : ""
           }`}
           type="button"
           onClick={() => handleButton(index)}

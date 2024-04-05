@@ -39,14 +39,14 @@ const AboutPage = ({ status, setStatus }) => {
       case 3:
         return (
           <img
-            src="src\assets\sasho.jpg"
+            src="src\assets\alex2.jpg"
             className="max-w-sm rounded-lg shadow-2xl  max-h-96"
           />
         );
       case 4:
         return (
           <img
-            src="src\assets\glupost.jpg"
+            src="src\assets\stoyan.jpg"
             className="max-w-sm rounded-lg shadow-2xl max-h-96"
           />
         );

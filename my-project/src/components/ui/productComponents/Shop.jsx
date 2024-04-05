@@ -3,9 +3,26 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Shop = ({ title, price, image, status }) => {
+  const [showButtons, setShowButtons] = useState(false);
+
   return (
     <>
-      <div className="card w-96 h-fit shadow-xl">
+      <div
+        className="relative card w-96 h-fit shadow-xl"
+        onMouseEnter={() => setShowButtons(true)}
+        onMouseLeave={() => setShowButtons(false)}
+      >
+        {showButtons && (
+          <div className="absolute top-0 right-0 mr-2 mt-2 z-10">
+            <button className="rounded-full bg-red-500 text-white p-2 mr-2">
+              <img width={20} height={20} src="/delete.svg" alt="delete" />
+            </button>
+            {/* Edit Button */}
+            <button className="rounded-full bg-violet-600 text-white p-2">
+              <img width={20} height={20} src="/edit.svg" alt="edit" />
+            </button>
+          </div>
+        )}
         <Link to="/product/product-info">
           <figure className="m-0 h-72">
             <img src={image} alt="Products" className="w-full" />
@@ -13,10 +30,8 @@ const Shop = ({ title, price, image, status }) => {
           <div className="card-body rounded-lg">
             <h2 className="card-title text-lg text-black">
               {title}
-
               <div className="badge badge-error">PROMO</div>
             </h2>
-
             <div className="card-actions justify-end items-center">
               <p className="text-xl text-gray-900">BGN {price}</p>
               <div>

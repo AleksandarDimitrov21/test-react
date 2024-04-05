@@ -17,12 +17,10 @@ const Login = ({ isLoggedIn }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "username") {
+    if (name === "username" || name === "password") {
       setShowCaution(!isAlphanumeric(value));
     }
-    if (name === "password") {
-      setShowCaution(!isAlphanumeric(value));
-    }
+
     setValues({ ...values, [name]: value });
   };
 

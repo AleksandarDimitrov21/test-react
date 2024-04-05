@@ -36,8 +36,8 @@ const ShopInside = ({ status, setStatus }) => {
       <div className="overflow-hidden h-16 ">
         <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
       </div>
-      <div className="flex justify-between items-center mt-32">
-        <div className="w-1/2 flex flex-col items-center justify-center border-r border-gray-300">
+      <div className="flex justify-betwwen items-center mt-32">
+        <div className="w-1/2 flex flex-col items-center justify-center border-r-2 border-gray-300">
           <img
             src={
               (smallImages.find((image) => image.selected) || smallImages[0])
@@ -65,15 +65,17 @@ const ShopInside = ({ status, setStatus }) => {
             ))}
           </div>
         </div>
-        <div className="w-1/2 ml-32 mb-32">
-          <h2 className="text-3xl mb-2 text-black">Product Name</h2>
+        <div className="flex flex-col justify-center pt-16 pb-16 p-32 rounded-xl  ml-16 bg-gray-200">
+          <h2 className="text-3xl px-20 mb-4 text-black">Product Name</h2>
           <p className="text-slate-800 ">Kod: 123123</p>
-          <p className="text-slate-800 ">In stock</p>
-          <p className="mb-4 mt-2 text-slate-900 text-xl">
+          <p className="text-slate-800 mb-4">In stock</p>
+          <p className="mb-4 text-slate-900 text-xl">
             Harakteristiki za produkta
           </p>
-          <p className="text-3xl mb-2 text-black">Price: 1289 00 лв.</p>
-          <button className="mt-4 bg-violet-500 hover:bg-violet-400 text-white font-bold py-2 px-4 rounded">
+          <p className="text-2xl mb-2 text-black">
+            Price: <span className="text-xl">BGN 1289.00</span>
+          </p>
+          <button className="mt-8 bg-violet-500 hover:bg-violet-400 text-white font-bold py-2 px-4 rounded-xl">
             Add to Cart
           </button>
         </div>

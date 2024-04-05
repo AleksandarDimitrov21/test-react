@@ -21,7 +21,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/user", {
+      const response = await fetch("http://localhost:8080/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,8 +48,8 @@ const SignUp = () => {
               onSubmit={handleSubmit}
               className="flex flex-col w-auto mx-auto px-8"
             >
-              <h1 className="text-3xl font-bold text-black mb-4">Sign Up:</h1>{" "}
-              {/* <UserInput
+              <h1 className="text-3xl font-bold text-black mb-4">Sign In:</h1>{" "}
+              <UserInput
                 type={"text"}
                 placeholder={"Username:"}
                 name={"username"}
@@ -76,7 +76,7 @@ const SignUp = () => {
                 name={"password"}
                 value={formData.password}
                 onChange={handleChange}
-              /> */}
+              />
               {showCaution && (
                 <p className="text-red-500 text-xs">
                   Incorrect Username or Password.
