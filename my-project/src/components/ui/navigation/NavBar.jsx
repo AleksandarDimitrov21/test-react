@@ -13,7 +13,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <div className="navbar bg-transparent fixed z-50 flex items-center justify-center ">
       <div className="flex items-center bg-gray-300 opacity-95 rounded-full py-1.5 shadow">
-        <div className="ml-2 mr-2">
+        <div className="ml-1.5 mr-1.5">
           <Link to="/">
             <h1
               className={`btn ${
@@ -26,7 +26,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             </h1>
           </Link>
         </div>
-        <div className="mx-2">
+        <div className=" mr-1.5">
           <Link to="/product">
             <h1
               className={`btn ${
@@ -39,14 +39,14 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             </h1>
           </Link>
         </div>
-        <div className="mx-2">
+        <div className="mr-1.5">
           <Link to="/about">
             <h1
               className={`btn ${
                 currentPage === "/about"
                   ? "bg-white text-black"
                   : "bg-transparent text-black"
-              } border-none text-xl cursor-pointer hover:bg-white font-semibold rounded-full shadow-none`}
+              } border-none text-xl  cursor-pointer hover:bg-white font-semibold rounded-full shadow-none`}
             >
               About
             </h1>
@@ -54,7 +54,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
         </div>
         <div>
           {!isLoggedIn && (
-            <div className="mr-2">
+            <div className="mr-1.5">
               <Link to="/login">
                 <h1
                   className={`btn ${
@@ -70,12 +70,12 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           )}
         </div>
         {isLoggedIn && (
-          <div className="mr-2">
+          <div className="mr-1">
             <Card cartQuantity={0} cartPrice={0} />
           </div>
         )}
         {isLoggedIn && (
-          <div className="mr-1 ">
+          <div className="mr-1.5">
             <ProfileNav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           </div>
         )}

@@ -11,7 +11,7 @@ const FAQ = () => {
           <h3 className="flex font-bold text-violet-500 justify-center ">
             FAQs
           </h3>
-          <h1 className="flex text-4xl  font-semibold text-black justify-center">
+          <h1 className="flex text-3xl sm:text-4xl  font-semibold text-black justify-center">
             Frequently asked questions
           </h1>
           <h2 className="text-lg font-medium text-slate-500 flex justify-center pt-3 pb-16">
@@ -30,7 +30,7 @@ const FAQ = () => {
               title="Do you offer discounts or promotions?"
               message="Yes, we frequently offer discounts and special offers to our customers."
             />
-            <button className="btn bg-violet-500 hover:bg-violet-700 text-white mt-32 w-auto border-none">
+            <button className=" btn bg-violet-500 hover:bg-violet-700 text-white mt-32 mx-4 border-none">
               See all
             </button>
           </div>

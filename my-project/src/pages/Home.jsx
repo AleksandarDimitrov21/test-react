@@ -25,22 +25,24 @@ const Home = ({ status, setStatus }) => {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="bg-white">
-          <div className="overflow-hidden h-screen">
+        <div className="bg-white min-h-screen">
+          <div className="overflow-hidden min-h-screen">
             <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
             <WholePagePhoto />
           </div>
-          <SeeProduct />
-          <About />
+          <div className="">
+            <SeeProduct />
+            <About />
 
-          <ScrollButton />
-          <Element name="FAQs" className="element">
-            <FAQ />
-          </Element>
-          <ContactForm />
+            <ScrollButton />
+            <Element name="FAQs" className="element">
+              <FAQ />
+            </Element>
+            <ContactForm />
 
-          <Location />
-          <Footer />
+            <Location />
+            <Footer />
+          </div>
         </div>
       )}
     </>

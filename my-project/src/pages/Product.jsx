@@ -9,7 +9,7 @@ const Product = ({ status, setStatus }) => {
   return (
     <>
       <div className="bg-white flex h-screen">
-        <div className="overflow-hidden h-16 ">
+        <div className="overflow-hidden  min-h-screen">
           <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
         </div>
         <div className="flex flex-col flex-grow ">

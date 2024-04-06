@@ -67,7 +67,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 0:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
+            <h1 className="text-3xl  font-bold mb-5 text-violet-500 w-72">
               Elena Dobreva
             </h1>
             <InfoCart
@@ -80,7 +80,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 1:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
+            <h1 className="text-3xl font-bold mb-5 text-violet-500 w-72">
               Hristo Sotirov
             </h1>
             <InfoCart
@@ -95,7 +95,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 2:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
+            <h1 className="text-3xl font-bold mb-5 text-violet-500 w-72">
               Martin Venev
             </h1>
             <InfoCart
@@ -110,7 +110,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 3:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
+            <h1 className="text-3xl font-bold mb-5 text-violet-500 w-72 ">
               Alexandar Dimitrov
             </h1>
             <InfoCart
@@ -125,7 +125,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 4:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
+            <h1 className="text-3xl font-bold mb-5 text-violet-500 w-72">
               Stoyan Ivanov
             </h1>
             <InfoCart
@@ -138,7 +138,7 @@ const AboutPage = ({ status, setStatus }) => {
       case 5:
         return (
           <>
-            <h1 className="text-3xl mr-40 font-bold mb-5 text-violet-500 w-72">
+            <h1 className="text-3xl font-bold mb-5 text-violet-500 w-72">
               Angel Stoynov
             </h1>
             <InfoCart
@@ -158,7 +158,7 @@ const AboutPage = ({ status, setStatus }) => {
   return (
     <>
       <div className="bg-white flex h-max">
-        <div className="overflow-hidden h-16 ">
+        <div className="overflow-hidden h-16  min-h-screen">
           <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
         </div>
         <div className="w-full">
@@ -180,11 +180,13 @@ const AboutPage = ({ status, setStatus }) => {
             <h1 className="text-4xl mt-10 mb-5 font-semibold font-serif text-zinc-800">
               Who are we?
             </h1>
-            <h2>
-              We provide IoT-powered devices, transforming the way you interact
-              with technology.
-            </h2>
-            <h2>We embarked on this journey to create something meaningful.</h2>
+            <div className="mx-2 sm:mx-0 flex justify-center items-center">
+              <h2>
+                We provide IoT-powered devices, transforming the way you
+                interact with technology. We embarked on this journey to create
+                something meaningful.
+              </h2>
+            </div>
             <h1 className="text-3xl mt-10 mb-5 font-semibold font-serif text-zinc-800">
               Our Mission
             </h1>
@@ -192,14 +194,14 @@ const AboutPage = ({ status, setStatus }) => {
             <Timeline />
 
             <Technologies />
-            <div className="w-3/6 flex justify-center text-center"></div>
+            <div className="w-3/6 flex justify-center text-center "></div>
             <h1 className="text-4xl mt-10 mb-5 font-semibold font-serif text-zinc-800">
               Meet our members
             </h1>
             <div className="rounded-lg flex-col justify-center">
               <div className="hero-content flex-col lg:flex-row-reverse">
                 {renderImage()}
-                <div>{renderText()}</div>
+                <div className="">{renderText()}</div>
               </div>
               <div className="flex justify-center items-center mb-3">
                 <Pagination diff={handleImage} />

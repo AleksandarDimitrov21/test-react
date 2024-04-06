@@ -27,20 +27,29 @@ const WholePagePhoto = () => {
       <div className="relative ">
         <div className="w-full h-screen absolute bg-black bg-opacity-20 border-none shadow-md shadow-gray-100" />
         <video
+          src="src\assets\videophone2.mp4"
+          alt="Product"
+          autoPlay
+          loop
+          muted
+          type="video/mp4"
+          className="w-full h-screen object-cover block sm:hidden"
+        />
+        <video
           src="src\assets\video.mp4"
           alt="Product"
           autoPlay
           loop
           muted
           type="video/mp4"
-          className="w-full h-screen object-cover"
+          className="w-full h-screen object-cover hidden sm:block"
         />
 
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{ opacity: fadeOpacity }}
         >
-          <h1 className="text-white font-sans text-6xl font-bold ">
+          <h1 className="text-white font-sans text-4xl sm:text-6xl font-bold ">
             {text.map((el, i) => (
               <motion.span
                 key={i}

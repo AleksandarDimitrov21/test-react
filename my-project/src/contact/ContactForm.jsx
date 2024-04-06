@@ -50,44 +50,44 @@ const ContactForm = () => {
   };
   return (
     <div className="flex justify-center bg-white mt-5">
-      <div className="bg-gray-100 rounded-xl px-28 py-12 mb-5 ">
-        <h1 className="flex justify-center text-3xl font-bold text-black  ">
-          <span className="border-b border-black pb-1">Contact us:</span>
+      <div className="bg-gray-100 rounded-xl px-5  sm:px-10 md:px-20 py-8 md:py-12 mb-5 w-full sm:w-96">
+        <h1 className="text-2xl md:text-3xl font-bold text-center text-black mb-4 md:mb-6">
+          Contact us:
         </h1>
-        <form
-          ref={form}
-          onSubmit={sendEmail}
-          className="flex flex-col w-80 rounded-xl "
-        >
-          <label>Name:</label>
+        <form ref={form} onSubmit={sendEmail} className="flex flex-col">
+          <label className="text-sm md:text-base">Name:</label>
           <input
             type="text"
             name="from_name"
-            className={`rounded-md h-12 text-black bg-white hover:bg-neutral-100 pl-2 ${
+            className={`h-10 md:h-12 rounded-md px-3 bg-white text-black mb-2 ${
               errors.name && "border border-red-500"
             }`}
           />
-          {errors.name && <p className="text-red-500">{errors.name}</p>}
-          <label>Email:</label>
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+          <label className="text-sm md:text-base">Email:</label>
           <input
             type="email"
             name="from_email"
-            className={`h-12 rounded-md pl-2 bg-white hover:bg-neutral-100 text-black ${
+            className={`h-10 md:h-12 rounded-md px-3 bg-white text-black mb-2 ${
               errors.email && "border border-red-500"
             }`}
           />
-          {errors.email && <p className="text-red-500">{errors.email}</p>}
-          <label>Message:</label>
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email}</p>
+          )}
+          <label className="text-sm md:text-base">Message:</label>
           <textarea
             name="message"
-            className={`rounded-md h-32 max-h-80 pl-2 bg-white hover:bg-neutral-100 text-black ${
+            className={`h-32 md:h-40 rounded-md px-3 bg-white text-black mb-2 ${
               errors.message && "border border-red-500"
             }`}
           />
-          {errors.message && <p className="text-red-500">{errors.message}</p>}
+          {errors.message && (
+            <p className="text-red-500 text-sm">{errors.message}</p>
+          )}
           <Buttom
-            textMessage={"Send"}
-            className="btn bg-white hover:bg-neutral-100"
+            textMessage="Send"
+            className="btn bg-white hover:bg-gray-200 text-black mt-4"
           />
         </form>
       </div>
