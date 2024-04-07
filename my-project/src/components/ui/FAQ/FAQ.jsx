@@ -11,10 +11,10 @@ const FAQ = () => {
           <h3 className="flex font-bold text-violet-500 justify-center ">
             FAQs
           </h3>
-          <h1 className="flex text-3xl sm:text-4xl  font-semibold text-black justify-center">
+          <h1 className="flex text-2xl sm:text-4xl  font-semibold text-black justify-center">
             Frequently asked questions
           </h1>
-          <h2 className="text-lg font-medium text-slate-500 flex justify-center pt-3 pb-16">
+          <h2 className="text-md font-medium text-slate-500 flex justify-center pt-3 pb-16">
             Here are our most frequently asked questions.
           </h2>
           <div className="flex flex-col">

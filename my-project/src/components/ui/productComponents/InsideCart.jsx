@@ -13,7 +13,9 @@ const InsideCart = ({ image, title, description, price }) => {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
-  const itemTotal = price * quantity;
+  const newPrice = (price) => {
+    return price * quantity;
+  };
   return (
     <div className="gap-2 py-3 border-t-2 flex flex-col sm:flex-row items-center">
       {/* Product Image and Details */}
@@ -28,7 +30,7 @@ const InsideCart = ({ image, title, description, price }) => {
         <div className="ml-4">
           <p className="text-lg text-black font-bold">{title}</p>
           <p className="text-sm text-gray-500">{description}</p>
-          <p className="text-sm text-gray-500">Price: ${price}</p>
+          <p className="text-sm text-gray-500">Price: ${newPrice(price)}</p>
         </div>
       </div>
 
@@ -50,9 +52,6 @@ const InsideCart = ({ image, title, description, price }) => {
           >
             <PlusIcon className="h-5 w-5" />
           </button>
-          <div className="ml-4 mr-2 text-sm text-black font-bold">
-            Total: ${itemTotal}
-          </div>
         </div>
       </div>
     </div>
