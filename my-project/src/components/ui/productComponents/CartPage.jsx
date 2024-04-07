@@ -34,19 +34,19 @@ const CartPage = () => {
       <div className="relative min-h-screen">
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src="src\assets\mainPhoto.jpg"
-            className="absolute inset-0 w-full h-full object-cover filter blur-sm"
+            src="https://pixelz.cc/wp-content/uploads/2018/09/iot-internet-of-things-uhd-4k-wallpaper.jpg"
+            className="absolute inset-0 w-full h-full object-cover filter "
             alt="Main Background"
           />
 
-          <div className="absolute inset-0 flex flex-col justify-between">
+          <div className="absolute inset-0 flex flex-col justify-center">
             <Link to="/" className="absolute top-0 right-0 m-4">
               <button className="text-md text-black bg-white hover:bg-violet-700 border-none font-bold rounded-full p-3">
                 Home
               </button>
             </Link>
 
-            <div className="flex justify-center mt-16 sm:mt-32">
+            <div className="flex justify-center mt-14 sm:mt-0">
               <div
                 className="bg-gray-100 p-4 rounded-l-lg overflow-y-auto"
                 ref={scrollRef}

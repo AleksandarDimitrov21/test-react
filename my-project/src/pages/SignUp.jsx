@@ -3,8 +3,9 @@ import UserInput from "../components/ui/UserInput";
 import { Link } from "react-router-dom";
 import Buttom from "../components/ui/Buttom";
 import { isValidEmail } from "../validation/Validation";
-
+import { useNavigate } from "react-router-dom";
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,6 +31,7 @@ const SignUp = () => {
       });
       if (response.ok) {
         console.log("User signed up successfully!");
+        navigate("/login");
       } else {
         setShowCaution(true);
         console.error("Error signing up:", response);
@@ -88,7 +90,7 @@ const SignUp = () => {
                   Log in
                 </Link>
               </p>
-              <Buttom textMessage="Sign Up now" />
+              <Buttom textMessage="Sign In now" />
             </form>
           </div>
         </div>

@@ -74,7 +74,7 @@ const Login = ({ isLoggedIn }) => {
               <h6 className="text-xs">
                 Don't have an account?{" "}
                 <Link to="/signup" className="text-violet-700">
-                  Sign Up
+                  Sign In
                 </Link>
               </h6>
               {showCaution && (

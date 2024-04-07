@@ -30,7 +30,7 @@ const Home = ({ status, setStatus }) => {
             <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
             <WholePagePhoto />
           </div>
-          <div className="">
+          <div>
             <SeeProduct />
             <About />
 

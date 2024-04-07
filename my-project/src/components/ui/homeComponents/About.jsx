@@ -16,21 +16,21 @@ const About = () => {
         return (
           <img
             src="src\assets\glupost4.jpg"
-            className="w-auto rounded-lg shadow-2xl"
+            className="w-42 sm:w-96 rounded-lg shadow-2xl"
           />
         );
       case 1:
         return (
           <img
             src="src\assets\glupost3.jpg"
-            className="w-auto rounded-lg shadow-2xl"
+            className="w-42 sm:w-96 rounded-lg shadow-2xl"
           />
         );
       case 2:
         return (
           <img
             src="src\assets\glupost.jpg"
-            className="w-auto rounded-lg shadow-2xl"
+            className="w-42 sm:w-96 rounded-lg shadow-2xl"
           />
         );
       default:
