@@ -49,9 +49,9 @@ const ContactForm = () => {
     return Object.keys(errors).length === 0;
   };
   return (
-    <div className="flex justify-center bg-white mt-5">
-      <div className="bg-gray-100 rounded-xl px-5  sm:px-10 md:px-20 py-8 md:py-12 mb-5 w-full sm:w-96">
-        <h1 className="text-2xl md:text-3xl font-bold text-center text-black mb-4 md:mb-6">
+    <div className="flex justify-center bg-white my-5">
+      <div className="bg-gray-100 rounded-xl px-20 py-5">
+        <h1 className="text-2xl md:text-3xl font-bold text-center text-black px-5 sm:px-20 mb-4 md:mb-6">
           Contact us:
         </h1>
         <form ref={form} onSubmit={sendEmail} className="flex flex-col">

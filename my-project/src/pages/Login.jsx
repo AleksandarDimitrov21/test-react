@@ -6,7 +6,7 @@ import { isAlphanumeric } from "../validation/Validation";
 import { Link } from "react-router-dom";
 
 const Login = ({ isLoggedIn }) => {
-  const [values, setValues] = useState({
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
@@ -21,19 +21,29 @@ const Login = ({ isLoggedIn }) => {
       setShowCaution(!isAlphanumeric(value));
     }
 
-    setValues({ ...values, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, password } = values;
-
-    if (username === "user" && password === "123456") {
-      isLoggedIn(true);
-      navigate("/");
-    } else {
-      console.log("No match");
-      setShowCaution(true);
+    try {
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        console.log("User signed up successfully!");
+        isLoggedIn(true);
+        navigate("/");
+      } else {
+        setShowCaution(true);
+        console.error("Error signing up:", response);
+      }
+    } catch (error) {
+      console.error("Error registering user:", error);
     }
   };
 
@@ -51,14 +61,14 @@ const Login = ({ isLoggedIn }) => {
                 type={"text"}
                 placeholder={"Username:"}
                 name={"username"}
-                value={values.username}
+                value={formData.username}
                 onChange={handleChange}
               />
               <UserInput
                 type={"password"}
                 placeholder={"Passsword:"}
                 name={"password"}
-                value={values.password}
+                value={formData.password}
                 onChange={handleChange}
               />
               <h6 className="text-xs">
