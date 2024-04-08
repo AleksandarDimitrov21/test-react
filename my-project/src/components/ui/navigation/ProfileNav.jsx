@@ -13,7 +13,6 @@ const Profile = ({ isLoggedIn, setIsLoggedIn }) => {
       "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
   );
 
-  // Function to update the avatar image URL in localStorage
   const updateAvatarImageUrl = (newImageUrl) => {
     setAvatarImageUrl(newImageUrl);
     localStorage.setItem("avatarImageUrl", newImageUrl);
@@ -28,6 +27,11 @@ const Profile = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="ml-3 ">
           <button className="justify-between text-black ">
             <Link to="/profile">Profile</Link>
+          </button>
+        </div>
+        <div className="ml-3 ">
+          <button className="justify-between text-black ">
+            <Link to="/orders">Orders</Link>
           </button>
         </div>
 

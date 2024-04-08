@@ -4,7 +4,6 @@ import axios from "axios";
 const Users = ({ users }) => {
   const handleDeleteUser = async (userId) => {
     try {
-      // Make DELETE request to backend API to delete the user
       await axios.delete(`/user/${userId}`);
 
       // If deletion is successful, update the users list by filtering out the deleted user
@@ -18,11 +17,6 @@ const Users = ({ users }) => {
     <tbody>
       {users.map((user) => (
         <tr key={user.id}>
-          <th>
-            <label>
-              <input type="checkbox" className="checkbox" />
-            </label>
-          </th>
           <td>
             <div className="flex items-center gap-3">
               <div className="avatar">

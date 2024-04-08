@@ -63,11 +63,6 @@ const Profile = () => {
                 <table className="table bg-zinc-800 rounded-none mb-5">
                   <thead>
                     <tr>
-                      <th>
-                        <label>
-                          <input type="checkbox" className="checkbox" />
-                        </label>
-                      </th>
                       <th className="text-lg">Name</th>
                       <th className="text-lg">Username</th>
                       <th className="text-lg">Email</th>

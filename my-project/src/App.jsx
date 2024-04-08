@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import CartPage from "./components/ui/productComponents/CartPage";
 import ShopInside from "./components/ui/productComponents/ShopInside";
 import AddProducts from "./adminPages/AddProducts";
+import Orders from "./adminPages/Orders";
 
 function App() {
   const [userData, setUserData] = useState(false);
@@ -46,6 +47,10 @@ function App() {
             <Route
               path="/card"
               element={<CartPage isLoggedIn={setUserData} />}
+            />
+            <Route
+              path="/orders"
+              element={<Orders isLoggedIn={setUserData} />}
             />
           </>
         ) : (
