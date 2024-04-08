@@ -13,6 +13,7 @@
     "@emailjs/browser": "^4.3.3",
     "@heroicons/react": "^1.0.6",
     "@tailwindui/react": "^0.1.1",
+    "axios": "^1.6.8",
     "framer-motion": "^11.0.20",
     "rc-checkbox": "^3.2.0",
     "react": "^18.2.0",

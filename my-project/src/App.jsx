@@ -8,6 +8,7 @@ import AboutPage from "./pages/AboutPage";
 import Profile from "./pages/Profile";
 import CartPage from "./components/ui/productComponents/CartPage";
 import ShopInside from "./components/ui/productComponents/ShopInside";
+import AddProducts from "./adminPages/AddProducts";
 
 function App() {
   const [userData, setUserData] = useState(false);
@@ -18,7 +19,11 @@ function App() {
           path="/"
           element={<Home status={userData} setStatus={setUserData} />}
         />
-
+        {/* ADMIN ONLY  */}
+        <Route
+          path="/add-product"
+          element={<AddProducts status={userData} setStatus={setUserData} />}
+        />
         <Route
           path="/product"
           element={<Product status={userData} setStatus={setUserData} />}

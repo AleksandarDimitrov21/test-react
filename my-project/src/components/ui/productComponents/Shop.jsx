@@ -3,17 +3,14 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Shop = ({ title, price, image, status }) => {
-  const [showButtons, setShowButtons] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
+  const [isEmployee, setEmployee] = useState(true);
 
   return (
     <>
       <div className="relative w-full sm:max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl card shadow-xl">
-        <div
-          className="absolute top-0 right-0 m-2 z-10 flex space-x-2"
-          onMouseEnter={() => setShowButtons(true)}
-          onMouseLeave={() => setShowButtons(false)}
-        >
-          {showButtons && (
+        <div className="absolute top-0 right-0 m-2 z-10 flex space-x-2">
+          {(isAdmin || isEmployee) && (
             <>
               <button className="rounded-full bg-red-500 text-white p-2">
                 <img src="/delete.svg" alt="delete" className="w-4 h-4" />

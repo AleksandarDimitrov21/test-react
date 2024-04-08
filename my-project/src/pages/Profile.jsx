@@ -3,10 +3,33 @@ import BackgroundPhoto from "../components/ui/photoComponents/BackgroundPhoto";
 import Avatar from "../components/ui/photoComponents/Avatar";
 import Stat from "../components/profileComponents/Stat";
 import Order from "../components/profileComponents/PreviousOrder";
+import Users from "../components/profileComponents/Users";
+import { useState, useEffect } from "react";
 const Profile = () => {
+  const [isAdmin, setIsAdmin] = useState(true);
+  const [isCustomer, setCustomer] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/user");
+      if (!response.ok) {
+        throw new Error("Failed to fetch user data");
+      }
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
   return (
     <>
-      <div className="bg-white h-max">
+      <div className="bg-white min-h-screen">
         <BackgroundPhoto />
         <div className="w-full h-0 flex justify-center items-center">
           <Avatar />
@@ -34,27 +57,49 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-4 mx-5">
-              <h1 className="text-2xl">Recently bought:</h1>
-              <Order
-                status={"Delivered"}
-                title={"Robot"}
-                description={"It cleans."}
-                price={"BGN 200"}
-                image={
-                  "https://s1.kaercher-media.com/mam/12696200/mainproduct/205903/d3.jpg"
-                }
-              />
-              <Order
-                status={"Delivered"}
-                title={"Robot"}
-                description={"It cleans."}
-                price={"BGN 200"}
-                image={
-                  "https://s1.kaercher-media.com/mam/12696200/mainproduct/205903/d3.jpg"
-                }
-              />
-            </div>
+
+            {isAdmin ? (
+              <div className="overflow-x-auto mt-5">
+                <table className="table bg-zinc-800 rounded-none mb-5">
+                  <thead>
+                    <tr>
+                      <th>
+                        <label>
+                          <input type="checkbox" className="checkbox" />
+                        </label>
+                      </th>
+                      <th className="text-lg">Name</th>
+                      <th className="text-lg">Username</th>
+                      <th className="text-lg">Email</th>
+                    </tr>
+                  </thead>
+                  <Users users={users} />
+                </table>
+              </div>
+            ) : null}
+            {isCustomer ? (
+              <div className=" mx-5">
+                <h1 className="text-2xl">Recently bought:</h1>
+                <Order
+                  status={"Delivered"}
+                  title={"Robot"}
+                  description={"It cleans."}
+                  price={"BGN 200"}
+                  image={
+                    "https://s1.kaercher-media.com/mam/12696200/mainproduct/205903/d3.jpg"
+                  }
+                />
+                <Order
+                  status={"Delivered"}
+                  title={"Robot"}
+                  description={"It cleans."}
+                  price={"BGN 200"}
+                  image={
+                    "https://s1.kaercher-media.com/mam/12696200/mainproduct/205903/d3.jpg"
+                  }
+                />
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

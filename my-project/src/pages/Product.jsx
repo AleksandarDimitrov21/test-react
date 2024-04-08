@@ -4,11 +4,27 @@ import NavBar from "../components/ui/navigation/NavBar";
 import Drawer from "../components/ui/productComponents/Drawer";
 import ScrollButton from "../components/ui/ScrollButton";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Product = ({ status, setStatus }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filter, setFilter] = useState("Sort by");
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/products");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   // Array of available categories
   const categories = [
@@ -31,7 +47,7 @@ const Product = ({ status, setStatus }) => {
           Products
         </h1>
         {!status && (
-          <h1 className="flex justify-center mt-10 text-3xl text-violet-500">
+          <h1 className="flex justify-center mt-10 text-xl sm:text-3xl text-violet-500">
             Please log in to add products to the cart.
           </h1>
         )}
@@ -84,32 +100,25 @@ const Product = ({ status, setStatus }) => {
         </div>
 
         <div className="flex justify-center mt-6 lg:mt-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            <Shop
-              title={"Samsung M70B"}
-              image={
-                "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQgByBT5IiAT_a2x9pUVb4VMoOrlzHH7Jrzj-HB5jzHlR4lNLMS"
-              }
-              price={2300}
-              status={status}
-            />
-            <Shop
-              title={"Samsung M70B"}
-              image={
-                "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQgByBT5IiAT_a2x9pUVb4VMoOrlzHH7Jrzj-HB5jzHlR4lNLMS"
-              }
-              price={2300}
-              status={status}
-            />
-            <Shop
-              title={"Samsung M70B"}
-              image={
-                "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQgByBT5IiAT_a2x9pUVb4VMoOrlzHH7Jrzj-HB5jzHlR4lNLMS"
-              }
-              price={2300}
-              status={status}
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-3">
+            {products.map((product) => (
+              <Shop
+                key={product.id}
+                title={product.name}
+                //
+                // image={product.image}
+                price={product.originalPrice}
+                status={status}
+              />
+            ))}
           </div>
+        </div>
+        <div className="flex justify-center">
+          <Link to={"/add-product"}>
+            <button className="bg-violet-600 border-none rounded-3xl py-3 w-96 text-xl my-5 font-semibold text-white hover:bg-violet-700">
+              Add Products
+            </button>
+          </Link>
         </div>
       </div>
     </div>
