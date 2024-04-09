@@ -18,13 +18,16 @@ const Orders = () => {
 
   return (
     <div className="bg-gradient-to-r from-indigo-300 to-violet-200 min-h-screen">
-      <div className="container mx-auto pt-24">
-        <Link to="/" className="absolute top-0 right-0 m-4">
-          <button className="text-md text-black bg-white hover:bg-violet-300 border-none font-bold rounded-full p-3">
+      <div className="container mx-auto pt-24 px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center mb-8">
+          <Link
+            to="/"
+            className="text-black bg-white hover:bg-violet-500 border-none font-bold rounded-full py-2 px-4"
+          >
             Home
-          </button>
-        </Link>
-        <div className="bg-white rounded-lg shadow-lg">
+          </Link>
+        </div>
+        <div className="bg-white rounded-lg shadow-lg overflow-x-auto">
           <table className="w-full text-center text-gray-800">
             <thead>
               <tr className="text-black">
@@ -44,7 +47,7 @@ const Orders = () => {
                   <td className="border px-4 py-2">{order.client.name}</td>
                   <td className="border px-4 py-2">{order.address}</td>
                   <td className="border px-4 py-2">{order.phoneNumber}</td>
-                  <td className="border px-4 py-2">
+                  <td className="border px-4 py-2 whitespace-nowrap">
                     {new Date(order.orderDateTime).toLocaleString("en-GB", {
                       day: "2-digit",
                       month: "2-digit",

@@ -1,21 +1,27 @@
 import NavBar from "../navigation/NavBar";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const ShopInside = ({ status, setStatus }) => {
   const [showButtons, setShowButtons] = useState(true);
-  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
+  const { id } = useParams();
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/products");
-        setProducts(response.data);
+        const response = await axios.get(
+          `http://localhost:8080/products/${id}`
+        );
+        setProduct(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
 
     fetchProducts();
-  }, []);
+  }, [id]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -28,7 +34,6 @@ const ShopInside = ({ status, setStatus }) => {
             src="https://image-us.samsung.com/SamsungUS/home/television-home-theater/tvs/samsung-neo-qled-8k/03162023/QN65QN900CFXZA_003_L-Perspective_Titan-Black-1600x1200-1.jpg?$product-details-jpg$"
             alt="photo"
           />
-
           <div className="flex flex-wrap w-full justify-center"></div>
         </div>
 
@@ -53,20 +58,30 @@ const ShopInside = ({ status, setStatus }) => {
               </button>
             </div>
           )}
-          <h2 className="text-3xl text-black mb-4">Product Name</h2>
-          <p className="text-slate-800 mb-2">Kod: 123123</p>
-          <p className="text-slate-800 mb-4">In stock</p>
-          <p className="mb-4 text-slate-900 text-xl">
-            Harakteristiki za produkta
-          </p>
-          <p className="text-2xl mb-2 text-black">
-            Price: <span className="text-xl">BGN 1289.00</span>
-          </p>
-          <div className="flex justify-center mb-2">
-            <button className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">
-              Add to Cart
-            </button>
-          </div>
+          {product && ( 
+            <>
+              <h2 className="text-xl text-gray-900 mb-2">{product.category}</h2>
+              <h2 className="text-3xl text-black mb-4">{product.name}</h2>
+
+              <p className="mb-4 text-slate-900 text-xl">
+                {product.description}
+              </p>
+              <p className="mb-4 text-slate-900 text-xl">{product.technical}</p>
+              {product.discount > 0 && 
+                <p className="text-red-700 font-bold text-lg">
+                  -{product.discount}%
+                </p>
+              )}
+              <p className="text-2xl mb-2 text-black">
+                <span className="text-xl">BGN {product.currentPrice}</span>
+              </p>
+              <div className="flex justify-center mb-2">
+                <button className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">
+                  Add to Cart
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

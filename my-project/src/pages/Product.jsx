@@ -60,12 +60,15 @@ const Product = ({ status, setStatus }) => {
         <div className="flex justify-center mt-6 lg:mt-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-3">
             {products.map((product) => (
-              <Shop
-                key={product.id}
-                title={product.name}
-                price={product.originalPrice}
-                status={status}
-              />
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <Shop
+                  key={product.id}
+                  productId={product.id}
+                  title={product.name}
+                  price={product.currentPrice}
+                  status={status}
+                />
+              </Link>
             ))}
           </div>
         </div>

@@ -26,18 +26,19 @@ function App() {
           element={<AddProducts status={userData} setStatus={setUserData} />}
         />
         <Route
-          path="/product"
-          element={<Product status={userData} setStatus={setUserData} />}
-        />
-        <Route
           path="/about"
           element={<AboutPage status={userData} setStatus={setUserData} />}
         />
-
         <Route
-          path="/product/product-info"
+          path="/product"
+          exact
+          element={<Product status={userData} setStatus={setUserData} />}
+        />
+        <Route
+          path="/product/:id"
           element={<ShopInside status={userData} setStatus={setUserData} />}
         />
+
         {userData ? (
           <>
             <Route
