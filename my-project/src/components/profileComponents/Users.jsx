@@ -1,18 +1,6 @@
 import React from "react";
-import axios from "axios";
 
-const Users = ({ users }) => {
-  const handleDeleteUser = async (userId) => {
-    try {
-      await axios.delete(`/user/${userId}`);
-
-      // If deletion is successful, update the users list by filtering out the deleted user
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
-  };
-
+const Users = ({ users, onDeleteUser }) => {
   return (
     <tbody>
       {users.map((user) => (
@@ -43,7 +31,7 @@ const Users = ({ users }) => {
           <td>
             <button
               className="rounded-full bg-red-500 text-white p-2 mr-2"
-              onClick={() => handleDeleteUser(user.id)}
+              onClick={() => onDeleteUser(user.id)}
             >
               <img width={20} height={20} src="/delete.svg" alt="delete" />
             </button>

@@ -58,16 +58,18 @@ const ShopInside = ({ status, setStatus }) => {
               </button>
             </div>
           )}
-          {product && ( 
+          {product && (
             <>
               <h2 className="text-xl text-gray-900 mb-2">{product.category}</h2>
-              <h2 className="text-3xl text-black mb-4">{product.name}</h2>
+              <h2 className="text-3xl text-black mb-2">{product.name}</h2>
+              <h2 className="text-xl text-gray-900 mb-1">{product.model}</h2>
+              <h2 className="text-xl text-gray-900 mb-4">{product.brand}</h2>
 
               <p className="mb-4 text-slate-900 text-xl">
                 {product.description}
               </p>
               <p className="mb-4 text-slate-900 text-xl">{product.technical}</p>
-              {product.discount > 0 && 
+              {product.discount > 0 && (
                 <p className="text-red-700 font-bold text-lg">
                   -{product.discount}%
                 </p>
