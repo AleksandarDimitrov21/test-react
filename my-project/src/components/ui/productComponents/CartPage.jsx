@@ -1,18 +1,54 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Scrollbar from "smooth-scrollbar";
 import InsideCart from "./InsideCart";
 
 const CartPage = () => {
-  const Products = [
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [Products, setProducts] = useState([
     {
       image:
         "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
       title: "ProductDog",
       description: "Tva e ot Products",
-      price: 99,
+      price: 100,
+      quantity: 1,
     },
-  ];
+    {
+      image:
+        "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
+      title: "ProductDog",
+      description: "Tva e ot Products",
+      price: 100,
+      quantity: 1,
+    },
+    {
+      image:
+        "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
+      title: "ProductDog",
+      description: "Tva e ot Products",
+      price: 100,
+      quantity: 1,
+    },
+  ]);
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      let total = 0;
+      for (let i = 0; i < Products.length; i++) {
+        total += Products[i].price * Products[i].quantity;
+      }
+      setTotalAmount(total);
+    };
+
+    calculateTotal();
+  }, [Products]);
+
+  const handleQuantityChange = (index, newQuantity) => {
+    const updatedProducts = [...Products];
+    updatedProducts[index].quantity = newQuantity;
+    setProducts(updatedProducts);
+  };
 
   const scrollRef = useRef(null);
 
@@ -64,51 +100,10 @@ const CartPage = () => {
                       image={product.image}
                       price={product.price}
                       description={product.description}
-                    />
-                  ))}
-                  {Products.map((product, index) => (
-                    <InsideCart
-                      key={index}
-                      title={product.title}
-                      image={product.image}
-                      price={product.price}
-                      description={product.description}
-                    />
-                  ))}
-                  {Products.map((product, index) => (
-                    <InsideCart
-                      key={index}
-                      title={product.title}
-                      image={product.image}
-                      price={product.price}
-                      description={product.description}
-                    />
-                  ))}
-                  {Products.map((product, index) => (
-                    <InsideCart
-                      key={index}
-                      title={product.title}
-                      image={product.image}
-                      price={product.price}
-                      description={product.description}
-                    />
-                  ))}
-                  {Products.map((product, index) => (
-                    <InsideCart
-                      key={index}
-                      title={product.title}
-                      image={product.image}
-                      price={product.price}
-                      description={product.description}
-                    />
-                  ))}
-                  {Products.map((product, index) => (
-                    <InsideCart
-                      key={index}
-                      title={product.title}
-                      image={product.image}
-                      price={product.price}
-                      description={product.description}
+                      quantity={product.quantity}
+                      onQuantityChange={(newQuantity) =>
+                        handleQuantityChange(index, newQuantity)
+                      }
                     />
                   ))}
                 </div>
@@ -120,7 +115,7 @@ const CartPage = () => {
                   </h1>
                   <div className="flex justify-between mb-2">
                     <p className="text-lg text-black">Subtotal:</p>
-                    <p className="text-lg text-black">$100</p>
+                    <p className="text-lg text-black">${totalAmount}</p>
                   </div>
                   <div className="flex justify-between mb-2">
                     <p className="text-lg text-black">Discount:</p>
@@ -128,7 +123,7 @@ const CartPage = () => {
                   </div>
                   <div className="flex justify-between mb-4">
                     <p className="text-lg text-black">Total:</p>
-                    <p className="text-lg text-black">$100</p>
+                    <p className="text-lg text-black">${totalAmount}</p>
                   </div>
                 </div>
                 <button className="bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 font-medium">
