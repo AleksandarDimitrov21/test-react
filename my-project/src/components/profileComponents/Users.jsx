@@ -1,6 +1,9 @@
 import React from "react";
 
 const Users = ({ users, onDeleteUser }) => {
+  const handleDelete = (userId) => {
+    onDeleteUser(userId);
+  };
   return (
     <tbody>
       {users.map((user) => (
@@ -31,7 +34,7 @@ const Users = ({ users, onDeleteUser }) => {
           <td>
             <button
               className="rounded-full bg-red-500 text-white p-2 mr-2"
-              onClick={() => onDeleteUser(user.id)}
+              onClick={() => handleDelete(user.id)}
             >
               <img width={20} height={20} src="/delete.svg" alt="delete" />
             </button>

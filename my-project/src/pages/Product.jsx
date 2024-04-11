@@ -11,8 +11,20 @@ const Product = ({ status, setStatus }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const categories = ["All", "Panels", "Modules", "Accessories", "Accessories"];
+  const categories = [
+    "All",
+    "Panels",
+    "Modules",
+    "Accessories",
+    "Sensors and alarms",
+    "Voice assistant",
+  ];
   const sortingOptions = ["Price: High-low", "Price: Low-High"];
+
+  function roundUpToTwoDecimals(number) {
+    number = number.toFixed(2);
+    return number;
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -108,7 +120,7 @@ const Product = ({ status, setStatus }) => {
               <Shop
                 productId={product.id}
                 title={product.name}
-                price={product.currentPrice}
+                price={roundUpToTwoDecimals(product.currentPrice)}
                 status={status}
               />
             </Link>

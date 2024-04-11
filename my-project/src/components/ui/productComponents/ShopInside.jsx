@@ -8,6 +8,11 @@ const ShopInside = ({ status, setStatus }) => {
   const [product, setProduct] = useState([]);
   const { id } = useParams();
 
+  function roundUpToTwoDecimals(number) {
+    number = number.toFixed(2);
+    return number;
+  }
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -75,7 +80,12 @@ const ShopInside = ({ status, setStatus }) => {
                 </p>
               )}
               <p className="text-2xl mb-2 text-black">
-                <span className="text-xl">BGN {product.currentPrice}</span>
+                <span className="text-xl">
+                  BGN{" "}
+                  {product && product.currentPrice
+                    ? roundUpToTwoDecimals(product.currentPrice)
+                    : "Price unavailable"}
+                </span>
               </p>
               <div className="flex justify-center mb-2">
                 <button className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">

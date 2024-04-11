@@ -21,18 +21,11 @@ const Profile = () => {
       console.error("Error fetching user data:", error);
     }
   };
-
   const handleDeleteUser = async (userId) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:8080/user/${userId}`
-      );
-      if (response.status === 200) {
-        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
-        console.log(`User with ID ${userId} deleted successfully.`);
-      } else {
-        console.error(`Failed to delete user with ID ${userId}`);
-      }
+      await axios.delete(`http://localhost:8080/user/${userId}`);
+
+      setUsers(users.filter((user) => user.id !== userId));
     } catch (error) {
       console.error("Error deleting user:", error);
     }
