@@ -34,6 +34,11 @@ const Profile = ({ isLoggedIn, setIsLoggedIn }) => {
             <Link to="/orders">Orders</Link>
           </button>
         </div>
+        <div className="ml-3 ">
+          <button className="justify-between text-black ">
+            <Link to="/users">Users</Link>
+          </button>
+        </div>
 
         <div className="text-black ml-3">
           <button onClick={handleExit}>Logout</button>

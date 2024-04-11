@@ -31,7 +31,7 @@ const AddProducts = () => {
       );
       if (response.status === 201) {
         console.log("Product added successfully!");
-        // Reset the form
+
         setProduct({
           name: "",
           brand: "",

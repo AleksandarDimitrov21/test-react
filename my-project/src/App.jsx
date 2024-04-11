@@ -10,6 +10,7 @@ import CartPage from "./components/ui/productComponents/CartPage";
 import ShopInside from "./components/ui/productComponents/ShopInside";
 import AddProducts from "./adminPages/AddProducts";
 import Orders from "./adminPages/Orders";
+import AddUser from "./adminPages/AddUser";
 
 function App() {
   const [userData, setUserData] = useState(false);
@@ -25,6 +26,10 @@ function App() {
         <Route
           path="/add-product"
           element={<AddProducts status={userData} setStatus={setUserData} />}
+        />
+        <Route
+          path="/users"
+          element={<AddUser status={userData} setStatus={setUserData} />}
         />
         <Route
           path="/about"
