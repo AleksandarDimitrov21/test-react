@@ -1,24 +1,36 @@
 import React from "react";
 import { useState } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
-const InsideCart = ({ image, title, description, price }) => {
-  const [quantity, setQuantity] = useState(1);
+const InsideCart = ({
+  image,
+  title,
+  description,
+  price,
+  quantity,
+  onQuantityChange,
+}) => {
+  const [localQuantity, setLocalQuantity] = useState(quantity);
 
   const incrementQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    const newQuantity = localQuantity + 1;
+    setLocalQuantity(newQuantity);
+    onQuantityChange(newQuantity);
   };
 
   const decrementQuantity = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+    if (localQuantity > 1) {
+      const newQuantity = localQuantity - 1;
+      setLocalQuantity(newQuantity);
+      onQuantityChange(newQuantity);
     }
   };
-  const newPrice = (price) => {
+
+  const calculateNewPrice = (price, quantity) => {
     return price * quantity;
   };
+
   return (
     <div className="gap-2 py-3 border-t-2 flex flex-col sm:flex-row items-center">
-      {/* Product Image and Details */}
       <div className="flex items-center mb-2 sm:mb-0">
         <div className="overflow-hidden">
           <img
@@ -30,7 +42,9 @@ const InsideCart = ({ image, title, description, price }) => {
         <div className="ml-4">
           <p className="text-lg text-black font-bold">{title}</p>
           <p className="text-sm text-gray-500">{description}</p>
-          <p className="text-sm text-gray-500">Price: ${newPrice(price)}</p>
+          <p className="text-sm text-gray-500">
+            Price: ${calculateNewPrice(price, localQuantity)}
+          </p>
         </div>
       </div>
 
