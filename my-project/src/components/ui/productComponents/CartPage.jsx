@@ -2,41 +2,31 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Scrollbar from "smooth-scrollbar";
 import InsideCart from "./InsideCart";
+import createMockProducts from "../../../CreateMockProducts";
 
 const CartPage = () => {
   const [totalAmount, setTotalAmount] = useState(0);
-  const [Products, setProducts] = useState([
-    {
-      image:
-        "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
-      title: "ProductDog",
-      description: "Tva e ot Products",
-      price: 100,
-      quantity: 1,
-    },
-    {
-      image:
-        "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
-      title: "ProductDog",
-      description: "Tva e ot Products",
-      price: 100,
-      quantity: 1,
-    },
-    {
-      image:
-        "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
-      title: "ProductDog",
-      description: "Tva e ot Products",
-      price: 100,
-      quantity: 1,
-    },
-  ]);
+  const [Products, setProducts] = useState([]);
+  const chosenIds = [1, 2, 16]; // Array of chosen IDs
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const mockProducts = await createMockProducts();
+      // Filter mockProducts based on chosenIds
+      const filteredProducts = mockProducts.filter((product) =>
+        chosenIds.includes(product.id)
+      );
+      setProducts(filteredProducts);
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const calculateTotal = () => {
       let total = 0;
       for (let i = 0; i < Products.length; i++) {
-        total += Products[i].price * Products[i].quantity;
+        total += Products[i].currentPrice * Products[i].quantity;
       }
       setTotalAmount(total);
     };
@@ -96,10 +86,9 @@ const CartPage = () => {
                   {Products.map((product, index) => (
                     <InsideCart
                       key={index}
-                      title={product.title}
-                      image={product.image}
-                      price={product.price}
-                      description={product.description}
+                      title={product.name}
+                      image={product.photo}
+                      price={product.currentPrice}
                       quantity={product.quantity}
                       onQuantityChange={(newQuantity) =>
                         handleQuantityChange(index, newQuantity)
