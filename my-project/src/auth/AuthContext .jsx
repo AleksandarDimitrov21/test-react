@@ -7,7 +7,9 @@ export function useAuth() {
 }
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("jwtToken") ? true : false
+  );
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");

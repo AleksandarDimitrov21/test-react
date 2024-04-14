@@ -1,14 +1,15 @@
 import React from "react";
 import { useCart } from "../../../CartContext";
 import InsideCart from "./InsideCart";
-
+import NavBar from "../navigation/NavBar";
+import { RoundedTwoDecimals } from "../../RoundedTwoDecimals";
 const CartPage = () => {
   const { cartItems } = useCart();
 
   return (
     <>
       <div className="bg-white min-h-screen flex flex-col">
-        {/* Your Navbar or Header component */}
+        <NavBar />
 
         <div className="flex flex-col">
           <h1 className="flex justify-center mt-20 text-4xl text-violet-500">
@@ -48,10 +49,9 @@ const CartPage = () => {
                   <div className="flex justify-between mb-2">
                     <p className="text-lg text-black">Subtotal:</p>
                     <p className="text-lg text-black">
-                      ${calculateSubtotal(cartItems)}
+                      ${RoundedTwoDecimals(calculateSubtotal(cartItems))}
                     </p>
                   </div>
-                  {/* Additional summary details */}
                 </div>
                 <button className="bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 font-medium">
                   Checkout

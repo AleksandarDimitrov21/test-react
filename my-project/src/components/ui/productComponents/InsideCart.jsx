@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../../../CartContext";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
+import { RoundedTwoDecimals } from "../../RoundedTwoDecimals";
 
 const InsideCart = ({ id, title, price, image, quantity }) => {
   const { updateQuantity, removeItem } = useCart();
@@ -32,7 +33,8 @@ const InsideCart = ({ id, title, price, image, quantity }) => {
         <div className="ml-4">
           <p className="text-lg text-black font-bold">{title}</p>
           <p className="text-sm text-gray-500">
-            Price: ${calculateNewPrice(price, localQuantity)}
+            Price: $
+            {RoundedTwoDecimals(calculateNewPrice(price, localQuantity))}
           </p>
         </div>
       </div>

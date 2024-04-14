@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const ShopInside = ({ status, setStatus }) => {
+const ShopInside = () => {
   const [showButtons, setShowButtons] = useState(true);
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
@@ -55,7 +55,7 @@ const ShopInside = ({ status, setStatus }) => {
   return (
     <div className="min-h-screen bg-white">
       <div className="overflow-hidden h-16">
-        <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
+        <NavBar />
       </div>
       <div className="flex flex-col md:flex-row items-center  mx-4 md:mx-8">
         <div className="w-full md:w-2/6 flex flex-col items-center justify-center border-r-0 md:border-r-2 border-gray-300 mb-8 md:mb-0">

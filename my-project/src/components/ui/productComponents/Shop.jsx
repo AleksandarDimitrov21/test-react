@@ -1,17 +1,19 @@
 import React from "react";
 import { useCart } from "../../../CartContext";
+import { useNavigate } from "react-router-dom";
 
 const Shop = ({ id, title, priceCurrent, priceOriginal, image, discount }) => {
   const { addToCart } = useCart();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (event) => {
+    event.preventDefault();
     const product = {
       id,
       title,
       price: priceCurrent,
       image,
       discount,
-      quantity: 1, // Initially, add with quantity 1
+      quantity: 1,
     };
     addToCart(product);
   };
@@ -41,7 +43,7 @@ const Shop = ({ id, title, priceCurrent, priceOriginal, image, discount }) => {
           <div className="flex items-center justify-end">
             <button
               className="btn bg-black hover:bg-violet-500 text-white border-none"
-              onClick={handleAddToCart}
+              onClick={(event) => handleAddToCart(event)}
             >
               Add to Cart
               <svg

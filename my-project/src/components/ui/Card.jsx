@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { RoundedTwoDecimals } from "../RoundedTwoDecimals";
 const Card = ({ cartQuantity, cartPrice }) => {
   return (
     <div className="dropdown dropdown-end items-center">
@@ -34,7 +34,10 @@ const Card = ({ cartQuantity, cartPrice }) => {
             {cartQuantity} Items
           </span>
           <span className=" text-black">
-            Subtotal: <span className="text-violet-600">BGN {cartPrice}</span>
+            Subtotal:{" "}
+            <span className="text-violet-600">
+              BGN {RoundedTwoDecimals(cartPrice)}
+            </span>
           </span>
           <div className="card-actions">
             <Link to="/card">

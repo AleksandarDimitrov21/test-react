@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import ProfileNav from "./ProfileNav";
 import Card from "../Card";
 import { useAuth } from "../../../auth/AuthContext ";
-
+import { useCart } from "../../../CartContext";
 const NavBar = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const [currentPage, setCurrentPage] = useState("");
+  const { totalItems, totalPrice } = useCart();
 
   useEffect(() => {
     setCurrentPage(location.pathname);
@@ -72,7 +73,7 @@ const NavBar = () => {
         </div>
         {isLoggedIn && (
           <div className="mr-0 sm:mr-1">
-            <Card cartQuantity={0} cartPrice={0} />
+            <Card cartQuantity={totalItems} cartPrice={totalPrice} />
           </div>
         )}
         {isLoggedIn && (
