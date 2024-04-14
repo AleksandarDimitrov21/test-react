@@ -39,12 +39,11 @@ const InsideCart = ({ id, title, price, image, quantity }) => {
         </div>
       </div>
 
-      {/* Quantity Controls */}
       <div className="ml-auto flex items-center">
         <button
           onClick={() => handleQuantityChange(localQuantity - 1)}
           disabled={localQuantity === 1}
-          className="bg-violet-500 text-white  rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
+          className="bg-violet-500 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
         >
           <MinusIcon className="h-5 w-5" />
         </button>
@@ -53,7 +52,7 @@ const InsideCart = ({ id, title, price, image, quantity }) => {
         </span>
         <button
           onClick={() => handleQuantityChange(localQuantity + 1)}
-          className="bg-violet-500 text-white  mr-1 rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
+          className="bg-violet-500 text-white mr-1 rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
         >
           <PlusIcon className="h-5 w-5" />
         </button>
