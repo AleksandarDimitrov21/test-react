@@ -13,7 +13,7 @@ import Loading from "../components/ui/loading/Loading";
 import { useEffect, useState } from "react";
 import ScrollButton from "../components/ui/ScrollButton";
 
-const Home = ({ status, setStatus }) => {
+const Home = () => {
   const [isLoading, setIsLoaded] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -27,7 +27,7 @@ const Home = ({ status, setStatus }) => {
       ) : (
         <div className="bg-white min-h-screen">
           <div className="overflow-hidden min-h-screen">
-            <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
+            <NavBar />
             <WholePagePhoto />
           </div>
           <div>

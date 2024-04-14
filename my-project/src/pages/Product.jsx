@@ -3,8 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Shop from "../components/ui/productComponents/Shop";
 import NavBar from "../components/ui/navigation/NavBar";
+import { useAuth } from "../auth/AuthContext ";
 
-const Product = ({ status, setStatus }) => {
+const Product = () => {
+  const { setIsLoggedIn } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filterCriteria, setFilterCriteria] = useState("Price: High-low");
   const [searchTerm, setSearchTerm] = useState("");
@@ -87,7 +89,7 @@ const Product = ({ status, setStatus }) => {
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
-      <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
+      <NavBar />
 
       <div className="flex flex-col">
         <h1 className="flex justify-center mt-20 text-4xl text-violet-500">
@@ -138,7 +140,7 @@ const Product = ({ status, setStatus }) => {
                 discount={product.discount}
                 priceOriginal={roundUpToTwoDecimals(product.originalPrice)}
                 priceCurrent={roundUpToTwoDecimals(product.currentPrice)}
-                status={status}
+                status={setIsLoggedIn}
               />
             </Link>
           ))}

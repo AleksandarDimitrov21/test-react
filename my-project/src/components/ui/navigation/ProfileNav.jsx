@@ -4,13 +4,10 @@ import { useState } from "react";
 import NavPhoto from "./NavPhoto";
 import { useAuth } from "../../../auth/AuthContext ";
 import { useNavigate } from "react-router-dom";
+
 const Profile = () => {
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+  const { handleLogout } = useAuth();
+
   const [avatarImageUrl, setAvatarImageUrl] = useState(
     localStorage.getItem("avatarImageUrl") ||
       "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"

@@ -1,11 +1,13 @@
 import NavBar from "../navigation/NavBar";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ShopInside = ({ status, setStatus }) => {
   const [showButtons, setShowButtons] = useState(true);
   const [product, setProduct] = useState([]);
+  const navigate = useNavigate();
   const { id } = useParams();
 
   function roundUpToTwoDecimals(number) {
@@ -33,6 +35,23 @@ const ShopInside = ({ status, setStatus }) => {
     fetchProduct();
   }, [id]);
 
+  const deleteProduct = async () => {
+    try {
+      await axios.post(`http://localhost:8080/productDelete/${id}`);
+      console.log("Product deleted successfully!");
+      navigate("/product");
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.status);
+        console.log(error.response.data);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log("Error", error.message);
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <div className="overflow-hidden h-16">
@@ -49,20 +68,15 @@ const ShopInside = ({ status, setStatus }) => {
             <div className="flex items-center justify-end mb-4">
               <button
                 className="rounded-full bg-red-500 text-white p-2 mr-2"
-                onClick={() => {
-                  console.log("Delete button clicked");
-                }}
+                onClick={deleteProduct}
               >
                 <img width={20} height={20} src="/delete.svg" alt="delete" />
               </button>
-              <button
-                className="rounded-full bg-violet-500 text-white p-2 mr-2"
-                onClick={() => {
-                  console.log("Edit button clicked");
-                }}
-              >
-                <img width={20} height={20} src="/edit.svg" alt="edit" />
-              </button>
+              <Link key={product.id} to={`/edit-product/${product.id}`}>
+                <button className="rounded-full bg-violet-500 text-white p-2 mr-2">
+                  <img width={20} height={20} src="/edit.svg" alt="edit" />
+                </button>
+              </Link>
             </div>
           )}
           {product && (

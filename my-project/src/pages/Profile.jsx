@@ -9,6 +9,8 @@ import axios from "axios";
 const Profile = () => {
   const [isAdmin, setIsAdmin] = useState(true);
   const [users, setUsers] = useState([]);
+  const [productId, setProductId] = useState("some-product-id");
+  const [productDetails, setProductDetails] = useState(null);
   const [isCustomer, setCustomer] = useState(true);
   useEffect(() => {
     fetchUsers();
@@ -22,6 +24,23 @@ const Profile = () => {
       console.error("Error fetching user data:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/productEmployee/${productId}`
+        );
+        setProductDetails(response.data);
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    };
+
+    if (productId) {
+      fetchProductDetails();
+    }
+  }, [productId]);
 
   return (
     <div className="bg-white min-h-screen">
@@ -67,6 +86,7 @@ const Profile = () => {
               </table>
             </div>
           ) : null}
+
           {isCustomer ? (
             <div className=" mx-5">
               <h1 className="text-2xl">Recently bought:</h1>

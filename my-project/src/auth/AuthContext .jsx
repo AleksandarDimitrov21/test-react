@@ -13,11 +13,19 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("jwtToken");
+    setIsLoggedIn(false);
+    navigate("/");
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );

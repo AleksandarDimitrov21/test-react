@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Forms from "./Forms";
+import { Form, Button } from "react-bootstrap";
 
-const AddProducts = () => {
+const EditProducts = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [product, setProduct] = useState({
     photo: "",
     name: "",
@@ -17,11 +21,12 @@ const AddProducts = () => {
     originalPrice: 0,
     discount: 0,
   });
-  const addProduct = async (e) => {
+
+  const edit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8080/products",
+      const response = await axios.put(
+        `http://localhost:8080/products/${id}`,
         product,
         {
           headers: {
@@ -29,8 +34,9 @@ const AddProducts = () => {
           },
         }
       );
-      if (response.status === 201) {
-        console.log("Product added successfully!");
+      if (response.status === 200) {
+        console.log("Product edited successfully!");
+        navigate(`/product/${id}`);
       }
     } catch (error) {
       console.error("Error adding product:", error);
@@ -56,7 +62,7 @@ const AddProducts = () => {
 
       <div className="flex items-center justify-center  min-h-screen">
         <div className="bg-white mt-20 sm:mt-5 px-14 sm:px-10 py-5 rounded-xl my-5">
-          <Form onSubmit={addProduct}>
+          <Form onSubmit={edit}>
             <div className="mb-1 flex flex-col">
               <Forms
                 label={"Photo:"}
@@ -167,4 +173,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default EditProducts;

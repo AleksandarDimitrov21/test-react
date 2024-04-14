@@ -10,8 +10,8 @@ const Forms = ({ label, type, name, value, onChange }) => {
         className="bg-white rounded-md py-2 border w-56 sm:w-96  hover:bg-neutral-200 text-black pl-2"
         type={type}
         name={name}
-        value={value}
         onChange={onChange}
+        value={type !== "file" ? value : undefined}
         required
       />
     </>

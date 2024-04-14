@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAuth } from "../../../auth/AuthContext ";
 
 const Shop = ({ title, priceCurrent, priceOriginal, image, discount }) => {
-  const { setIsLoggedIn } = useAuth();
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   return (
     <>
       <div className="relative w-full sm:max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl card shadow-xl">
@@ -28,7 +28,7 @@ const Shop = ({ title, priceCurrent, priceOriginal, image, discount }) => {
             )}
           </div>
           <div className="flex items-center justify-end">
-            {setIsLoggedIn && (
+            {isLoggedIn && (
               <button
                 className="btn bg-black hover:bg-violet-500 text-white border-none"
                 onClick={(e) => e.preventDefault()}
