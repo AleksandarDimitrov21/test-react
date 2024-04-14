@@ -3,6 +3,7 @@ import { useCart } from "../../../CartContext";
 import InsideCart from "./InsideCart";
 import NavBar from "../navigation/NavBar";
 import { RoundedTwoDecimals } from "../../RoundedTwoDecimals";
+
 const CartPage = () => {
   const { cartItems } = useCart();
 
@@ -16,9 +17,8 @@ const CartPage = () => {
             Cart
           </h1>
 
-          <div className="flex flex-col sm:flex-row justify-center mx-5 sm:mx-0  mb-20 mt-5 lg:mt-12 gap-3">
-            {/* Cart content */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-5">
+          <div className="flex flex-col sm:flex-row justify-center mx-5 sm:mx-0 mb-20 mt-5 lg:mt-12 gap-3">
+            <div className="flex flex-col w-full sm:w-auto">
               {cartItems.length === 0 ? (
                 <p className="text-center text-lg text-gray-500">
                   Your cart is empty
@@ -36,12 +36,9 @@ const CartPage = () => {
                 ))
               )}
             </div>
-          </div>
 
-          {/* Cart total and checkout button */}
-          {cartItems.length > 0 && (
-            <div className="flex justify-center">
-              <div className=" bg-gray-200 p-4 w-36 md:w-72 rounded-r-lg shadow-md flex flex-col justify-between">
+            {cartItems.length > 0 && (
+              <div className="bg-gray-200 p-4 w-full sm:w-72 rounded-r-lg shadow-md flex flex-col justify-between">
                 <div className="">
                   <h1 className="text-black text-2xl font-bold mb-4">
                     Summary
@@ -57,15 +54,14 @@ const CartPage = () => {
                   Checkout
                 </button>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-// Helper function to calculate subtotal
 const calculateSubtotal = (cartItems) => {
   return cartItems.reduce(
     (total, item) => total + item.price * item.quantity,

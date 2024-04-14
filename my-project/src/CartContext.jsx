@@ -15,14 +15,33 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   const addToCart = (product) => {
-    const newCartItems = [...cartItems, product];
-    setCartItems(newCartItems);
+    const existingItem = cartItems.find((item) => item.title === product.title);
+
+    if (existingItem) {
+      const updatedCartItems = cartItems.map((item) =>
+        item.title === product.title
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      setCartItems(updatedCartItems);
+    } else {
+      const newProduct = { ...product, id: generateId() };
+      const newCartItems = [...cartItems, newProduct];
+      setCartItems(newCartItems);
+    }
+
+    console.log("Updated Cart Items:", cartItems);
   };
 
   const updateQuantity = (id, quantity) => {
     const updatedCartItems = cartItems.map((item) =>
       item.id === id ? { ...item, quantity } : item
     );
+    setCartItems(updatedCartItems);
+  };
+
+  const removeItem = (id) => {
+    const updatedCartItems = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCartItems);
   };
 
@@ -36,9 +55,8 @@ export const CartProvider = ({ children }) => {
     0
   );
 
-  const removeItem = (id) => {
-    const updatedCartItems = cartItems.filter((item) => item.id !== id);
-    setCartItems(updatedCartItems);
+  const generateId = () => {
+    return "_" + Math.random().toString(36).substr(2, 9);
   };
 
   return (
