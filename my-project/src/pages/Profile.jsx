@@ -3,12 +3,13 @@ import BackgroundPhoto from "../components/ui/photoComponents/BackgroundPhoto";
 import Avatar from "../components/ui/photoComponents/Avatar";
 import Stat from "../components/profileComponents/Stat";
 import Users from "../components/profileComponents/Users";
+import Order from "../components/profileComponents/PreviousOrder";
 import axios from "axios";
 
 const Profile = () => {
   const [isAdmin, setIsAdmin] = useState(true);
   const [users, setUsers] = useState([]);
-  const [isCustomer, setCustomer] = useState(false);
+  const [isCustomer, setCustomer] = useState(true);
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -19,15 +20,6 @@ const Profile = () => {
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
-    }
-  };
-  const handleDeleteUser = async (userId) => {
-    try {
-      await axios.delete(`http://localhost:8080/user/${userId}`);
-
-      setUsers(users.filter((user) => user.id !== userId));
-    } catch (error) {
-      console.error("Error deleting user:", error);
     }
   };
 
@@ -69,10 +61,9 @@ const Profile = () => {
                     <th className="text-lg">Name</th>
                     <th className="text-lg">Username</th>
                     <th className="text-lg">Email</th>
-                    <th className="text-lg">Actions</th>
                   </tr>
                 </thead>
-                <Users users={users} onDeleteUser={handleDeleteUser} />
+                <Users users={users} />
               </table>
             </div>
           ) : null}
@@ -84,18 +75,12 @@ const Profile = () => {
                 title={"Robot"}
                 description={"It cleans."}
                 price={"BGN 200"}
-                image={
-                  "https://s1.kaercher-media.com/mam/12696200/mainproduct/205903/d3.jpg"
-                }
               />
               <Order
                 status={"Delivered"}
                 title={"Robot"}
                 description={"It cleans."}
                 price={"BGN 200"}
-                image={
-                  "https://s1.kaercher-media.com/mam/12696200/mainproduct/205903/d3.jpg"
-                }
               />
             </div>
           ) : null}

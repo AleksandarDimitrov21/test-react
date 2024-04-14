@@ -2,11 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import NavPhoto from "./NavPhoto";
-
-const Profile = ({ isLoggedIn, setIsLoggedIn }) => {
-  const handleExit = () => {
-    setIsLoggedIn(false);
-    console.log("hello");
+import { useAuth } from "../../../auth/AuthContext ";
+import { useNavigate } from "react-router-dom";
+const Profile = () => {
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
   };
   const [avatarImageUrl, setAvatarImageUrl] = useState(
     localStorage.getItem("avatarImageUrl") ||
@@ -39,9 +42,14 @@ const Profile = ({ isLoggedIn, setIsLoggedIn }) => {
             <Link to="/users">Users</Link>
           </button>
         </div>
+        <div className="ml-3 ">
+          <button className="justify-between text-black ">
+            <Link to="/product-display">Product Info</Link>
+          </button>
+        </div>
 
         <div className="text-black ml-3">
-          <button onClick={handleExit}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         </div>
       </ul>
     </div>

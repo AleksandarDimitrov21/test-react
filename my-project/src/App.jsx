@@ -11,64 +11,34 @@ import ShopInside from "./components/ui/productComponents/ShopInside";
 import AddProducts from "./adminPages/AddProducts";
 import Orders from "./adminPages/Orders";
 import AddUser from "./adminPages/AddUser";
-
+import ProductInfo from "./adminPages/ProductInfo";
+import { useAuth } from "./auth/AuthContext ";
+import ProtectedRoute from "./auth/ProtectedRoute";
 function App() {
-  const [userData, setUserData] = useState(false);
-
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={<Home status={userData} setStatus={setUserData} />}
-        />
-        {/* ADMIN ONLY  */}
-        <Route
-          path="/add-product"
-          element={<AddProducts status={userData} setStatus={setUserData} />}
-        />
-        <Route
-          path="/users"
-          element={<AddUser status={userData} setStatus={setUserData} />}
-        />
-        <Route
-          path="/about"
-          element={<AboutPage status={userData} setStatus={setUserData} />}
-        />
-        <Route
-          path="/product"
-          exact
-          element={<Product status={userData} setStatus={setUserData} />}
-        />
-        <Route
-          path="/product/:id"
-          element={<ShopInside status={userData} setStatus={setUserData} />}
-        />
+        <Route path="/" element={<Home />} />
 
-        {userData ? (
-          <>
-            <Route
-              path="/profile"
-              element={<Profile isLoggedIn={setUserData} />}
-            />
-            <Route
-              path="/card"
-              element={<CartPage isLoggedIn={setUserData} />}
-            />
-            <Route
-              path="/orders"
-              element={<Orders isLoggedIn={setUserData} />}
-            />
-          </>
-        ) : (
-          <>
-            <Route path="/login" element={<Login isLoggedIn={setUserData} />} />
-            <Route
-              path="/signup"
-              element={<SignUp isLoggedIn={setUserData} />}
-            />
-          </>
-        )}
+        <Route path="/add-product" element={<AddProducts />} />
+        <Route path="/users" element={<AddUser />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/product" exact element={<Product />} />
+        <Route path="/product/:id" element={<ShopInside />} />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/card" element={<CartPage />} />
+        <Route path="/orders" element={<Orders />} />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </>
   );

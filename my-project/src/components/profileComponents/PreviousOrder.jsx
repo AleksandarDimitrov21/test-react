@@ -1,17 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Order = ({ status, title, description, price, image }) => {
+const Order = ({ status, title, description, price }) => {
   return (
     <div className="py-12 border-t">
       <div className="flex flex-wrap ">
-        <div className="pr-3">
-          <img
-            src={image}
-            tabIndex="0"
-            className="w-40 h-40 bg-slate-100 "
-          ></img>
-        </div>
         <div className="flex-grow-1 ">
           <div className="font-semibold mb-2 text-gray-700 text-xl">
             {status}

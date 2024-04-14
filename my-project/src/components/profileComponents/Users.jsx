@@ -1,9 +1,6 @@
 import React from "react";
 
-const Users = ({ users, onDeleteUser }) => {
-  const handleDelete = (userId) => {
-    onDeleteUser(userId);
-  };
+const Users = ({ users }) => {
   return (
     <tbody>
       {users.map((user) => (
@@ -31,14 +28,6 @@ const Users = ({ users, onDeleteUser }) => {
           </td>
           <td className="text-zinc-400 text-xl">{user.username}</td>
           <td className="text-zinc-400 text-xl">{user.email}</td>
-          <td>
-            <button
-              className="rounded-full bg-red-500 text-white p-2 mr-2"
-              onClick={() => handleDelete(user.id)}
-            >
-              <img width={20} height={20} src="/delete.svg" alt="delete" />
-            </button>
-          </td>
         </tr>
       ))}
     </tbody>

@@ -14,18 +14,23 @@ const ShopInside = ({ status, setStatus }) => {
   }
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProduct = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/products/${id}`
-        );
+        const response = await axios.get(`http://localhost:8080/product/${id}`);
         setProduct(response.data);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        if (error.response) {
+          console.log(error.response.status);
+          console.log(error.response.data);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
       }
     };
 
-    fetchProducts();
+    fetchProduct();
   }, [id]);
 
   return (
@@ -33,12 +38,9 @@ const ShopInside = ({ status, setStatus }) => {
       <div className="overflow-hidden h-16">
         <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
       </div>
-      <div className="flex flex-col md:flex-row items-center mt-8 md:mt-16 mx-4 md:mx-8">
-        <div className="w-full md:w-1/2 flex flex-col items-center justify-center border-r-0 md:border-r-2 border-gray-300 mb-8 md:mb-0">
-          <img
-            src="https://image-us.samsung.com/SamsungUS/home/television-home-theater/tvs/samsung-neo-qled-8k/03162023/QN65QN900CFXZA_003_L-Perspective_Titan-Black-1600x1200-1.jpg?$product-details-jpg$"
-            alt="photo"
-          />
+      <div className="flex flex-col md:flex-row items-center  mx-4 md:mx-8">
+        <div className="w-full md:w-2/6 flex flex-col items-center justify-center border-r-0 md:border-r-2 border-gray-300 mb-8 md:mb-0">
+          <img src={product.photo} alt="photo" />
           <div className="flex flex-wrap w-full justify-center"></div>
         </div>
 
@@ -67,8 +69,12 @@ const ShopInside = ({ status, setStatus }) => {
             <>
               <h2 className="text-xl text-gray-900 mb-2">{product.category}</h2>
               <h2 className="text-3xl text-black mb-2">{product.name}</h2>
-              <h2 className="text-xl text-gray-900 mb-1">{product.model}</h2>
-              <h2 className="text-xl text-gray-900 mb-4">{product.brand}</h2>
+              <h2 className="text-xl text-gray-900 mb-1">
+                Model: {product.model}
+              </h2>
+              <h2 className="text-xl text-gray-900 mb-4">
+                Brand: {product.brand}
+              </h2>
 
               <p className="mb-4 text-slate-900 text-xl">
                 {product.description}

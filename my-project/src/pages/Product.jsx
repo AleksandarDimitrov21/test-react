@@ -6,7 +6,7 @@ import NavBar from "../components/ui/navigation/NavBar";
 
 const Product = ({ status, setStatus }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [filterCriteria, setFilterCriteria] = useState("");
+  const [filterCriteria, setFilterCriteria] = useState("Price: High-low");
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -18,8 +18,14 @@ const Product = ({ status, setStatus }) => {
     "Accessories",
     "Sensors and alarms",
     "Voice assistant",
+    "Promotional",
   ];
-  const sortingOptions = ["Price: High-low", "Price: Low-High"];
+  const sortingOptions = [
+    "Price: High-low",
+    "Price: Low-High",
+    "Sort: A-Z",
+    "Sort: Z-A",
+  ];
 
   function roundUpToTwoDecimals(number) {
     number = number.toFixed(2);
@@ -28,26 +34,29 @@ const Product = ({ status, setStatus }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      let url = "http://localhost:8080/products";
+      if (selectedCategory === "Promotional") {
+        url = "http://localhost:8080/promotional";
+      } else if (selectedCategory !== "All") {
+        url = `http://localhost:8080/products/category/${selectedCategory}`;
+      }
+
       try {
-        const response = await axios.get("http://localhost:8080/products");
+        const response = await axios.get(url);
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
 
-    fetchProducts();
-  }, []);
+    if (selectedCategory) {
+      fetchProducts();
+    }
+  }, [selectedCategory]);
 
   useEffect(() => {
     const applyFilter = () => {
       let filteredProducts = [...products];
-
-      if (selectedCategory !== "All") {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.category === selectedCategory
-        );
-      }
 
       if (filterCriteria === "Price: High-low") {
         filteredProducts.sort((a, b) => b.currentPrice - a.currentPrice);
@@ -55,17 +64,22 @@ const Product = ({ status, setStatus }) => {
         filteredProducts.sort((a, b) => a.currentPrice - b.currentPrice);
       }
 
+      if (filterCriteria === "Sort: A-Z") {
+        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (filterCriteria === "Sort: Z-A") {
+        filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+      }
+
       if (searchTerm.trim() !== "") {
         filteredProducts = filteredProducts.filter((product) =>
           product.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
       }
-
       setFilteredProducts(filteredProducts);
     };
 
     applyFilter();
-  }, [products, selectedCategory, filterCriteria, searchTerm]);
+  }, [products, filterCriteria, searchTerm]);
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
@@ -75,12 +89,12 @@ const Product = ({ status, setStatus }) => {
     <div className="bg-white min-h-screen flex flex-col">
       <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
 
-      <div className="flex flex-col flex-grow">
+      <div className="flex flex-col">
         <h1 className="flex justify-center mt-20 text-4xl text-violet-500">
           Products
         </h1>
 
-        <div className="flex justify-center mb-20 mt-5 lg:mt-12 gap-3">
+        <div className="flex flex-col sm:flex-row justify-center mx-5 sm:mx-0  mb-20 mt-5 lg:mt-12 gap-3">
           <input
             type="text"
             value={searchTerm}
@@ -114,13 +128,16 @@ const Product = ({ status, setStatus }) => {
       </div>
 
       <div className="flex justify-center mt-6 lg:mt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-5">
           {filteredProducts.map((product) => (
             <Link key={product.id} to={`/product/${product.id}`}>
               <Shop
                 productId={product.id}
                 title={product.name}
-                price={roundUpToTwoDecimals(product.currentPrice)}
+                image={product.photo}
+                discount={product.discount}
+                priceOriginal={roundUpToTwoDecimals(product.originalPrice)}
+                priceCurrent={roundUpToTwoDecimals(product.currentPrice)}
                 status={status}
               />
             </Link>

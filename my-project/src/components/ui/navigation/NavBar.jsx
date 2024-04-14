@@ -2,9 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ProfileNav from "./ProfileNav";
 import Card from "../Card";
+import { useAuth } from "../../../auth/AuthContext ";
 
-const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
-  const location = useLocation();
+const NavBar = () => {
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   const [currentPage, setCurrentPage] = useState("");
 
   useEffect(() => {

@@ -4,8 +4,9 @@ import Buttom from "../components/ui/Buttom";
 import { useNavigate } from "react-router-dom";
 import { isAlphanumeric } from "../validation/Validation";
 import { Link } from "react-router-dom";
-
-const Login = ({ isLoggedIn }) => {
+import { useAuth } from "../auth/AuthContext ";
+const Login = () => {
+  const { setIsLoggedIn } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -35,9 +36,11 @@ const Login = ({ isLoggedIn }) => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        console.log("User signed up successfully!");
-        isLoggedIn(true);
+        const { token } = await response.json();
+        localStorage.setItem("jwtToken", token);
+        setIsLoggedIn(true);
         navigate("/");
+        console.log("User signed up successfully!");
       } else {
         setShowCaution(true);
         console.error("Error signing up:", response);

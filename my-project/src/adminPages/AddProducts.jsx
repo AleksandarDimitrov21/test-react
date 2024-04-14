@@ -6,13 +6,13 @@ import Forms from "./Forms";
 
 const AddProducts = () => {
   const [product, setProduct] = useState({
+    photo: "",
     name: "",
     brand: "",
     model: "",
     category: "",
     quantity: 0,
     description: "",
-    technicalDocumentation: "",
     minPrice: 0,
     originalPrice: 0,
     discount: 0,
@@ -25,7 +25,7 @@ const AddProducts = () => {
         product,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -33,13 +33,13 @@ const AddProducts = () => {
         console.log("Product added successfully!");
 
         setProduct({
+          photo: "",
           name: "",
           brand: "",
           model: "",
           category: "",
           quantity: 0,
           description: "",
-          technicalDocumentation: "",
           minPrice: 0,
           originalPrice: 0,
           discount: 0,
@@ -66,6 +66,15 @@ const AddProducts = () => {
       <div className="flex items-center justify-center  min-h-screen">
         <div className="bg-white mt-20 sm:mt-5 px-14 sm:px-10 py-5 rounded-xl my-5">
           <Form onSubmit={addProduct}>
+            <div className="mb-1 flex flex-col">
+              <Forms
+                label={"Photo:"}
+                type={"file"}
+                name={"photo"}
+                value={product.photo}
+                onChange={handleChange}
+              />
+            </div>
             <div className="mb-1 flex flex-col">
               <Forms
                 label={"Name:"}
@@ -124,18 +133,6 @@ const AddProducts = () => {
                 className="rounded-md bg-white text-black pl-2 border min-h-10 w-56 sm:w-96 hover:bg-neutral-200"
                 name="description"
                 value={product.description}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="mb-1 flex flex-col">
-              <label className="text-md font-semibold text-black mb-1">
-                Technical:
-              </label>
-              <textarea
-                className="rounded-md bg-white text-black pl-2 border min-h-10 w-56 sm:w-96 hover:bg-neutral-200"
-                name="technicalDocumentation"
-                value={product.technicalDocumentation}
                 onChange={handleChange}
               />
             </div>

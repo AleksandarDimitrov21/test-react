@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../../auth/AuthContext ";
 
-const Shop = ({ title, price, image, status }) => {
+const Shop = ({ title, priceCurrent, priceOriginal, image, discount }) => {
+  const { setIsLoggedIn } = useAuth();
   return (
     <>
       <div className="relative w-full sm:max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl card shadow-xl">
@@ -10,14 +12,23 @@ const Shop = ({ title, price, image, status }) => {
           <img
             src={image}
             alt="Product"
-            className="w-full h-full object-cover"
+            className="w-auto h-full object-cover"
           />
         </figure>
         <div className="p-4">
           <h2 className="text-lg text-black">{title}</h2>
-          <div className="flex items-center justify-between">
-            <div className="text-xl text-gray-900">BGN {price}</div>
-            {status && (
+          <div className="flex items-center">
+            <div className="text-xl text-gray-900 mr-2">
+              BGN{" "}
+              {discount > 0 && <s className="text-gray-500">{priceOriginal}</s>}{" "}
+              {priceCurrent}
+            </div>
+            {discount > 0 && (
+              <p className="text-red-700 font-bold text-lg">-{discount}%</p>
+            )}
+          </div>
+          <div className="flex items-center justify-end">
+            {setIsLoggedIn && (
               <button
                 className="btn bg-black hover:bg-violet-500 text-white border-none"
                 onClick={(e) => e.preventDefault()}

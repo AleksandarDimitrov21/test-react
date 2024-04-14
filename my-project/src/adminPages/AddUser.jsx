@@ -18,11 +18,15 @@ const AddUser = () => {
   const addProduct = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/user", user, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:8080/register",
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (response.status === 201) {
         console.log("User added successfully!");
 
