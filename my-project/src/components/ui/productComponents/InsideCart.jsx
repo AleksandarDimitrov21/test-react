@@ -1,14 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
-const InsideCart = ({
-  image,
-  title,
-  description,
-  price,
-  quantity,
-  onQuantityChange,
-}) => {
+const InsideCart = ({ image, title, price, quantity, onQuantityChange }) => {
   const [localQuantity, setLocalQuantity] = useState(quantity);
 
   const incrementQuantity = () => {
@@ -41,7 +34,6 @@ const InsideCart = ({
         </div>
         <div className="ml-4">
           <p className="text-lg text-black font-bold">{title}</p>
-          <p className="text-sm text-gray-500">{description}</p>
           <p className="text-sm text-gray-500">
             Price: ${calculateNewPrice(price, localQuantity)}
           </p>
