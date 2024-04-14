@@ -1,21 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useCart } from "../../../CartContext";
 import { PlusIcon, MinusIcon } from "@heroicons/react/outline";
-const InsideCart = ({ image, title, price, quantity, onQuantityChange }) => {
+
+const InsideCart = ({ id, title, price, image, quantity }) => {
+  const { updateQuantity, removeItem } = useCart();
   const [localQuantity, setLocalQuantity] = useState(quantity);
 
-  const incrementQuantity = () => {
-    const newQuantity = localQuantity + 1;
+  const handleQuantityChange = (newQuantity) => {
     setLocalQuantity(newQuantity);
-    onQuantityChange(newQuantity);
+    updateQuantity(id, newQuantity);
   };
 
-  const decrementQuantity = () => {
-    if (localQuantity > 1) {
-      const newQuantity = localQuantity - 1;
-      setLocalQuantity(newQuantity);
-      onQuantityChange(newQuantity);
-    }
+  const handleRemoveItem = () => {
+    removeItem(id);
   };
 
   const calculateNewPrice = (price, quantity) => {
@@ -40,25 +37,30 @@ const InsideCart = ({ image, title, price, quantity, onQuantityChange }) => {
         </div>
       </div>
 
-      {/* Price and Quantity Controls */}
-      <div className="ml-auto flex ">
-        <div className="flex items-center">
-          <button
-            onClick={decrementQuantity}
-            className="bg-violet-500 text-white  rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
-          >
-            <MinusIcon className="h-5 w-5" />
-          </button>
-          <span className="bg-gray-200 text-black py-1 px-3 mx-2 rounded-full">
-            {quantity}
-          </span>
-          <button
-            onClick={incrementQuantity}
-            className="bg-violet-500 text-white  mr-1 rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
-          >
-            <PlusIcon className="h-5 w-5" />
-          </button>
-        </div>
+      {/* Quantity Controls */}
+      <div className="ml-auto flex items-center">
+        <button
+          onClick={() => handleQuantityChange(localQuantity - 1)}
+          disabled={localQuantity === 1}
+          className="bg-violet-500 text-white  rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
+        >
+          <MinusIcon className="h-5 w-5" />
+        </button>
+        <span className="bg-gray-200 text-black py-1 px-3 mx-2 rounded-full">
+          {localQuantity}
+        </span>
+        <button
+          onClick={() => handleQuantityChange(localQuantity + 1)}
+          className="bg-violet-500 text-white  mr-1 rounded-full focus:outline-none focus:ring-2 focus:ring-violet-400"
+        >
+          <PlusIcon className="h-5 w-5" />
+        </button>
+        <button
+          onClick={handleRemoveItem}
+          className="text-red-600 hover:text-red-700 ml-2 focus:outline-none"
+        >
+          Remove
+        </button>
       </div>
     </div>
   );
