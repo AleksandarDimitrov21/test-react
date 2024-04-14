@@ -40,7 +40,7 @@ const Product = () => {
       if (selectedCategory === "Promotional") {
         url = "http://localhost:8080/promotional";
       } else if (selectedCategory !== "All") {
-        url = `http://localhost:8080/products/category/${selectedCategory}`;
+        url = `http://localhost:8080/${selectedCategory}`;
       }
 
       try {

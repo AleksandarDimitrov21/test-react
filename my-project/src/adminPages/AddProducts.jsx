@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Forms from "./Forms";
+import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
     photo: "",
     name: "",
@@ -31,6 +33,7 @@ const AddProducts = () => {
       );
       if (response.status === 201) {
         console.log("Product added successfully!");
+        navigate("/product");
       }
     } catch (error) {
       console.error("Error adding product:", error);
