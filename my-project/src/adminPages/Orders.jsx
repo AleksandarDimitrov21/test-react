@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
 
@@ -15,6 +15,24 @@ const Orders = () => {
         console.error("Error fetching orders: ", error);
       });
   }, []);
+
+  const changeOrderStatus = (orderId, newStatus) => {
+    axios
+      .put(`http://localhost:8080/orderStatusChange/${orderId}`, {
+        newStatus: newStatus,
+        customerId: orderId,
+      })
+      .then(() => {
+        setOrders((prevOrders) =>
+          prevOrders.map((order) =>
+            order.id === orderId ? { ...order, status: newStatus } : order
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Error updating order status: ", error);
+      });
+  };
 
   return (
     <div className="bg-gradient-to-r from-indigo-300 to-violet-200 min-h-screen">
@@ -38,6 +56,7 @@ const Orders = () => {
                 <th className="px-4 py-2">Order Date</th>
                 <th className="px-4 py-2">Value</th>
                 <th className="px-4 py-2">Status</th>
+                <th className="px-4 py-2">Change Status</th>
               </tr>
             </thead>
             <tbody>
@@ -56,8 +75,24 @@ const Orders = () => {
                       minute: "2-digit",
                     })}
                   </td>
-                  <td className="border px-4 py-2">{order.value}</td>
+                  <td className="border px-4 py-2">
+                    BGN {RoundedTwoDecimals(order.value)}
+                  </td>
                   <td className="border px-4 py-2">{order.status}</td>
+                  <td className="border px-4 py-2 ">
+                    <select
+                      value={order.status}
+                      onChange={(e) =>
+                        changeOrderStatus(order.id, e.target.value)
+                      }
+                      className="rounded-md bg-white text-black pl-2 border min-h-10 w-20 sm:w-36 hover:bg-neutral-200 "
+                    >
+                      <option value="PENDING">PENDING</option>
+                      <option value="PROCESSING">PROCESSING</option>
+                      <option value="COMPLETED">COMPLETED</option>
+                      <option value="CANCELED">CANCELED</option>
+                    </select>
+                  </td>
                 </tr>
               ))}
             </tbody>

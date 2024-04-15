@@ -1,11 +1,11 @@
-import NavBar from "../navigation/NavBar";
+import NavBar from "../components/ui/navigation/NavBar";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { RoundedTwoDecimals } from "../../RoundedTwoDecimals";
+import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
 
-const ShopInside = () => {
+const InsideProductEmployee = () => {
   const [showButtons, setShowButtons] = useState(true);
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
@@ -14,7 +14,9 @@ const ShopInside = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/product/${id}`);
+        const response = await axios.get(
+          `http://localhost:8080/productEmployee/${id}`
+        );
         setProduct(response.data);
       } catch (error) {
         if (error.response) {
@@ -30,33 +32,6 @@ const ShopInside = () => {
 
     fetchProduct();
   }, [id]);
-
-  const fetchPromo = async (event) => {
-    const newDiscount = parseInt(event.target.value, 10);
-
-    try {
-      const response = await axios.post(
-        `http://localhost:8080/set-discount/${id}`,
-        JSON.stringify(newDiscount),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Promo added successfully!", response.data);
-      window.location.reload();
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.status);
-        console.log(error.response.data);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
-      }
-    }
-  };
 
   const deleteProduct = async () => {
     try {
@@ -122,7 +97,6 @@ const ShopInside = () => {
                   -{product.discount}%
                 </p>
               )}
-
               <p className="text-2xl mb-2 text-black">
                 <span className="text-xl">
                   BGN{" "}
@@ -131,26 +105,13 @@ const ShopInside = () => {
                     : "Price unavailable"}
                 </span>
               </p>
-              <div className="flex flex-row items-center gap-2">
-                <h4 className="text-black">Discount: </h4>
-
-                <select className="bg-white text-sm" onChange={fetchPromo}>
-                  <option value={0}>0%</option>
-                  <option value={5}>-5%</option>
-                  <option value={10}>-10%</option>
-                  <option value={15}>-15%</option>
-                  <option value={20}>-20%</option>
-                  <option value={25}>-25%</option>
-                  <option value={30}>-30%</option>
-                  <option value={50}>-50%</option>
-                  <option value={75}>-75%</option>
-                </select>
-              </div>
-
               <div className="flex justify-center mb-2">
-                <button className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">
-                  Add to Cart
-                </button>
+                {/* CHANGE THE URL INSIDE LINK */}
+                <Link to="/">
+                  <button className="mt-4 w-96 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">
+                    Return for sale
+                  </button>
+                </Link>
               </div>
             </>
           )}
@@ -160,4 +121,4 @@ const ShopInside = () => {
   );
 };
 
-export default ShopInside;
+export default InsideProductEmployee;

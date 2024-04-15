@@ -16,6 +16,8 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 import EditProducts from "./adminPages/EditProducts";
 import { CartProvider } from "./CartContext";
 import ProductEmployee from "./adminPages/ProductEmployee";
+import InsideProductEmployee from "./adminPages/InsideProductEmployee";
+import Revenue from "./adminPages/Revenue";
 
 function App() {
   return (
@@ -113,6 +115,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <ProductEmployee />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/productEmployee/:id"
+            element={
+              <ProtectedRoute>
+                <InsideProductEmployee />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/revenue"
+            element={
+              <ProtectedRoute>
+                <Revenue />
               </ProtectedRoute>
             }
           />

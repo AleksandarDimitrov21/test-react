@@ -24,11 +24,7 @@ const InsideCart = ({ id, title, price, image, quantity }) => {
     <div className="gap-2 py-3 border-t-2 flex flex-col sm:flex-row items-center">
       <div className="flex items-center mb-2 sm:mb-0">
         <div className="overflow-hidden">
-          <img
-            src={image}
-            alt="Product"
-            className="w-20 h-20 sm:w-40 sm:h-40 object-cover"
-          />
+          <img src={image} alt="Product" className="w-40 h-auto object-cover" />
         </div>
         <div className="ml-4">
           <p className="text-lg text-black font-bold">{title}</p>
@@ -56,11 +52,12 @@ const InsideCart = ({ id, title, price, image, quantity }) => {
         >
           <PlusIcon className="h-5 w-5" />
         </button>
-        <button
-          onClick={handleRemoveItem}
-          className="text-red-600 hover:text-red-700 ml-2 focus:outline-none"
-        >
-          Remove
+        <button onClick={handleRemoveItem} className="ml-5">
+          <img
+            src="delete.svg"
+            alt="delete"
+            className="h-6 w-6 bg-red-600 hover:text-red-700 rounded-full p-1"
+          />
         </button>
       </div>
     </div>

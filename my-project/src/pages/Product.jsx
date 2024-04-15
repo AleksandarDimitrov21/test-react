@@ -141,6 +141,7 @@ const Product = () => {
                 priceOriginal={roundUpToTwoDecimals(product.originalPrice)}
                 priceCurrent={roundUpToTwoDecimals(product.currentPrice)}
                 status={setIsLoggedIn}
+                buttonName={"Add to cart"}
               />
             </Link>
           ))}

@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Forms from "./Forms";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     photo: "",
     name: "",
@@ -38,6 +40,7 @@ const AddUser = () => {
           password: "",
           userType: "",
         });
+        navigate("/");
       }
     } catch (error) {
       console.error("Error adding product:", error);

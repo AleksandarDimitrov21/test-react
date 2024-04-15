@@ -91,7 +91,7 @@ const ProductEmployee = () => {
 
       <div className="flex flex-col">
         <h1 className="flex justify-center mt-20 text-4xl text-violet-500">
-          Products
+          All Products
         </h1>
 
         <div className="flex flex-col sm:flex-row justify-center mx-5 sm:mx-0  mb-20 mt-5 lg:mt-12 gap-3">
@@ -127,7 +127,7 @@ const ProductEmployee = () => {
         </div>
       </div>
 
-      <div className="flex justify-center mt-6 lg:mt-12">
+      <div className="flex justify-center mt-6 lg:mt-12 mb-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-5">
           {filteredProducts.map((product) => (
             <Link key={product.id} to={`/productEmployee/${product.id}`}>
@@ -139,18 +139,11 @@ const ProductEmployee = () => {
                 priceOriginal={roundUpToTwoDecimals(product.originalPrice)}
                 priceCurrent={roundUpToTwoDecimals(product.currentPrice)}
                 status={setIsLoggedIn}
+                buttonName={"Return for sale"}
               />
             </Link>
           ))}
         </div>
-      </div>
-
-      <div className="flex justify-center">
-        <Link to="/add-product">
-          <button className="bg-violet-600 border-none rounded-3xl py-3 w-96 text-xl my-5 font-semibold text-white hover:bg-violet-700">
-            Add Products
-          </button>
-        </Link>
       </div>
     </div>
   );
