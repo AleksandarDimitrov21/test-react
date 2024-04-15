@@ -15,6 +15,7 @@ import ProductInfo from "./adminPages/ProductInfo";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import EditProducts from "./adminPages/EditProducts";
 import { CartProvider } from "./CartContext";
+import ProductEmployee from "./adminPages/ProductEmployee";
 
 function App() {
   return (
@@ -44,7 +45,7 @@ function App() {
           <Route path="/product/:id" element={<ShopInside />} />
 
           <Route
-            path="/profile"
+            path="/profile/:id"
             element={
               <ProtectedRoute>
                 <Profile />
@@ -108,10 +109,10 @@ function App() {
             }
           />
           <Route
-            path="/edit-product/:id"
+            path="/product-employee"
             element={
               <ProtectedRoute>
-                <EditProducts />
+                <ProductEmployee />
               </ProtectedRoute>
             }
           />

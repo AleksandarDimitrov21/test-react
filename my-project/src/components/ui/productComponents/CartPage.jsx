@@ -46,7 +46,7 @@ const CartPage = () => {
                   <div className="flex justify-between mb-2">
                     <p className="text-lg text-black">Subtotal:</p>
                     <p className="text-lg text-black">
-                      ${RoundedTwoDecimals(calculateSubtotal(cartItems))}
+                      BGN {RoundedTwoDecimals(calculateSubtotal(cartItems))}
                     </p>
                   </div>
                 </div>

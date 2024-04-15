@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { RoundedTwoDecimals } from "../../RoundedTwoDecimals";
 
 const ShopInside = () => {
   const [showButtons, setShowButtons] = useState(true);
@@ -103,7 +104,7 @@ const ShopInside = () => {
                 <span className="text-xl">
                   BGN{" "}
                   {product && product.currentPrice
-                    ? roundUpToTwoDecimals(product.currentPrice)
+                    ? RoundedTwoDecimals(product.currentPrice)
                     : "Price unavailable"}
                 </span>
               </p>

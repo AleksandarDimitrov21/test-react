@@ -7,11 +7,8 @@ import Order from "../components/profileComponents/PreviousOrder";
 import axios from "axios";
 
 const Profile = () => {
-  const [isAdmin, setIsAdmin] = useState(true);
   const [users, setUsers] = useState([]);
-  const [productId, setProductId] = useState("some-product-id");
-  const [productDetails, setProductDetails] = useState(null);
-  const [isCustomer, setCustomer] = useState(true);
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -24,23 +21,6 @@ const Profile = () => {
       console.error("Error fetching user data:", error);
     }
   };
-
-  useEffect(() => {
-    const fetchProductDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/productEmployee/${productId}`
-        );
-        setProductDetails(response.data);
-      } catch (error) {
-        console.error("Error fetching product details:", error);
-      }
-    };
-
-    if (productId) {
-      fetchProductDetails();
-    }
-  }, [productId]);
 
   return (
     <div className="bg-white min-h-screen">
@@ -72,38 +52,34 @@ const Profile = () => {
             </div>
           </div>
 
-          {isAdmin ? (
-            <div className="overflow-x-auto mt-5">
-              <table className="table bg-zinc-800 rounded-none mb-5">
-                <thead>
-                  <tr>
-                    <th className="text-lg">Name</th>
-                    <th className="text-lg">Username</th>
-                    <th className="text-lg">Email</th>
-                  </tr>
-                </thead>
-                <Users users={users} />
-              </table>
-            </div>
-          ) : null}
+          <div className="overflow-x-auto mt-5">
+            <table className="table bg-zinc-800 rounded-none mb-5">
+              <thead>
+                <tr>
+                  <th className="text-lg">Name</th>
+                  <th className="text-lg">Username</th>
+                  <th className="text-lg">Email</th>
+                </tr>
+              </thead>
+              <Users users={users} />
+            </table>
+          </div>
 
-          {isCustomer ? (
-            <div className=" mx-5">
-              <h1 className="text-2xl">Recently bought:</h1>
-              <Order
-                status={"Delivered"}
-                title={"Robot"}
-                description={"It cleans."}
-                price={"BGN 200"}
-              />
-              <Order
-                status={"Delivered"}
-                title={"Robot"}
-                description={"It cleans."}
-                price={"BGN 200"}
-              />
-            </div>
-          ) : null}
+          <div className=" mx-5">
+            <h1 className="text-2xl">Recently bought:</h1>
+            <Order
+              status={"Delivered"}
+              title={"Robot"}
+              description={"It cleans."}
+              price={"BGN 200"}
+            />
+            <Order
+              status={"Delivered"}
+              title={"Robot"}
+              description={"It cleans."}
+              price={"BGN 200"}
+            />
+          </div>
         </div>
       </div>
     </div>

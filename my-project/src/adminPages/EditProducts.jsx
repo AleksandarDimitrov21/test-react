@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Forms from "./Forms";
@@ -21,6 +21,20 @@ const EditProducts = () => {
     originalPrice: 0,
     discount: 0,
   });
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/product/${id}`);
+        if (response.status === 200) {
+          setProduct(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    };
+    fetchProductDetails();
+  }, [id]);
 
   const edit = async (e) => {
     e.preventDefault();

@@ -22,7 +22,7 @@ const Orders = () => {
         <div className="flex justify-between items-center mb-8">
           <Link
             to="/"
-            className="text-black bg-white hover:bg-violet-500 border-none font-bold rounded-full py-2 px-4"
+            className="text-black bg-white hover:bg-violet-200 border-none font-bold rounded-full py-2 px-4"
           >
             Home
           </Link>

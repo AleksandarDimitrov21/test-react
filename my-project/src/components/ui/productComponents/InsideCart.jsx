@@ -33,7 +33,7 @@ const InsideCart = ({ id, title, price, image, quantity }) => {
         <div className="ml-4">
           <p className="text-lg text-black font-bold">{title}</p>
           <p className="text-sm text-gray-500">
-            Price: $
+            Price: BGN{" "}
             {RoundedTwoDecimals(calculateNewPrice(price, localQuantity))}
           </p>
         </div>
