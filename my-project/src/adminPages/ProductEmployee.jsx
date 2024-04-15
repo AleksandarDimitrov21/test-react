@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Shop from "../components/ui/productComponents/Shop";
 import NavBar from "../components/ui/navigation/NavBar";
-import { useAuth } from "../auth/AuthContext ";
+import DisplayDeletedProducts from "../DisplayDeletedProducts";
 
 const ProductEmployee = () => {
-  const { setIsLoggedIn } = useAuth();
+  const [deletedProducts, setDeletedProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filterCriteria, setFilterCriteria] = useState("Price: High-low");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredDeletedProducts, setFilteredDeletedProducts] = useState([]);
+
   const categories = [
     "All",
     "Panels",
@@ -28,73 +26,70 @@ const ProductEmployee = () => {
     "Sort: Z-A",
   ];
 
-  function roundUpToTwoDecimals(number) {
-    number = number.toFixed(2);
-    return number;
-  }
-
   useEffect(() => {
-    const fetchProducts = async () => {
-      let url = "http://localhost:8080/productEmployee";
-      if (selectedCategory === "Promotional") {
-        url = "http://localhost:8080/promotional";
-      } else if (selectedCategory !== "All") {
-        url = `http://localhost:8080/${selectedCategory}`;
-      }
-
-      try {
-        const response = await axios.get(url);
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    if (selectedCategory) {
-      fetchProducts();
-    }
-  }, [selectedCategory]);
+    fetchDeletedProducts();
+  }, []);
 
   useEffect(() => {
     const applyFilter = () => {
-      let filteredProducts = [...products];
+      let filtered = deletedProducts;
 
-      if (filterCriteria === "Price: High-low") {
-        filteredProducts.sort((a, b) => b.currentPrice - a.currentPrice);
-      } else if (filterCriteria === "Price: Low-High") {
-        filteredProducts.sort((a, b) => a.currentPrice - b.currentPrice);
-      }
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
-      if (filterCriteria === "Sort: A-Z") {
-        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-      } else if (filterCriteria === "Sort: Z-A") {
-        filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
-      }
-
-      if (searchTerm.trim() !== "") {
-        filteredProducts = filteredProducts.filter((product) =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      if (selectedCategory !== "All") {
+        filtered = filtered.filter(
+          (product) => product.category === selectedCategory
         );
       }
-      setFilteredProducts(filteredProducts);
+
+      if (filterCriteria === "Price: High-low") {
+        filtered.sort((a, b) => b.currentPrice - a.currentPrice);
+      } else if (filterCriteria === "Price: Low-High") {
+        filtered.sort((a, b) => a.currentPrice - b.currentPrice);
+      } else if (filterCriteria === "Sort: A-Z") {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (filterCriteria === "Sort: Z-A") {
+        filtered.sort((a, b) => b.name.localeCompare(a.name));
+      }
+
+      setFilteredDeletedProducts(filtered);
     };
 
     applyFilter();
-  }, [products, filterCriteria, searchTerm]);
+  }, [deletedProducts, searchTerm, selectedCategory, filterCriteria]);
+
+  const fetchDeletedProducts = async () => {
+    const url = "http://localhost:8080/deletedProducts";
+    try {
+      const response = await axios.get(url);
+      setDeletedProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching deleted products:", error);
+    }
+  };
+
+  const handleReturnToSale = (productId) => {
+    setDeletedProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== productId)
+    );
+  };
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
   return (
     <div className="bg-white min-h-screen flex flex-col">
       <NavBar />
 
       <div className="flex flex-col">
         <h1 className="flex justify-center mt-20 text-4xl text-violet-500">
-          All Products
+          Deleted Products
         </h1>
 
-        <div className="flex flex-col sm:flex-row justify-center mx-5 sm:mx-0  mb-20 mt-5 lg:mt-12 gap-3">
+        <div className="flex flex-col sm:flex-row justify-center mx-5 sm:mx-0 mb-20 mt-5 lg:mt-12 gap-3">
           <input
             type="text"
             value={searchTerm}
@@ -129,19 +124,17 @@ const ProductEmployee = () => {
 
       <div className="flex justify-center mt-6 lg:mt-12 mb-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-5">
-          {filteredProducts.map((product) => (
-            <Link key={product.id} to={`/productEmployee/${product.id}`}>
-              <Shop
-                productId={product.id}
-                title={product.name}
-                image={product.photo}
-                discount={product.discount}
-                priceOriginal={roundUpToTwoDecimals(product.originalPrice)}
-                priceCurrent={roundUpToTwoDecimals(product.currentPrice)}
-                status={setIsLoggedIn}
-                buttonName={"Return for sale"}
-              />
-            </Link>
+          {filteredDeletedProducts.map((product) => (
+            <DisplayDeletedProducts
+              key={product.id}
+              id={product.id}
+              title={product.name}
+              priceCurrent={product.currentPrice.toFixed(2)}
+              priceOriginal={product.originalPrice.toFixed(2)}
+              image={product.photo}
+              discount={product.discount}
+              onReturnToSale={handleReturnToSale}
+            />
           ))}
         </div>
       </div>
