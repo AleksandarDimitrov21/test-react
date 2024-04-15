@@ -106,7 +106,6 @@ const InsideProductEmployee = () => {
                 </span>
               </p>
               <div className="flex justify-center mb-2">
-                {/* CHANGE THE URL INSIDE LINK */}
                 <Link to="/">
                   <button className="mt-4 w-96 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">
                     Return for sale

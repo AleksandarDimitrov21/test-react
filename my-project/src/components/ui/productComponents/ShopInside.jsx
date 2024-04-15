@@ -116,7 +116,7 @@ const ShopInside = () => {
               <p className="mb-4 text-slate-900 text-xl">
                 {product.description}
               </p>
-              <p className="mb-4 text-slate-900 text-xl">{product.technical}</p>
+
               {product.discount > 0 && (
                 <p className="text-red-700 font-bold text-lg">
                   -{product.discount}%
