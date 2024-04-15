@@ -42,7 +42,7 @@ const Profile = () => {
         </div>
         <div className="ml-3 ">
           <button className="justify-between text-black ">
-            <Link to="/product-employee">All products</Link>
+            <Link to="/product-employee">Deleted products</Link>
           </button>
         </div>
 
