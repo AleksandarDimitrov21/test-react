@@ -4,49 +4,63 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
+import { useAuth } from "../auth/AuthContext ";
 
 const InsideProductEmployee = () => {
-  const [showButtons, setShowButtons] = useState(true);
+  const { userType } = useAuth();
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/productEmployee/${id}`
-        );
-        setProduct(response.data);
-      } catch (error) {
-        if (error.response) {
-          console.log(error.response.status);
-          console.log(error.response.data);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log("Error", error.message);
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+      const fetchProduct = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:8080/productEmployee/${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${jwtToken}`,
+              },
+            }
+          );
+          setProduct(response.data);
+        } catch (error) {
+          if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("Error", error.message);
+          }
         }
-      }
-    };
+      };
 
-    fetchProduct();
+      fetchProduct();
+    }
   }, [id]);
 
-  const deleteProduct = async () => {
-    try {
-      await axios.post(`http://localhost:8080/productDelete/${id}`);
-      console.log("Product deleted successfully!");
-      navigate("/product");
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.status);
-        console.log(error.response.data);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
+  const handleReturnToSale = async () => {
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (userType === "ADMIN" && jwtToken) {
+      try {
+        await axios.post(
+          `http://localhost:8080/productReturn/${id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        navigate("/");
+      } catch (error) {
+        console.error("Error returning product to sale:", error);
       }
+    } else {
+      console.error("Unauthorized or no JWT token found.");
     }
   };
 
@@ -62,21 +76,14 @@ const InsideProductEmployee = () => {
         </div>
 
         <div className="w-full md:w-1/2 flex flex-col justify-center pt-4 md:pt-0 px-4 md:px-12">
-          {showButtons && (
-            <div className="flex items-center justify-end mb-4">
-              <button
-                className="rounded-full bg-red-500 text-white p-2 mr-2"
-                onClick={deleteProduct}
-              >
-                <img width={20} height={20} src="/delete.svg" alt="delete" />
+          <div className="flex items-center justify-end mb-4">
+            <Link key={product.id} to={`/edit-product/${product.id}`}>
+              <button className="rounded-full bg-violet-500 text-white p-2 mr-2">
+                <img width={20} height={20} src="/edit.svg" alt="edit" />
               </button>
-              <Link key={product.id} to={`/edit-product/${product.id}`}>
-                <button className="rounded-full bg-violet-500 text-white p-2 mr-2">
-                  <img width={20} height={20} src="/edit.svg" alt="edit" />
-                </button>
-              </Link>
-            </div>
-          )}
+            </Link>
+          </div>
+
           {product && (
             <>
               <h2 className="text-xl text-gray-900 mb-2">{product.category}</h2>
@@ -91,7 +98,7 @@ const InsideProductEmployee = () => {
               <p className="mb-4 text-slate-900 text-xl">
                 {product.description}
               </p>
-              <p className="mb-4 text-slate-900 text-xl">{product.technical}</p>
+
               {product.discount > 0 && (
                 <p className="text-red-700 font-bold text-lg">
                   -{product.discount}%
@@ -107,7 +114,10 @@ const InsideProductEmployee = () => {
               </p>
               <div className="flex justify-center mb-2">
                 <Link to="/">
-                  <button className="mt-4 w-96 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">
+                  <button
+                    className="mt-4 w-96 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full"
+                    onClick={handleReturnToSale}
+                  >
                     Return for sale
                   </button>
                 </Link>

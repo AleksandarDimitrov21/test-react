@@ -4,11 +4,12 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Forms from "./Forms";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext ";
 
 const AddUser = () => {
   const navigate = useNavigate();
+  const { userType } = useAuth();
   const [user, setUser] = useState({
-    photo: "",
     name: "",
     email: "",
     username: "",
@@ -19,31 +20,32 @@ const AddUser = () => {
 
   const addProduct = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/register",
-        user,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.status === 200) {
-        console.log("User added successfully!");
+    if (userType === "ADMIN") {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/register",
+          user,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.status === 200) {
+          console.log("User added successfully!");
 
-        setUser({
-          photo: "",
-          name: "",
-          email: "",
-          username: "",
-          password: "",
-          userType: "",
-        });
-        navigate("/");
+          setUser({
+            name: "",
+            email: "",
+            username: "",
+            password: "",
+            userType: "",
+          });
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Error adding product:", error);
       }
-    } catch (error) {
-      console.error("Error adding product:", error);
     }
   };
 
@@ -66,16 +68,6 @@ const AddUser = () => {
       <div className="flex items-center justify-center  min-h-screen">
         <div className="bg-white mt-20 sm:mt-5 px-14 sm:px-10 py-5 rounded-xl my-5">
           <Form onSubmit={addProduct}>
-            <div className="mb-1 flex flex-col">
-              <Forms
-                label={"Photo:"}
-                type={"text"}
-                name={"photo"}
-                value={user.photo}
-                onChange={handleChange}
-              />
-            </div>
-
             <div className="mb-1 flex flex-col">
               <Forms
                 label={"Name:"}

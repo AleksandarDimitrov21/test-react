@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import Forms from "./Forms";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext ";
 
 const AddProducts = () => {
   const navigate = useNavigate();
+  const { userType } = useAuth();
   const [product, setProduct] = useState({
     photo: "",
     name: "",
@@ -19,24 +21,33 @@ const AddProducts = () => {
     originalPrice: 0,
     discount: 0,
   });
+
   const addProduct = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/products",
-        product,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (!jwtToken) {
+      console.error("No JWT token found.");
+      return;
+    }
+    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/products",
+          product,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        if (response.status === 201) {
+          console.log("Product added successfully!");
+          navigate("/product");
         }
-      );
-      if (response.status === 201) {
-        console.log("Product added successfully!");
-        navigate("/product");
+      } catch (error) {
+        console.error("Error adding product:", error);
       }
-    } catch (error) {
-      console.error("Error adding product:", error);
     }
   };
 

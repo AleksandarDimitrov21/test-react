@@ -21,7 +21,7 @@ const InsideCart = ({ id, title, price, image, quantity }) => {
   };
 
   return (
-    <div className="gap-2 py-3 border-t-2 flex flex-col sm:flex-row items-center">
+    <div className="gap-2 py-3 border-t-2 flex flex-col sm:flex-row items-center h-[200px] ">
       <div className="flex items-center mb-2 sm:mb-0">
         <div className="overflow-hidden">
           <img src={image} alt="Product" className="w-40 h-auto object-cover" />

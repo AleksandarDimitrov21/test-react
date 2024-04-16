@@ -33,7 +33,7 @@ const ProductInfo = () => {
             Home
           </Link>
         </div>
-        <div className="bg-white rounded-lg shadow-lg overflow-x-auto h-[400px] sm:h-[800px]">
+        <div className="bg-white rounded-lg shadow-lg overflow-x-auto h-[400px] sm:h-[600px]">
           <table className="w-full text-center text-gray-800 ">
             <thead>
               <tr className="text-black">

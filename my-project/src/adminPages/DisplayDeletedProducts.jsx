@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import { useAuth } from "../auth/AuthContext ";
 const DisplayDeletedProducts = ({
   id,
   title,
@@ -10,12 +10,26 @@ const DisplayDeletedProducts = ({
   discount,
   onReturnToSale,
 }) => {
+  const { userType } = useAuth();
   const handleReturnToSale = async () => {
-    try {
-      await axios.post(`http://localhost:8080/productReturn/${id}`);
-      onReturnToSale(id);
-    } catch (error) {
-      console.error("Error returning product to sale:", error);
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (userType === "ADMIN" && jwtToken) {
+      try {
+        await axios.post(
+          `http://localhost:8080/productReturn/${id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        onReturnToSale(id);
+      } catch (error) {
+        console.error("Error returning product to sale:", error);
+      }
+    } else {
+      console.error("Unauthorized or no JWT token found.");
     }
   };
 

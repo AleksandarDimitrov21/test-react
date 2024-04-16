@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "../components/ui/navigation/NavBar";
-import DisplayDeletedProducts from "../DisplayDeletedProducts";
+
+import DisplayDeletedProducts from "./DisplayDeletedProducts";
 
 import { useAuth } from "../auth/AuthContext ";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProductEmployee = () => {
   const [deletedProducts, setDeletedProducts] = useState([]);
@@ -11,6 +14,7 @@ const ProductEmployee = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filterCriteria, setFilterCriteria] = useState("Price: High-low");
   const [filteredDeletedProducts, setFilteredDeletedProducts] = useState([]);
+  const navigate = useNavigate();
 
   const { userType } = useAuth();
 
@@ -65,12 +69,23 @@ const ProductEmployee = () => {
   }, [deletedProducts, searchTerm, selectedCategory, filterCriteria]);
 
   const fetchDeletedProducts = async () => {
-    const url = "http://localhost:8080/deletedProducts";
-    try {
-      const response = await axios.get(url);
-      setDeletedProducts(response.data);
-    } catch (error) {
-      console.error("Error fetching deleted products:", error);
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (userType === "ADMIN") {
+      if (!jwtToken) {
+        console.error("No JWT token found.");
+        return;
+      }
+      const url = "http://localhost:8080/deletedProducts";
+      try {
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
+        setDeletedProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching deleted products:", error);
+      }
     }
   };
 
@@ -131,16 +146,18 @@ const ProductEmployee = () => {
           {userType === "ADMIN" && (
             <>
               {filteredDeletedProducts.map((product) => (
-                <DisplayDeletedProducts
-                  key={product.id}
-                  id={product.id}
-                  title={product.name}
-                  priceCurrent={product.currentPrice.toFixed(2)}
-                  priceOriginal={product.originalPrice.toFixed(2)}
-                  image={product.photo}
-                  discount={product.discount}
-                  onReturnToSale={handleReturnToSale}
-                />
+                <Link key={product.id} to={`/productEmployee/${product.id}`}>
+                  <DisplayDeletedProducts
+                    key={product.id}
+                    id={product.id}
+                    title={product.name}
+                    priceCurrent={product.currentPrice.toFixed(2)}
+                    priceOriginal={product.originalPrice.toFixed(2)}
+                    image={product.photo}
+                    discount={product.discount}
+                    onReturnToSale={handleReturnToSale}
+                  />
+                </Link>
               ))}
             </>
           )}

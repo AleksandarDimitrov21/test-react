@@ -5,12 +5,29 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { RoundedTwoDecimals } from "../../RoundedTwoDecimals";
 import { useAuth } from "../../../auth/AuthContext ";
+import { useCart } from "../../../CartContext";
 
 const ShopInside = () => {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
   const { userType, setUserType } = useAuth();
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (event) => {
+    event.preventDefault();
+
+    const productToAdd = {
+      id: product.id,
+      title: product.name,
+      price: RoundedTwoDecimals(product.currentPrice),
+      image: product.photo,
+      discount: product.discount,
+      quantity: 1,
+    };
+
+    addToCart(productToAdd);
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,13 +45,16 @@ const ShopInside = () => {
         }
       }
     };
-
     fetchProduct();
   }, [id]);
 
   const fetchPromo = async (event) => {
     const newDiscount = parseInt(event.target.value, 10);
-
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (!jwtToken) {
+      console.error("No JWT token found.");
+      return;
+    }
     try {
       const response = await axios.post(
         `http://localhost:8080/set-discount/${id}`,
@@ -42,6 +62,7 @@ const ShopInside = () => {
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
           },
         }
       );
@@ -60,8 +81,22 @@ const ShopInside = () => {
   };
 
   const deleteProduct = async () => {
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (!jwtToken) {
+      console.error("No JWT token found.");
+      return;
+    }
     try {
-      await axios.post(`http://localhost:8080/productDelete/${id}`);
+      await axios.post(
+        `http://localhost:8080/productDelete/${id}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        }
+      );
       console.log("Product deleted successfully!");
       navigate("/product");
     } catch (error) {
@@ -153,7 +188,10 @@ const ShopInside = () => {
               )}
 
               <div className="flex justify-center mb-2">
-                <button className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">
+                <button
+                  className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full"
+                  onClick={(event) => handleAddToCart(event)}
+                >
                   Add to Cart
                 </button>
               </div>

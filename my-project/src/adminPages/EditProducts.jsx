@@ -5,9 +5,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Forms from "./Forms";
 import { Form, Button } from "react-bootstrap";
+import { useAuth } from "../auth/AuthContext ";
 
 const EditProducts = () => {
   const navigate = useNavigate();
+  const { userType } = useAuth();
   const { id } = useParams();
   const [product, setProduct] = useState({
     photo: "",
@@ -23,37 +25,57 @@ const EditProducts = () => {
   });
 
   useEffect(() => {
-    const fetchProductDetails = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/product/${id}`);
-        if (response.status === 200) {
-          setProduct(response.data);
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+      const fetchProductDetails = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:8080/product/${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${jwtToken}`,
+              },
+            }
+          );
+          if (response.status === 200) {
+            setProduct(response.data);
+          }
+        } catch (error) {
+          console.error("Error fetching product details:", error);
         }
-      } catch (error) {
-        console.error("Error fetching product details:", error);
+      };
+      if (jwtToken && (userType === "ADMIN" || userType === "EMPLOYEE")) {
+        fetchProductDetails();
       }
-    };
-    fetchProductDetails();
+    }
   }, [id]);
 
   const edit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.put(
-        `http://localhost:8080/products/${id}`,
-        product,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (!jwtToken) {
+      console.error("No JWT token found.");
+      return;
+    }
+    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+      try {
+        const response = await axios.put(
+          `http://localhost:8080/products/${id}`,
+          product,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          console.log("Product edited successfully!");
+          navigate(`/product/${id}`);
         }
-      );
-      if (response.status === 200) {
-        console.log("Product edited successfully!");
-        navigate(`/product/${id}`);
+      } catch (error) {
+        console.error("Error adding product:", error);
       }
-    } catch (error) {
-      console.error("Error adding product:", error);
     }
   };
 

@@ -49,7 +49,7 @@ const WholePagePhoto = () => {
           className="absolute inset-0 flex items-center justify-center"
           style={{ opacity: fadeOpacity }}
         >
-          <h1 className="text-white font-sans text-4xl sm:text-6xl font-bold ">
+          <h1 className="text-white font-sans text-3xl sm:text-6xl font-bold ">
             {text.map((el, i) => (
               <motion.span
                 key={i}
