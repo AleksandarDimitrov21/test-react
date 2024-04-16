@@ -3,12 +3,16 @@ import axios from "axios";
 import NavBar from "../components/ui/navigation/NavBar";
 import DisplayDeletedProducts from "../DisplayDeletedProducts";
 
+import { useAuth } from "../auth/AuthContext ";
+
 const ProductEmployee = () => {
   const [deletedProducts, setDeletedProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filterCriteria, setFilterCriteria] = useState("Price: High-low");
   const [filteredDeletedProducts, setFilteredDeletedProducts] = useState([]);
+
+  const { userType } = useAuth();
 
   const categories = [
     "All",
@@ -124,18 +128,22 @@ const ProductEmployee = () => {
 
       <div className="flex justify-center mt-6 lg:mt-12 mb-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-5">
-          {filteredDeletedProducts.map((product) => (
-            <DisplayDeletedProducts
-              key={product.id}
-              id={product.id}
-              title={product.name}
-              priceCurrent={product.currentPrice.toFixed(2)}
-              priceOriginal={product.originalPrice.toFixed(2)}
-              image={product.photo}
-              discount={product.discount}
-              onReturnToSale={handleReturnToSale}
-            />
-          ))}
+          {userType === "ADMIN" && (
+            <>
+              {filteredDeletedProducts.map((product) => (
+                <DisplayDeletedProducts
+                  key={product.id}
+                  id={product.id}
+                  title={product.name}
+                  priceCurrent={product.currentPrice.toFixed(2)}
+                  priceOriginal={product.originalPrice.toFixed(2)}
+                  image={product.photo}
+                  discount={product.discount}
+                  onReturnToSale={handleReturnToSale}
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

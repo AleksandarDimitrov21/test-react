@@ -2,20 +2,25 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
-
+import { useAuth } from "../auth/AuthContext ";
 const ProductInfo = () => {
   const [products, setProducts] = useState([]);
+  const { userType } = useAuth();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/products")
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching orders: ", error);
-      });
-  }, []);
+    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+      axios
+        .get("http://localhost:8080/products")
+        .then((response) => {
+          setProducts(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching products: ", error);
+        });
+    } else {
+      console.log("Unauthorized access!"); // Handle unauthorized access
+    }
+  }, [userType]);
 
   return (
     <div className="bg-gradient-to-r from-indigo-300 to-violet-200 min-h-screen">

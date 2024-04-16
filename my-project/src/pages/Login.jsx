@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { isAlphanumeric } from "../validation/Validation";
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext ";
+import { jwtDecode } from "jwt-decode";
+
 const Login = () => {
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, setUserType } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -35,18 +37,27 @@ const Login = () => {
         },
         body: JSON.stringify(formData),
       });
+      const data = await response.json();
       if (response.ok) {
-        const { token } = await response.json();
-        localStorage.setItem("jwtToken", token);
-        setIsLoggedIn(true);
-        navigate("/");
-        console.log("User signed up successfully!");
+        if (data.accessToken) {
+          localStorage.setItem("jwtToken", data.accessToken);
+          console.log(data.accessToken);
+          const decoded = jwtDecode(data.accessToken);
+          setIsLoggedIn(true);
+          setUserType(decoded.userType);
+          navigate("/");
+          console.log("User signed up successfully!");
+        } else {
+          console.error("Access token not present in response:", data);
+          setShowCaution(true);
+        }
       } else {
+        console.error("Error signing up with status:", response.status, data);
         setShowCaution(true);
-        console.error("Error signing up:", response);
       }
     } catch (error) {
       console.error("Error registering user:", error);
+      setShowCaution(true);
     }
   };
 

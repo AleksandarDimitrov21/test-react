@@ -15,22 +15,25 @@ const About = () => {
       case 0:
         return (
           <img
-            src="src\assets\glupost4.jpg"
-            className="w-42 sm:w-96 rounded-lg shadow-2xl"
+            src="mission.svg"
+            alt="mission"
+            className="w-42 sm:w-96 rounded-lg"
           />
         );
       case 1:
         return (
           <img
-            src="src\assets\glupost3.jpg"
-            className="w-42 sm:w-96 rounded-lg shadow-2xl"
+            src="future.svg"
+            alt="future"
+            className="w-42 sm:w-96 rounded-lg"
           />
         );
       case 2:
         return (
           <img
-            src="src\assets\glupost.jpg"
-            className="w-42 sm:w-96 rounded-lg shadow-2xl"
+            src="people.svg"
+            alt="members"
+            className="w-42 sm:w-96 rounded-lg "
           />
         );
       default:

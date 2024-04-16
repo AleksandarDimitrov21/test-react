@@ -4,12 +4,13 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { RoundedTwoDecimals } from "../../RoundedTwoDecimals";
+import { useAuth } from "../../../auth/AuthContext ";
 
 const ShopInside = () => {
-  const [showButtons, setShowButtons] = useState(true);
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
+  const { userType, setUserType } = useAuth();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -85,23 +86,25 @@ const ShopInside = () => {
           <img src={product.photo} alt="photo" />
           <div className="flex flex-wrap w-full justify-center"></div>
         </div>
-
         <div className="w-full md:w-1/2 flex flex-col justify-center pt-4 md:pt-0 px-4 md:px-12">
-          {showButtons && (
-            <div className="flex items-center justify-end mb-4">
+          <div className="flex items-center justify-end mb-4">
+            {userType === "ADMIN" && (
               <button
                 className="rounded-full bg-red-500 text-white p-2 mr-2"
                 onClick={deleteProduct}
               >
                 <img width={20} height={20} src="/delete.svg" alt="delete" />
               </button>
+            )}
+            {(userType === "ADMIN" || userType === "EMPLOYEE") && (
               <Link key={product.id} to={`/edit-product/${product.id}`}>
                 <button className="rounded-full bg-violet-500 text-white p-2 mr-2">
                   <img width={20} height={20} src="/edit.svg" alt="edit" />
                 </button>
               </Link>
-            </div>
-          )}
+            )}
+          </div>
+
           {product && (
             <>
               <h2 className="text-xl text-gray-900 mb-2">{product.category}</h2>
@@ -131,21 +134,23 @@ const ShopInside = () => {
                     : "Price unavailable"}
                 </span>
               </p>
-              <div className="flex flex-row items-center gap-2">
-                <h4 className="text-black">Discount: </h4>
+              {(userType === "ADMIN" || userType === "EMPLOYEE") && (
+                <div className="flex flex-row items-center gap-2">
+                  <h4 className="text-black">Discount: </h4>
 
-                <select className="bg-white text-sm" onChange={fetchPromo}>
-                  <option value={0}>0%</option>
-                  <option value={5}>-5%</option>
-                  <option value={10}>-10%</option>
-                  <option value={15}>-15%</option>
-                  <option value={20}>-20%</option>
-                  <option value={25}>-25%</option>
-                  <option value={30}>-30%</option>
-                  <option value={50}>-50%</option>
-                  <option value={75}>-75%</option>
-                </select>
-              </div>
+                  <select className="bg-white text-sm" onChange={fetchPromo}>
+                    <option value={0}>0%</option>
+                    <option value={5}>-5%</option>
+                    <option value={10}>-10%</option>
+                    <option value={15}>-15%</option>
+                    <option value={20}>-20%</option>
+                    <option value={25}>-25%</option>
+                    <option value={30}>-30%</option>
+                    <option value={50}>-50%</option>
+                    <option value={75}>-75%</option>
+                  </select>
+                </div>
+              )}
 
               <div className="flex justify-center mb-2">
                 <button className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full">

@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import NavPhoto from "./NavPhoto";
-import { useAuth } from "../../../auth/AuthContext ";
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../../../auth/AuthContext ";
 
 const Profile = () => {
   const { handleLogout } = useAuth();
@@ -12,6 +13,7 @@ const Profile = () => {
     localStorage.getItem("avatarImageUrl") ||
       "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
   );
+  const { userType } = useAuth();
 
   return (
     <div className="dropdown dropdown-end ">
@@ -25,26 +27,35 @@ const Profile = () => {
             <Link to="/profile">Profile</Link>
           </button>
         </div>
-        <div className="ml-3 ">
-          <button className="justify-between text-black ">
-            <Link to="/orders">Orders</Link>
-          </button>
-        </div>
-        <div className="ml-3 ">
-          <button className="justify-between text-black ">
-            <Link to="/users">Users</Link>
-          </button>
-        </div>
-        <div className="ml-3 ">
-          <button className="justify-between text-black ">
-            <Link to="/product-display">Product Info</Link>
-          </button>
-        </div>
-        <div className="ml-3 ">
-          <button className="justify-between text-black ">
-            <Link to="/product-employee">Deleted products</Link>
-          </button>
-        </div>
+        {(userType === "ADMIN" || userType === "EMPLOYEE") && (
+          <>
+            <div className="ml-3 ">
+              <button className="justify-between text-black ">
+                <Link to="/orders">Orders</Link>
+              </button>
+            </div>
+
+            <div className="ml-3 ">
+              <button className="justify-between text-black ">
+                <Link to="/product-display">Product Info</Link>
+              </button>
+            </div>
+          </>
+        )}
+        {userType === "ADMIN" && (
+          <>
+            <div className="ml-3 ">
+              <button className="justify-between text-black ">
+                <Link to="/product-employee">Deleted products</Link>
+              </button>
+            </div>
+            <div className="ml-3 ">
+              <button className="justify-between text-black ">
+                <Link to="/users">Users</Link>
+              </button>
+            </div>
+          </>
+        )}
         <div className="ml-3 ">
           <button className="justify-between text-black ">
             <Link to="/revenue">Revenue</Link>

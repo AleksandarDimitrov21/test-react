@@ -12,6 +12,7 @@ const Product = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const { userType } = useAuth();
 
   const categories = [
     "All",
@@ -130,7 +131,7 @@ const Product = () => {
       </div>
 
       <div className="flex justify-center mt-6 lg:mt-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-5 mb-5">
           {filteredProducts.map((product) => (
             <Link key={product.id} to={`/product/${product.id}`}>
               <Shop
@@ -149,11 +150,13 @@ const Product = () => {
       </div>
 
       <div className="flex justify-center">
-        <Link to="/add-product">
-          <button className="bg-violet-600 border-none rounded-3xl py-3 w-96 text-xl my-5 font-semibold text-white hover:bg-violet-700">
-            Add Products
-          </button>
-        </Link>
+        {(userType === "ADMIN" || userType === "EMPLOYEE") && (
+          <Link to="/add-product">
+            <button className="bg-violet-600 border-none rounded-3xl py-3 w-96 text-xl my-5 font-semibold text-white hover:bg-violet-700">
+              Add Products
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
