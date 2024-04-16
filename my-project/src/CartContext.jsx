@@ -29,8 +29,6 @@ export const CartProvider = ({ children }) => {
       const newCartItems = [...cartItems, newProduct];
       setCartItems(newCartItems);
     }
-
-    console.log("Updated Cart Items:", cartItems);
   };
 
   const updateQuantity = (id, quantity) => {
@@ -43,6 +41,10 @@ export const CartProvider = ({ children }) => {
   const removeItem = (id) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCartItems);
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
   };
 
   const totalItems = cartItems.reduce(
@@ -66,6 +68,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         updateQuantity,
         removeItem,
+        clearCart,
         totalItems,
         totalPrice,
       }}
@@ -74,3 +77,5 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
+
+export default CartContext;

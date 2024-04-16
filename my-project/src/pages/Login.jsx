@@ -6,9 +6,11 @@ import { isAlphanumeric } from "../validation/Validation";
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext ";
 import { jwtDecode } from "jwt-decode";
+import { useCart } from "../CartContext";
 
 const Login = () => {
   const { setIsLoggedIn, setUserType } = useAuth();
+  const { clearCart } = useCart();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -41,10 +43,10 @@ const Login = () => {
       if (response.ok) {
         if (data.accessToken) {
           localStorage.setItem("jwtToken", data.accessToken);
-          console.log(data.accessToken);
           const decoded = jwtDecode(data.accessToken);
           setIsLoggedIn(true);
           setUserType(decoded.userType);
+          clearCart();
           navigate("/");
           console.log("User signed up successfully!");
         } else {
@@ -80,7 +82,7 @@ const Login = () => {
               />
               <UserInput
                 type={"password"}
-                placeholder={"Passsword:"}
+                placeholder={"Password:"}
                 name={"password"}
                 value={formData.password}
                 onChange={handleChange}
@@ -88,7 +90,7 @@ const Login = () => {
               <h6 className="text-xs">
                 Don't have an account?{" "}
                 <Link to="/signup" className="text-violet-700">
-                  Sign In
+                  Sign Up
                 </Link>
               </h6>
               {showCaution && (
