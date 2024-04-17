@@ -78,7 +78,7 @@ const NavBar = () => {
         )}
         {isLoggedIn && (
           <div className="mr-1 sm:mr-2">
-            <ProfileNav isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <ProfileNav />
           </div>
         )}
       </div>

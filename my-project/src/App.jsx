@@ -18,6 +18,7 @@ import { CartProvider } from "./CartContext";
 import ProductEmployee from "./adminPages/ProductEmployee";
 import InsideProductEmployee from "./adminPages/InsideProductEmployee";
 import Revenue from "./adminPages/Revenue";
+import PhotoChange from "./components/ui/photoComponents/PhotoChange";
 
 function App() {
   return (
@@ -83,6 +84,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/change-photo"
+            element={
+              <ProtectedRoute>
+                <PhotoChange />
               </ProtectedRoute>
             }
           />

@@ -29,7 +29,6 @@ const Profile = () => {
           }
         );
         setUserDetail(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching user details:", error);
       }
@@ -42,14 +41,22 @@ const Profile = () => {
 
   return (
     <div className="dropdown dropdown-end ">
-      <NavPhoto imageUrl={userDetail?.photo} />
+      {userDetail?.photo ? (
+        <NavPhoto imageUrl={userDetail?.photo} />
+      ) : (
+        <NavPhoto
+          imageUrl={
+            "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
+          }
+        />
+      )}
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-200 rounded-box w-52"
       >
         <div className="ml-3 ">
           <button className="justify-between text-black ">
-            {userId && <Link to={`profile/${userId}`}>Profile</Link>}
+            {userId && <Link to={`/profile/${userId}`}>Profile</Link>}
           </button>
         </div>
         {(userType === "ADMIN" || userType === "EMPLOYEE") && (

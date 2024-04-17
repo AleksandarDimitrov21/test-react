@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Shop from "../components/ui/productComponents/Shop";
 import NavBar from "../components/ui/navigation/NavBar";
 import { useAuth } from "../auth/AuthContext ";
+import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
+import Skeleton from "../components/ui/Skeleton";
 
 const Product = () => {
   const { setIsLoggedIn } = useAuth();
@@ -29,11 +31,6 @@ const Product = () => {
     "Sort: A-Z",
     "Sort: Z-A",
   ];
-
-  function roundUpToTwoDecimals(number) {
-    number = number.toFixed(2);
-    return number;
-  }
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -139,8 +136,8 @@ const Product = () => {
                 title={product.name}
                 image={product.photo}
                 discount={product.discount}
-                priceOriginal={roundUpToTwoDecimals(product.originalPrice)}
-                priceCurrent={roundUpToTwoDecimals(product.currentPrice)}
+                priceOriginal={RoundedTwoDecimals(product.originalPrice)}
+                priceCurrent={RoundedTwoDecimals(product.currentPrice)}
                 status={setIsLoggedIn}
                 buttonName={"Add to cart"}
               />
