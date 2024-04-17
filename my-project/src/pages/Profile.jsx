@@ -9,32 +9,73 @@ import { useAuth } from "../auth/AuthContext ";
 
 const Profile = () => {
   const [users, setUsers] = useState([]);
-  const [name, setName] = useState("");
-  const { userType } = useAuth();
+  const [userDetail, setUserDetail] = useState(null);
+  const { userType, userId } = useAuth();
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/user");
-      setUsers(response.data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (!jwtToken) {
+      console.error("No JWT token found.");
+      return;
+    }
+    if (userType === "ADMIN") {
+      try {
+        const response = await axios.get("http://localhost:8080/user", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
+
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
     }
   };
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    const jwtToken = localStorage.getItem("jwtToken");
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/user/${userId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        setUserDetail(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    if (jwtToken) {
+      fetchUserDetails();
+    }
+  }, [userId]);
 
   return (
     <>
       <div className="bg-white min-h-screen">
         <BackgroundPhoto />
         <div className="w-full h-0 flex justify-center items-center">
-          <Avatar />
+          <Avatar photoURL={userDetail?.photo} />
         </div>
         <div className="h-auto text-center mt-32">
-          <h1 className="text-4xl font-semibold text-black">{name}</h1>
-          <h2>Upload your own picture</h2>
+          <h1 className="text-4xl font-semibold text-black">
+            {userDetail ? userDetail.name : "Loading..."}
+          </h1>
         </div>
         <div className="mt-5">
           <div>

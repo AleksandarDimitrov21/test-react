@@ -9,22 +9,47 @@ import { useAuth } from "../../../auth/AuthContext ";
 
 const Profile = () => {
   const { handleLogout } = useAuth();
-  const [avatarImageUrl, setAvatarImageUrl] = useState(
-    localStorage.getItem("avatarImageUrl") ||
-      "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-  );
-  const { userType } = useAuth();
+  const [userDetail, setUserDetail] = useState(null);
+
+  const { userType, userId } = useAuth();
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    const jwtToken = localStorage.getItem("jwtToken");
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/user/${userId}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        setUserDetail(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    if (jwtToken) {
+      fetchUserDetails();
+    }
+  }, [userId]);
 
   return (
     <div className="dropdown dropdown-end ">
-      <NavPhoto imageUrl={avatarImageUrl} />
+      <NavPhoto imageUrl={userDetail?.photo} />
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-200 rounded-box w-52"
       >
         <div className="ml-3 ">
           <button className="justify-between text-black ">
-            <Link to="/profile">Profile</Link>
+            {userId && <Link to={`profile/${userId}`}>Profile</Link>}
           </button>
         </div>
         {(userType === "ADMIN" || userType === "EMPLOYEE") && (

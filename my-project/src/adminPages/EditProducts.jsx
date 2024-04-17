@@ -26,27 +26,26 @@ const EditProducts = () => {
 
   useEffect(() => {
     const jwtToken = localStorage.getItem("jwtToken");
-    if (userType === "ADMIN" || userType === "EMPLOYEE") {
-      const fetchProductDetails = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:8080/product/${id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${jwtToken}`,
-              },
-            }
-          );
-          if (response.status === 200) {
-            setProduct(response.data);
+
+    const fetchProductDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/product/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
           }
-        } catch (error) {
-          console.error("Error fetching product details:", error);
+        );
+        if (response.status === 200) {
+          setProduct(response.data);
         }
-      };
-      if (jwtToken && (userType === "ADMIN" || userType === "EMPLOYEE")) {
-        fetchProductDetails();
+      } catch (error) {
+        console.error("Error fetching product details:", error);
       }
+    };
+    if (jwtToken && (userType === "ADMIN" || userType === "EMPLOYEE")) {
+      fetchProductDetails();
     }
   }, [id]);
 

@@ -47,14 +47,6 @@ function App() {
           <Route path="/product/:id" element={<ShopInside />} />
 
           <Route
-            path="/profile/:id"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
             path="/product-display"
             element={
               <ProtectedRoute>
@@ -87,7 +79,7 @@ function App() {
             }
           />
           <Route
-            path="/profile"
+            path="/profile/:id"
             element={
               <ProtectedRoute>
                 <Profile />

@@ -1,13 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const Avatar = () => {
+const Avatar = ({ photoURL }) => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState(() => {
-    return (
-      localStorage.getItem("avatarImageUrl") ||
-      "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-    );
-  });
 
   const fileInputRef = useRef(null);
 
@@ -44,7 +38,7 @@ const Avatar = () => {
       >
         <img
           className="w-full h-full object-cover "
-          src={imageUrl}
+          src={photoURL}
           alt="avatar"
           onClick={handleImageClick}
         />

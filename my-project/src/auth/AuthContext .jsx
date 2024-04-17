@@ -13,9 +13,14 @@ export const AuthProvider = ({ children }) => {
     localStorage.getItem("jwtToken") ? true : false
   );
   const [userType, setUserType] = useState(null);
+  const [userId, setUserId] = useState("");
+
   const navigate = useNavigate();
 
   const checkUserRole = (token) => {
+    if (!token) {
+      return console.log("No token");
+    }
     try {
       const decodedToken = jwtDecode(token);
       const currentDate = new Date();
@@ -24,6 +29,8 @@ export const AuthProvider = ({ children }) => {
         handleLogout();
       } else {
         setIsLoggedIn(true);
+        setUserId(decodedToken.jti);
+
         setUserType(decodedToken.userType);
       }
     } catch (error) {
@@ -44,12 +51,24 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("jwtToken");
     setIsLoggedIn(false);
     setUserType(null);
+    setUserId("");
     navigate("/");
   };
 
+  useEffect(() => {
+    checkUserRole(localStorage.getItem("jwtToken"));
+  });
+
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn, handleLogout, userType, setUserType }}
+      value={{
+        isLoggedIn,
+        setIsLoggedIn,
+        handleLogout,
+        userType,
+        setUserType,
+        userId,
+      }}
     >
       {children}
     </AuthContext.Provider>

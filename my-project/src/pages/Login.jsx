@@ -48,6 +48,7 @@ const Login = () => {
           setUserType(decoded.userType);
           clearCart();
           navigate("/");
+          console.log(data.accessToken);
           console.log("User signed up successfully!");
         } else {
           console.error("Access token not present in response:", data);

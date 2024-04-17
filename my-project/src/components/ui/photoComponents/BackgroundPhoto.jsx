@@ -13,8 +13,8 @@ const BackgroundPhoto = () => {
         </Link>
         <div>
           <img
-            src="src\assets\photoBackground.jpg"
-            alt="Product"
+            src="https://cdn.hero.page/wallpapers/abef7a18-2e69-46e2-86a6-c1ba351c3101-nature's-geometry-minimalist-mountain-art-wallpaper-2.png"
+            alt="Background"
             className="w-full h-96 object-cover shadow-md shadow-gray-200"
           />
         </div>
