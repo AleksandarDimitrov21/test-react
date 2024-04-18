@@ -6,9 +6,11 @@ import { useAuth } from "../auth/AuthContext ";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const { userInfo } = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const jwtToken = localStorage.getItem("jwtToken");
+
     const fetchOrders = () => {
       axios
         .get("http://localhost:8080/orders", {
@@ -31,7 +33,6 @@ const Orders = () => {
       fetchOrders();
     }
   }, [userInfo?.userType]);
-  console.log(userInfo);
 
   const changeOrderStatus = async (orderId, newStatus) => {
     const jwtToken = localStorage.getItem("jwtToken");
@@ -77,6 +78,15 @@ const Orders = () => {
               Home
             </Link>
           </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Search by Order ID..."
+              className="input input-bordered bg-white"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
           <div className="bg-white rounded-lg shadow-lg overflow-x-auto">
             <table className="w-full text-center text-gray-800">
               <thead>
@@ -92,39 +102,41 @@ const Orders = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((order) => (
-                  <tr key={order.id}>
-                    <td className="border px-4 py-2">{order.id}</td>
-                    <td className="border px-4 py-2">{order.client.name}</td>
-                    <td className="border px-4 py-2">{order.address}</td>
-                    <td className="border px-4 py-2">{order.phoneNumber}</td>
-                    <td className="border px-4 py-2 whitespace-nowrap">
-                      {new Date(order.orderDateTime).toLocaleString("en-GB", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </td>
-                    <td className="border px-4 py-2">BGN {order.value}</td>
-                    <td className="border px-4 py-2">{order.status}</td>
-                    <td className="border px-4 py-2 ">
-                      <select
-                        value={order.status}
-                        onChange={(e) =>
-                          changeOrderStatus(order.id, e.target.value)
-                        }
-                        className="rounded-md bg-white text-black pl-2 border min-h-10 w-20 sm:w-36 hover:bg-neutral-200 "
-                      >
-                        <option value="PENDING">PENDING</option>
-                        <option value="PROCESSING">PROCESSING</option>
-                        <option value="COMPLETED">COMPLETED</option>
-                        <option value="CANCELED">CANCELED</option>
-                      </select>
-                    </td>
-                  </tr>
-                ))}
+                {orders
+                  .filter((order) => order.id.toString().includes(searchTerm))
+                  .map((order) => (
+                    <tr key={order.id}>
+                      <td className="border px-4 py-2">{order.id}</td>
+                      <td className="border px-4 py-2">{order.client.name}</td>
+                      <td className="border px-4 py-2">{order.address}</td>
+                      <td className="border px-4 py-2">{order.phoneNumber}</td>
+                      <td className="border px-4 py-2 whitespace-nowrap">
+                        {new Date(order.orderDateTime).toLocaleString("en-GB", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </td>
+                      <td className="border px-4 py-2">BGN {order.value}</td>
+                      <td className="border px-4 py-2">{order.status}</td>
+                      <td className="border px-4 py-2 ">
+                        <select
+                          value={order.status}
+                          onChange={(e) =>
+                            changeOrderStatus(order.id, e.target.value)
+                          }
+                          className="rounded-md bg-white text-black pl-2 border min-h-10 w-20 sm:w-36 hover:bg-neutral-200 "
+                        >
+                          <option value="PENDING">PENDING</option>
+                          <option value="PROCESSING">PROCESSING</option>
+                          <option value="COMPLETED">COMPLETED</option>
+                          <option value="CANCELED">CANCELED</option>
+                        </select>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

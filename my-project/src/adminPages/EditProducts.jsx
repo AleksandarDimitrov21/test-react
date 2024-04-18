@@ -117,7 +117,6 @@ const EditProducts = () => {
                 onChange={handleChange}
               />
             </div>
-
             <div className="mb-1 flex flex-col">
               <Forms
                 label={"Brand:"}
@@ -127,7 +126,6 @@ const EditProducts = () => {
                 onChange={handleChange}
               />
             </div>
-
             <div className="mb-1 flex flex-col">
               <Forms
                 label={"Model:"}
@@ -137,7 +135,6 @@ const EditProducts = () => {
                 onChange={handleChange}
               />
             </div>
-
             <div className="mb-1 flex flex-col">
               <Forms
                 label={"Category:"}
@@ -147,17 +144,6 @@ const EditProducts = () => {
                 onChange={handleChange}
               />
             </div>
-
-            <div className="mb-1 flex flex-col">
-              <Forms
-                label={"Quantity:"}
-                type={"number"}
-                name={"quantity"}
-                value={product.quantity}
-                onChange={handleChange}
-              />
-            </div>
-
             <div className="mb-1 flex flex-col">
               <label className="text-md font-semibold text-black mb-1">
                 Description:
@@ -169,32 +155,43 @@ const EditProducts = () => {
                 onChange={handleChange}
               />
             </div>
+            {userInfo?.userType === "ADMIN" && (
+              <>
+                <div className="mb-1 flex flex-col">
+                  <Forms
+                    label={"Quantity:"}
+                    type={"number"}
+                    name={"quantity"}
+                    value={product.quantity}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-1 flex flex-col">
+                  <Forms
+                    label={"Min Price"}
+                    type="number"
+                    name={"minPrice"}
+                    value={product.minPrice}
+                    onChange={handleChange}
+                  />
+                  <Forms
+                    label={"Original Price"}
+                    type="number"
+                    name={"originalPrice"}
+                    value={product.originalPrice}
+                    onChange={handleChange}
+                  />
 
-            <div className="mb-1 flex flex-col">
-              <Forms
-                label={"Min Price"}
-                type="number"
-                name={"minPrice"}
-                value={product.minPrice}
-                onChange={handleChange}
-              />
-              <Forms
-                label={"Original Price"}
-                type="number"
-                name={"originalPrice"}
-                value={product.originalPrice}
-                onChange={handleChange}
-              />
-
-              <Forms
-                label={"Discount"}
-                type="number"
-                name={"discount"}
-                value={product.discount}
-                onChange={handleChange}
-              />
-            </div>
-
+                  <Forms
+                    label={"Discount"}
+                    type="number"
+                    name={"discount"}
+                    value={product.discount}
+                    onChange={handleChange}
+                  />
+                </div>
+              </>
+            )}
             <Button
               className="bg-black border-none w-56 sm:w-96 rounded-3xl py-3 text-xl mt-2 mb-0 font-semibold text-white hover:bg-violet-500"
               variant="primary"

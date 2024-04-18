@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
   const { userInfo } = useAuth();
   const token = localStorage.getItem("jwtToken");
 
@@ -37,6 +38,30 @@ const Profile = () => {
     if (userInfo) {
       fetchUsers();
     }
+  }, [userInfo, token]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      if (!token || userInfo?.userType !== "CUSTOMER" || !userInfo?.id) {
+        return;
+      }
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/clientOrder/${userInfo.id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+
+    fetchOrders();
   }, [userInfo, token]);
 
   return (
@@ -83,19 +108,16 @@ const Profile = () => {
             </div>
 
             <div className=" mx-5">
-              <h1 className="text-2xl">Recently bought:</h1>
-              <Order
-                status={"Delivered"}
-                title={"Robot"}
-                description={"It cleans."}
-                price={"BGN 200"}
-              />
-              <Order
-                status={"Delivered"}
-                title={"Robot"}
-                description={"It cleans."}
-                price={"BGN 200"}
-              />
+              {orders.map((order) => (
+                <Order
+                  key={order.id}
+                  status={order.status}
+                  phone={order.phoneNumber}
+                  address={order.address}
+                  time={order.orderDateTime}
+                  price={order.value}
+                />
+              ))}
             </div>
           </div>
         </div>

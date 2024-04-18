@@ -68,11 +68,20 @@ const Product = () => {
         filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
       }
 
-      if (searchTerm.trim() !== "") {
-        filteredProducts = filteredProducts.filter((product) =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+      if (userInfo?.userType === "ADMIN" || userInfo?.userType === "EMPLOYEE") {
+        if (searchTerm.trim() !== "") {
+          filteredProducts = filteredProducts.filter((product) =>
+            product.id.toString().includes(searchTerm)
+          );
+        }
+      } else {
+        if (searchTerm.trim() !== "") {
+          filteredProducts = filteredProducts.filter((product) =>
+            product.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
       }
+
       setFilteredProducts(filteredProducts);
     };
 
