@@ -52,7 +52,7 @@ const InsideCart = ({ id, title, price, image, quantity }) => {
         >
           <PlusIcon className="h-5 w-5" />
         </button>
-        <button onClick={handleRemoveItem} className="ml-5">
+        <button onClick={handleRemoveItem} className="ml-5 mr-2">
           <img
             src="delete.svg"
             alt="delete"

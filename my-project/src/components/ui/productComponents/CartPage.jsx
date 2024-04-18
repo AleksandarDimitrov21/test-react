@@ -11,7 +11,8 @@ const CartPage = () => {
   const [actualIds, setActualIds] = useState([]);
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const { userId } = useAuth();
+  const { userInfo } = useAuth();
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
     const fetchActualIds = async () => {
@@ -40,27 +41,35 @@ const CartPage = () => {
   }, [cartItems]);
 
   const handleCheckout = async () => {
-    try {
-      const order = {
-        clientId: userId,
-        address: address,
-        phoneNumber: phoneNumber,
-        productIdQuantityMap: {},
-      };
+    console.log(userInfo?.userType);
+    if (userInfo?.userType === "CUSTOMER") {
+      try {
+        const order = {
+          clientId: userInfo?.id,
+          address: address,
+          phoneNumber: phoneNumber,
+          productIdQuantityMap: {},
+        };
 
-      cartItems.forEach((item, index) => {
-        order.productIdQuantityMap[actualIds[index]] = item.quantity;
-      });
+        cartItems.forEach((item, index) => {
+          order.productIdQuantityMap[actualIds[index]] = item.quantity;
+        });
 
-      const response = await axios.post(
-        "http://localhost:8080/createOrder",
-        order
-      );
+        const response = await axios.post(
+          "http://localhost:8080/createOrder",
+          order,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      console.log("Order created successfully:", response.data);
-      clearCart();
-    } catch (error) {
-      console.error("Error creating order:", error);
+        console.log("Order created successfully:", response.data);
+        clearCart();
+      } catch (error) {
+        console.error("Error creating order:", error);
+      }
     }
   };
 
@@ -73,8 +82,8 @@ const CartPage = () => {
             Cart
           </h1>
 
-          <div className="flex flex-col sm:flex-row justify-center mx-5 sm:mx-0 mb-20 mt-5 lg:mt-12 gap-3">
-            <div className="flex flex-col w-full sm:w-auto h-[575px] overflow-y-auto">
+          <div className="flex flex-col sm:flex-row justify-center mt-4 gap-3">
+            <div className="flex flex-col gap-20 sm:gap-10  h-[575px] overflow-y-auto shadow-xl">
               {cartItems.length === 0 ? (
                 <p className="text-center text-lg text-gray-500">
                   Your cart is empty
@@ -94,39 +103,46 @@ const CartPage = () => {
             </div>
 
             {cartItems.length > 0 && (
-              <div className="bg-gray-200 p-4 w-full sm:w-72 rounded-r-lg shadow-md flex flex-col justify-between">
+              <div className="bg-gray-200 p-4 w-full sm:w-72 rounded-r-lg shadow-xl flex flex-col justify-between">
                 <div className="">
                   <h1 className="text-black text-2xl font-bold mb-4">
                     Summary
                   </h1>
+                  {userInfo?.userType === "CUSTOMER" && (
+                    <>
+                      <input
+                        type="text"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        placeholder="Address"
+                        className="input input-bordered mb-2 bg-gray-300 text-black"
+                      />
+                      <input
+                        type="text"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="Phone Number"
+                        className="input input-bordered mb-4 bg-gray-300 text-black"
+                      />
+                    </>
+                  )}
+                </div>
+                <div className="flex flex-col">
                   <div className="flex justify-between mb-2">
-                    <p className="text-lg text-black">Subtotal:</p>
+                    <p className="text-lg text-black">Total:</p>
                     <p className="text-lg text-black">
                       BGN {RoundedTwoDecimals(calculateSubtotal(cartItems))}
                     </p>
                   </div>
-
-                  <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeholder="Address"
-                    className="input input-bordered mb-2 bg-gray-300"
-                  />
-                  <input
-                    type="text"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="Phone Number"
-                    className="input input-bordered mb-4 bg-gray-300"
-                  />
+                  {userInfo?.userType === "CUSTOMER" && (
+                    <button
+                      onClick={handleCheckout}
+                      className="bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 font-medium"
+                    >
+                      Checkout
+                    </button>
+                  )}
                 </div>
-                <button
-                  onClick={handleCheckout}
-                  className="bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 font-medium"
-                >
-                  Checkout
-                </button>
               </div>
             )}
           </div>

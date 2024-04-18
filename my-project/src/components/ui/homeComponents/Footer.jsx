@@ -7,9 +7,6 @@ const Footer = () => {
         <a className="link link-hover" href="/about">
           About us
         </a>
-        <a className="link link-hover" href="src\assets\test.docx">
-          Documentation
-        </a>
       </nav>
       <aside className="text-white">
         <p>Copyright © 2024</p>

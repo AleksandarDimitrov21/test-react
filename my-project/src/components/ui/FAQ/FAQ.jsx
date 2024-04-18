@@ -30,9 +30,6 @@ const FAQ = () => {
               title="Do you offer discounts or promotions?"
               message="Yes, we frequently offer discounts and special offers to our customers."
             />
-            <button className=" btn bg-violet-500 hover:bg-violet-700 text-white mt-32 mx-4 border-none">
-              See all
-            </button>
           </div>
         </div>
       </div>
