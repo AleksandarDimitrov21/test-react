@@ -31,7 +31,6 @@ const Orders = () => {
       fetchOrders();
     }
   }, [userInfo?.userType]);
-  console.log(userInfo);
 
   const changeOrderStatus = async (orderId, newStatus) => {
     const jwtToken = localStorage.getItem("jwtToken");
