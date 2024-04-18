@@ -74,7 +74,7 @@ const CartPage = () => {
           </h1>
 
           <div className="flex flex-col sm:flex-row justify-center mx-5 sm:mx-0 mb-20 mt-5 lg:mt-12 gap-3">
-            <div className="flex flex-col w-full sm:w-auto">
+            <div className="flex flex-col w-full sm:w-auto h-[575px] overflow-y-auto">
               {cartItems.length === 0 ? (
                 <p className="text-center text-lg text-gray-500">
                   Your cart is empty
@@ -111,14 +111,14 @@ const CartPage = () => {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder="Address"
-                    className="input input-bordered mb-2"
+                    className="input input-bordered mb-2 bg-gray-300"
                   />
                   <input
                     type="text"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     placeholder="Phone Number"
-                    className="input input-bordered mb-4"
+                    className="input input-bordered mb-4 bg-gray-300"
                   />
                 </div>
                 <button
