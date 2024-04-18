@@ -5,14 +5,15 @@ import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
 import { useAuth } from "../auth/AuthContext ";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const { tokenUser, tokenInitial } = useAuth();
+  const { userInfo } = useAuth();
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
     const fetchOrders = () => {
       axios
         .get("http://localhost:8080/orders", {
           headers: {
-            Authorization: `Bearer ${tokenInitial}`,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
@@ -24,16 +25,16 @@ const Orders = () => {
     };
 
     if (
-      tokenInitial &&
-      (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE")
+      token &&
+      (userInfo?.userType === "ADMIN" || userInfo?.userType === "EMPLOYEE")
     ) {
       fetchOrders();
     }
-  }, [tokenUser, tokenInitial]);
+  }, [userInfo, token]);
 
   const changeOrderStatus = async (orderId, newStatus) => {
-    const tokenInitial = localStorage.getItem("tokenInitial");
-    if (!tokenInitial) {
+    const token = localStorage.getItem("token");
+    if (!token) {
       console.error("No JWT token found.");
       return;
     }
@@ -47,7 +48,7 @@ const Orders = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${tokenInitial}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       )

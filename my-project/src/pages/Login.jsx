@@ -31,10 +31,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post("http://localhost:8080/login", formData).then(({ data }) => {
-      handleLogin(data.userInfoDto);
-      clearCart();
-    });
+    axios
+      .post("http://localhost:8080/login", formData)
+      .then(({ data }) => {
+        handleLogin(data.userInfoDto, data.accessToken);
+        clearCart();
+      })
+      .catch((error) => {
+        console.error("Login error", error);
+        setShowCaution(true);
+      });
   };
 
   return (

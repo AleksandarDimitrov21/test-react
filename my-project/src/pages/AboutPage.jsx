@@ -6,7 +6,7 @@ import InfoCart from "../components/ui/aboutcomponent/InfoCart";
 import Timeline from "../components/ui/aboutcomponent/Timeline";
 import Technologies from "../components/ui/aboutcomponent/Technologies";
 
-const AboutPage = ({ status, setStatus }) => {
+const AboutPage = () => {
   const [image, setImage] = useState(0);
 
   const handleImage = (index) => {
@@ -159,7 +159,7 @@ const AboutPage = ({ status, setStatus }) => {
     <>
       <div className="bg-white flex h-max">
         <div className="overflow-hidden h-16  min-h-screen">
-          <NavBar isLoggedIn={status} setIsLoggedIn={setStatus} />
+          <NavBar />
         </div>
         <div className="w-full">
           <div>

@@ -1,15 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import NavPhoto from "./NavPhoto";
-
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../../../auth/AuthContext ";
 
 const Profile = () => {
-  const { handleLogout, tokenInitial, userInfo } = useAuth();
-  const [userDetail, setUserDetail] = useState(null);
+  const { handleLogout, userInfo } = useAuth();
 
   return (
     <div className="dropdown dropdown-end ">

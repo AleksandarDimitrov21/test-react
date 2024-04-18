@@ -9,7 +9,8 @@ import { useAuth } from "../auth/AuthContext ";
 
 const EditProducts = () => {
   const navigate = useNavigate();
-  const { tokenUser, tokenInitial } = useAuth();
+  const { userInfo } = useAuth();
+  const token = localStorage.getItem("jwtToken");
   const { id } = useParams();
   const [product, setProduct] = useState({
     photo: "",
@@ -31,7 +32,7 @@ const EditProducts = () => {
           `http://localhost:8080/product/${id}`,
           {
             headers: {
-              Authorization: `Bearer ${tokenInitial}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -43,8 +44,8 @@ const EditProducts = () => {
       }
     };
     if (
-      tokenInitial &&
-      (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE")
+      token &&
+      (userInfo?.userType === "ADMIN" || userInfo?.userType === "EMPLOYEE")
     ) {
       fetchProductDetails();
     }
@@ -52,11 +53,11 @@ const EditProducts = () => {
 
   const edit = async (e) => {
     e.preventDefault();
-    if (!tokenInitial) {
+    if (!token) {
       console.error("No JWT token found.");
       return;
     }
-    if (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE") {
+    if (userInfo?.userType === "ADMIN" || userInfo?.userType === "EMPLOYEE") {
       try {
         const response = await axios.put(
           `http://localhost:8080/products/${id}`,
@@ -64,7 +65,7 @@ const EditProducts = () => {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${tokenInitial}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );

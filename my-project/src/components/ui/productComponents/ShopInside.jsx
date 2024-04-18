@@ -11,7 +11,8 @@ const ShopInside = () => {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { userType, setUserType } = useAuth();
+  const { userInfo } = useAuth();
+  const token = localStorage.getItem("jwtToken");
   const { addToCart } = useCart();
 
   const handleAddToCart = (event) => {
@@ -50,8 +51,7 @@ const ShopInside = () => {
 
   const fetchPromo = async (event) => {
     const newDiscount = parseInt(event.target.value, 10);
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (!jwtToken) {
+    if (!token) {
       console.error("No JWT token found.");
       return;
     }
@@ -62,7 +62,7 @@ const ShopInside = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -81,8 +81,7 @@ const ShopInside = () => {
   };
 
   const deleteProduct = async () => {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (!jwtToken) {
+    if (!token) {
       console.error("No JWT token found.");
       return;
     }
@@ -93,7 +92,7 @@ const ShopInside = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -123,7 +122,7 @@ const ShopInside = () => {
         </div>
         <div className="w-full md:w-1/2 flex flex-col justify-center pt-4 md:pt-0 px-4 md:px-12">
           <div className="flex items-center justify-end mb-4">
-            {userType === "ADMIN" && (
+            {userInfo?.userType === "ADMIN" && (
               <button
                 className="rounded-full bg-red-500 text-white p-2 mr-2"
                 onClick={deleteProduct}
@@ -131,7 +130,8 @@ const ShopInside = () => {
                 <img width={20} height={20} src="/delete.svg" alt="delete" />
               </button>
             )}
-            {(userType === "ADMIN" || userType === "EMPLOYEE") && (
+            {(userInfo?.userType === "ADMIN" ||
+              userInfo?.userType === "EMPLOYEE") && (
               <Link key={product.id} to={`/edit-product/${product.id}`}>
                 <button className="rounded-full bg-violet-500 text-white p-2 mr-2">
                   <img width={20} height={20} src="/edit.svg" alt="edit" />
@@ -169,7 +169,8 @@ const ShopInside = () => {
                     : "Price unavailable"}
                 </span>
               </p>
-              {(userType === "ADMIN" || userType === "EMPLOYEE") && (
+              {(userInfo?.userType === "ADMIN" ||
+                userInfo?.userType === "EMPLOYEE") && (
                 <div className="flex flex-row items-center gap-2">
                   <h4 className="text-black">Discount: </h4>
 

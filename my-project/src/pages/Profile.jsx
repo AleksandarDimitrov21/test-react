@@ -10,21 +10,21 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [users, setUsers] = useState([]);
-  const [userDetail, setUserDetail] = useState(null);
-  const { tokenUser, tokenInitial, userInfo } = useAuth();
+  const { userInfo } = useAuth();
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
     const fetchUsers = async () => {
-      if (!tokenInitial) {
+      if (!token) {
         console.error("No JWT token found.");
         return;
       }
-      if (tokenUser?.userType === "ADMIN") {
+      if (userInfo?.userType === "ADMIN") {
         try {
           const response = await axios.get("http://localhost:8080/user", {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${tokenInitial}`,
+              Authorization: `Bearer ${token}`,
             },
           });
 
@@ -34,11 +34,10 @@ const Profile = () => {
         }
       }
     };
-    if (tokenInitial) {
+    if (userInfo) {
       fetchUsers();
     }
-  }, [tokenInitial, tokenUser]);
-  console.log(userInfo);
+  }, [userInfo, token]);
 
   return (
     <>

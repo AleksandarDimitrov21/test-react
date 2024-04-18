@@ -5,7 +5,7 @@ import Card from "../Card";
 import { useAuth } from "../../../auth/AuthContext ";
 import { useCart } from "../../../CartContext";
 const NavBar = () => {
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { userInfo } = useAuth();
   const [currentPage, setCurrentPage] = useState("");
   const { totalItems, totalPrice } = useCart();
 
@@ -55,7 +55,7 @@ const NavBar = () => {
           </Link>
         </div>
         <div>
-          {!isLoggedIn && (
+          {!userInfo && (
             <div className="mr-0 sm:mr-2">
               <Link to="/login">
                 <h1
@@ -71,12 +71,12 @@ const NavBar = () => {
             </div>
           )}
         </div>
-        {isLoggedIn && (
+        {userInfo && (
           <div className="mr-0 sm:mr-1">
             <Card cartQuantity={totalItems} cartPrice={totalPrice} />
           </div>
         )}
-        {isLoggedIn && (
+        {userInfo && (
           <div className="mr-1 sm:mr-2">
             <ProfileNav />
           </div>

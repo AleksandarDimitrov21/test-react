@@ -6,10 +6,11 @@ import Avatar from "./Avatar";
 
 const PhotoChange = () => {
   const [newPhotoUrl, setNewPhotoUrl] = useState("");
-  const { userId } = useAuth();
+  const { userInfo } = useAuth();
   const [feedback, setFeedback] = useState("");
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [redirectToProfile, setRedirectToProfile] = useState(false);
+  const token = localStorage.getItem("jwtToken");
 
   const handlePhotoUrlChange = (e) => {
     setNewPhotoUrl(e.target.value);
@@ -21,20 +22,19 @@ const PhotoChange = () => {
   };
 
   const handleSubmit = async () => {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (!jwtToken) {
+    if (!token) {
       console.error("JWT Token not found.");
       setFeedback("Error: JWT Token not found.");
       return;
     }
     try {
       await axios.put(
-        `http://localhost:8080/users/change-photo/${userId}`,
+        `http://localhost:8080/users/change-photo/${userInfo?.id}`,
         JSON.stringify(newPhotoUrl),
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtToken}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -53,7 +53,7 @@ const PhotoChange = () => {
   };
 
   if (redirectToProfile) {
-    return <Navigate to={`/profile/${userId}`} replace={true} />;
+    return <Navigate to={`/profile/${userInfo?.id}`} replace={true} />;
   }
   return (
     <div className="bg-gradient-to-r from-indigo-300 to-violet-200">

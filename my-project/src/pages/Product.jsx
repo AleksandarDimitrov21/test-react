@@ -5,16 +5,14 @@ import Shop from "../components/ui/productComponents/Shop";
 import NavBar from "../components/ui/navigation/NavBar";
 import { useAuth } from "../auth/AuthContext ";
 import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
-import Skeleton from "../components/ui/Skeleton";
 
 const Product = () => {
-  const { setIsLoggedIn } = useAuth();
+  const { userInfo } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filterCriteria, setFilterCriteria] = useState("Price: High-low");
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const { tokenUser, tokenInitial } = useAuth();
 
   const categories = [
     "All",
@@ -138,7 +136,6 @@ const Product = () => {
                 discount={product.discount}
                 priceOriginal={RoundedTwoDecimals(product.originalPrice)}
                 priceCurrent={RoundedTwoDecimals(product.currentPrice)}
-                status={setIsLoggedIn}
                 buttonName={"Add to cart"}
               />
             </Link>
@@ -147,8 +144,8 @@ const Product = () => {
       </div>
 
       <div className="flex justify-center">
-        {(tokenUser?.userType === "ADMIN" ||
-          tokenUser?.userType === "EMPLOYEE") && (
+        {(userInfo?.userType === "ADMIN" ||
+          userInfo?.userType === "EMPLOYEE") && (
           <Link to="/add-product">
             <button className="bg-violet-600 border-none rounded-3xl py-3 w-96 text-xl my-5 font-semibold text-white hover:bg-violet-700">
               Add Products

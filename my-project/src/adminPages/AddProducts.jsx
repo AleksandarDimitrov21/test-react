@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
@@ -8,7 +8,8 @@ import { useAuth } from "../auth/AuthContext ";
 
 const AddProducts = () => {
   const navigate = useNavigate();
-  const { tokenUser, tokenInitial } = useAuth();
+  const { userInfo } = useAuth();
+  const token = localStorage.getItem("jwtToken");
   const [product, setProduct] = useState({
     photo: "",
     name: "",
@@ -25,11 +26,11 @@ const AddProducts = () => {
   const addProduct = async (e) => {
     e.preventDefault();
 
-    if (!tokenUser?.jti) {
+    if (!userInfo) {
       console.error("No JWT token found.");
       return;
     }
-    if (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE") {
+    if (userInfo?.userType === "ADMIN" || userInfo?.userType === "EMPLOYEE") {
       try {
         const response = await axios.post(
           "http://localhost:8080/products",
@@ -37,7 +38,7 @@ const AddProducts = () => {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${tokenInitial}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );

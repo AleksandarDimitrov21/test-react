@@ -8,7 +8,7 @@ import { useAuth } from "../auth/AuthContext ";
 
 const AddUser = () => {
   const navigate = useNavigate();
-  const { tokenUser } = useAuth();
+  const { userInfo } = useAuth();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -20,7 +20,7 @@ const AddUser = () => {
 
   const addProduct = async (e) => {
     e.preventDefault();
-    if (tokenUser?.userType === "ADMIN") {
+    if (userInfo?.userType === "ADMIN") {
       try {
         const response = await axios.post(
           "http://localhost:8080/register",
