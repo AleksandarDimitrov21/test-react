@@ -12,13 +12,15 @@ import Orders from "./adminPages/Orders";
 import AddUser from "./adminPages/AddUser";
 import ProductInfo from "./adminPages/ProductInfo";
 
-import ProtectedRoute from "./auth/ProtectedRoute";
 import EditProducts from "./adminPages/EditProducts";
 import { CartProvider } from "./CartContext";
 import ProductEmployee from "./adminPages/ProductEmployee";
 import InsideProductEmployee from "./adminPages/InsideProductEmployee";
 import Revenue from "./adminPages/Revenue";
 import PhotoChange from "./components/ui/photoComponents/PhotoChange";
+import CustomerProtected from "./auth/CustomerProtected";
+import AdminProtected from "./auth/AdminProtected";
+import Loading from "./components/ui/loading/Loading";
 
 function App() {
   return (
@@ -26,7 +28,6 @@ function App() {
       <CartProvider>
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route path="/about" element={<AboutPage />} />
           <Route path="/product" exact element={<Product />} />
           <Route path="/product/:id" element={<ShopInside />} />
@@ -34,106 +35,74 @@ function App() {
           <Route
             path="/add-product"
             element={
-              <ProtectedRoute>
+              <CustomerProtected>
                 <AddProducts />
-              </ProtectedRoute>
+              </CustomerProtected>
             }
           />
-          <Route
-            path="/users"
-            element={
-              <ProtectedRoute>
-                <AddUser />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/users" element={<AddUser />} />
 
           <Route
             path="/product-display"
             element={
-              <ProtectedRoute>
+              <CustomerProtected>
                 <ProductInfo />
-              </ProtectedRoute>
+              </CustomerProtected>
             }
           />
-          <Route
-            path="/card"
-            element={
-              <ProtectedRoute>
-                <CartPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/card" element={<CartPage />} />
+
           <Route
             path="/orders"
             element={
-              <ProtectedRoute>
+              <CustomerProtected>
                 <Orders />
-              </ProtectedRoute>
+              </CustomerProtected>
             }
           />
+
           <Route
             path="/edit-product/:id"
             element={
-              <ProtectedRoute>
+              <CustomerProtected>
                 <EditProducts />
-              </ProtectedRoute>
+              </CustomerProtected>
             }
           />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/change-photo"
-            element={
-              <ProtectedRoute>
-                <PhotoChange />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/card"
-            element={
-              <ProtectedRoute>
-                <CartPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/profile" element={<Profile />} />
+
+          <Route path="/change-photo" element={<PhotoChange />} />
+
           <Route
             path="/orders"
             element={
-              <ProtectedRoute>
+              <CustomerProtected>
                 <Orders />
-              </ProtectedRoute>
+              </CustomerProtected>
             }
           />
           <Route
             path="/product-employee"
             element={
-              <ProtectedRoute>
+              <AdminProtected>
                 <ProductEmployee />
-              </ProtectedRoute>
+              </AdminProtected>
             }
           />
           <Route
             path="/productEmployee/:id"
             element={
-              <ProtectedRoute>
+              <AdminProtected>
                 <InsideProductEmployee />
-              </ProtectedRoute>
+              </AdminProtected>
             }
           />
           <Route
             path="/revenue"
             element={
-              <ProtectedRoute>
+              <AdminProtected>
                 <Revenue />
-              </ProtectedRoute>
+              </AdminProtected>
             }
           />
 
