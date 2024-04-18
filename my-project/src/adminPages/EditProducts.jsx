@@ -9,7 +9,7 @@ import { useAuth } from "../auth/AuthContext ";
 
 const EditProducts = () => {
   const navigate = useNavigate();
-  const { userType } = useAuth();
+  const { tokenUser, tokenInitial } = useAuth();
   const { id } = useParams();
   const [product, setProduct] = useState({
     photo: "",
@@ -25,15 +25,13 @@ const EditProducts = () => {
   });
 
   useEffect(() => {
-    const jwtToken = localStorage.getItem("jwtToken");
-
     const fetchProductDetails = async () => {
       try {
         const response = await axios.get(
           `http://localhost:8080/product/${id}`,
           {
             headers: {
-              Authorization: `Bearer ${jwtToken}`,
+              Authorization: `Bearer ${tokenInitial}`,
             },
           }
         );
@@ -44,19 +42,21 @@ const EditProducts = () => {
         console.error("Error fetching product details:", error);
       }
     };
-    if (jwtToken && (userType === "ADMIN" || userType === "EMPLOYEE")) {
+    if (
+      tokenInitial &&
+      (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE")
+    ) {
       fetchProductDetails();
     }
   }, [id]);
 
   const edit = async (e) => {
     e.preventDefault();
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (!jwtToken) {
+    if (!tokenInitial) {
       console.error("No JWT token found.");
       return;
     }
-    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+    if (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE") {
       try {
         const response = await axios.put(
           `http://localhost:8080/products/${id}`,
@@ -64,7 +64,7 @@ const EditProducts = () => {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${jwtToken}`,
+              Authorization: `Bearer ${tokenInitial}`,
             },
           }
         );

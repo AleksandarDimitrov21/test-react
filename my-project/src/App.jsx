@@ -27,6 +27,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/product" exact element={<Product />} />
+          <Route path="/product/:id" element={<ShopInside />} />
+
           <Route
             path="/add-product"
             element={
@@ -43,9 +47,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/product" exact element={<Product />} />
-          <Route path="/product/:id" element={<ShopInside />} />
 
           <Route
             path="/product-display"
@@ -80,7 +81,7 @@ function App() {
             }
           />
           <Route
-            path="/profile/:id"
+            path="/profile"
             element={
               <ProtectedRoute>
                 <Profile />

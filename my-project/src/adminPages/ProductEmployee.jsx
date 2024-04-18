@@ -16,7 +16,7 @@ const ProductEmployee = () => {
   const [filteredDeletedProducts, setFilteredDeletedProducts] = useState([]);
   const navigate = useNavigate();
 
-  const { userType } = useAuth();
+  const { tokenUser, tokenInitial } = useAuth();
 
   const categories = [
     "All",
@@ -69,9 +69,8 @@ const ProductEmployee = () => {
   }, [deletedProducts, searchTerm, selectedCategory, filterCriteria]);
 
   const fetchDeletedProducts = async () => {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (userType === "ADMIN") {
-      if (!jwtToken) {
+    if (tokenUser?.userType === "ADMIN") {
+      if (!tokenInitial) {
         console.error("No JWT token found.");
         return;
       }
@@ -79,7 +78,7 @@ const ProductEmployee = () => {
       try {
         const response = await axios.get(url, {
           headers: {
-            Authorization: `Bearer ${jwtToken}`,
+            Authorization: `Bearer ${tokenInitial}`,
           },
         });
         setDeletedProducts(response.data);
@@ -143,7 +142,7 @@ const ProductEmployee = () => {
 
       <div className="flex justify-center mt-6 lg:mt-12 mb-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 sm:gap-5">
-          {userType === "ADMIN" && (
+          {tokenUser?.userType === "ADMIN" && (
             <>
               {filteredDeletedProducts.map((product) => (
                 <Link key={product.id} to={`/productEmployee/${product.id}`}>

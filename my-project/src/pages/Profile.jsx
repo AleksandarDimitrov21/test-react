@@ -11,58 +11,34 @@ import { Link } from "react-router-dom";
 const Profile = () => {
   const [users, setUsers] = useState([]);
   const [userDetail, setUserDetail] = useState(null);
-  const { userType, userId } = useAuth();
+  const { tokenUser, tokenInitial, userInfo } = useAuth();
+
   useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (!jwtToken) {
-      console.error("No JWT token found.");
-      return;
-    }
-    if (userType === "ADMIN") {
-      try {
-        const response = await axios.get("http://localhost:8080/user", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        });
-
-        setUsers(response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+    const fetchUsers = async () => {
+      if (!tokenInitial) {
+        console.error("No JWT token found.");
+        return;
       }
-    }
-  };
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    const jwtToken = localStorage.getItem("jwtToken");
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/user/${userId}`,
-          {
+      if (tokenUser?.userType === "ADMIN") {
+        try {
+          const response = await axios.get("http://localhost:8080/user", {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${jwtToken}`,
+              Authorization: `Bearer ${tokenInitial}`,
             },
-          }
-        );
-        setUserDetail(response.data);
-      } catch (error) {
-        console.error("Error fetching user details:", error);
+          });
+
+          setUsers(response.data);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
       }
     };
-
-    if (jwtToken) {
-      fetchUserDetails();
+    if (tokenInitial) {
+      fetchUsers();
     }
-  }, [userId]);
+  }, [tokenInitial, tokenUser]);
+  console.log(userInfo);
 
   return (
     <>
@@ -70,16 +46,12 @@ const Profile = () => {
         <BackgroundPhoto />
         <div className="w-full h-0 flex justify-center items-center">
           <Link to="/change-photo">
-            {userDetail?.photo ? (
-              <Avatar photoURL={userDetail?.photo} />
-            ) : (
-              <Avatar photoURL="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" />
-            )}
+            <Avatar photoURL={userInfo?.photo} />
           </Link>
         </div>
         <div className="h-auto text-center mt-32">
           <h1 className="text-4xl font-semibold text-black">
-            {userDetail ? userDetail.name : "Loading..."}
+            {userInfo ? userInfo.name : "Loading..."}
           </h1>
         </div>
         <div className="mt-5">
@@ -103,7 +75,8 @@ const Profile = () => {
             </div>
 
             <div className="overflow-x-auto mt-5">
-              {(userType === "ADMIN" || userType === "EMPLOYEE") && (
+              {(userInfo?.userType === "ADMIN" ||
+                userInfo?.userType === "EMPLOYEE") && (
                 <table className="table bg-zinc-800 rounded-none mb-5">
                   <Users users={users} />
                 </table>

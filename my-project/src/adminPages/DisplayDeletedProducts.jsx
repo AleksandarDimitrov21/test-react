@@ -10,17 +10,17 @@ const DisplayDeletedProducts = ({
   discount,
   onReturnToSale,
 }) => {
-  const { userType } = useAuth();
+  const { tokenUser, tokenInitial } = useAuth();
+
   const handleReturnToSale = async () => {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (userType === "ADMIN" && jwtToken) {
+    if (tokenUser?.userType === "ADMIN" && tokenInitial) {
       try {
         await axios.post(
           `http://localhost:8080/productReturn/${id}`,
           {},
           {
             headers: {
-              Authorization: `Bearer ${jwtToken}`,
+              Authorization: `Bearer ${tokenInitial}`,
             },
           }
         );

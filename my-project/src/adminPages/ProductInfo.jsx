@@ -5,10 +5,10 @@ import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
 import { useAuth } from "../auth/AuthContext ";
 const ProductInfo = () => {
   const [products, setProducts] = useState([]);
-  const { userType } = useAuth();
+  const { tokenUser, tokenInitial } = useAuth();
 
   useEffect(() => {
-    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+    if (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE") {
       axios
         .get("http://localhost:8080/products")
         .then((response) => {
@@ -20,7 +20,7 @@ const ProductInfo = () => {
     } else {
       console.log("Unauthorized access!"); // Handle unauthorized access
     }
-  }, [userType]);
+  }, [tokenUser]);
 
   return (
     <div className="bg-gradient-to-r from-indigo-300 to-violet-200 min-h-screen">

@@ -8,7 +8,7 @@ import { useAuth } from "../auth/AuthContext ";
 
 const AddProducts = () => {
   const navigate = useNavigate();
-  const { userType } = useAuth();
+  const { tokenUser, tokenInitial } = useAuth();
   const [product, setProduct] = useState({
     photo: "",
     name: "",
@@ -24,12 +24,12 @@ const AddProducts = () => {
 
   const addProduct = async (e) => {
     e.preventDefault();
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (!jwtToken) {
+
+    if (!tokenUser?.jti) {
       console.error("No JWT token found.");
       return;
     }
-    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+    if (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE") {
       try {
         const response = await axios.post(
           "http://localhost:8080/products",
@@ -37,7 +37,7 @@ const AddProducts = () => {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${jwtToken}`,
+              Authorization: `Bearer ${tokenInitial}`,
             },
           }
         );

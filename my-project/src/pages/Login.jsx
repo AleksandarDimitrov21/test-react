@@ -7,15 +7,15 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext ";
 import { jwtDecode } from "jwt-decode";
 import { useCart } from "../CartContext";
+import axios from "axios";
 
 const Login = () => {
-  const { setIsLoggedIn, setUserType } = useAuth();
+  const { handleLogin } = useAuth();
   const { clearCart } = useCart();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const navigate = useNavigate();
 
   const [showCaution, setShowCaution] = useState(false);
 
@@ -31,37 +31,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        if (data.accessToken) {
-          localStorage.setItem("jwtToken", data.accessToken);
-          const decoded = jwtDecode(data.accessToken);
-          setIsLoggedIn(true);
-          setUserType(decoded.userType);
-          clearCart();
-          navigate("/");
-
-          console.log("User signed up successfully!");
-        } else {
-          console.error("Access token not present in response:", data);
-          setShowCaution(true);
-        }
-      } else {
-        console.error("Error signing up with status:", response.status, data);
-        setShowCaution(true);
-      }
-    } catch (error) {
-      console.error("Error registering user:", error);
-      setShowCaution(true);
-    }
+    axios.post("http://localhost:8080/login", formData).then(({ data }) => {
+      handleLogin(data.userInfoDto);
+      clearCart();
+    });
   };
 
   return (

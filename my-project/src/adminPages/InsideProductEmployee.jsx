@@ -7,21 +7,20 @@ import { RoundedTwoDecimals } from "../components/RoundedTwoDecimals";
 import { useAuth } from "../auth/AuthContext ";
 
 const InsideProductEmployee = () => {
-  const { userType } = useAuth();
+  const { tokenUser, tokenInitial } = useAuth();
   const [product, setProduct] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (userType === "ADMIN" || userType === "EMPLOYEE") {
+    if (tokenUser?.userType === "ADMIN" || tokenUser?.userType === "EMPLOYEE") {
       const fetchProduct = async () => {
         try {
           const response = await axios.get(
             `http://localhost:8080/productEmployee/${id}`,
             {
               headers: {
-                Authorization: `Bearer ${jwtToken}`,
+                Authorization: `Bearer ${tokenInitial}`,
               },
             }
           );
@@ -40,18 +39,17 @@ const InsideProductEmployee = () => {
 
       fetchProduct();
     }
-  }, [id]);
+  }, [id, tokenUser, tokenInitial]);
 
   const handleReturnToSale = async () => {
-    const jwtToken = localStorage.getItem("jwtToken");
-    if (userType === "ADMIN" && jwtToken) {
+    if (tokenUser?.userType === "ADMIN" && tokenInitial) {
       try {
         await axios.post(
           `http://localhost:8080/productReturn/${id}`,
           {},
           {
             headers: {
-              Authorization: `Bearer ${jwtToken}`,
+              Authorization: `Bearer ${tokenInitial}`,
             },
           }
         );

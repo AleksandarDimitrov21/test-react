@@ -14,7 +14,7 @@ const Product = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const { userType } = useAuth();
+  const { tokenUser, tokenInitial } = useAuth();
 
   const categories = [
     "All",
@@ -147,7 +147,8 @@ const Product = () => {
       </div>
 
       <div className="flex justify-center">
-        {(userType === "ADMIN" || userType === "EMPLOYEE") && (
+        {(tokenUser?.userType === "ADMIN" ||
+          tokenUser?.userType === "EMPLOYEE") && (
           <Link to="/add-product">
             <button className="bg-violet-600 border-none rounded-3xl py-3 w-96 text-xl my-5 font-semibold text-white hover:bg-violet-700">
               Add Products

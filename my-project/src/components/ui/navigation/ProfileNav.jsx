@@ -8,58 +8,24 @@ import axios from "axios";
 import { useAuth } from "../../../auth/AuthContext ";
 
 const Profile = () => {
-  const { handleLogout } = useAuth();
+  const { handleLogout, tokenInitial, userInfo } = useAuth();
   const [userDetail, setUserDetail] = useState(null);
-
-  const { userType, userId } = useAuth();
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    const jwtToken = localStorage.getItem("jwtToken");
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/user/${userId}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${jwtToken}`,
-            },
-          }
-        );
-        setUserDetail(response.data);
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-      }
-    };
-
-    if (jwtToken) {
-      fetchUserDetails();
-    }
-  }, [userId]);
 
   return (
     <div className="dropdown dropdown-end ">
-      {userDetail?.photo ? (
-        <NavPhoto imageUrl={userDetail?.photo} />
-      ) : (
-        <NavPhoto
-          imageUrl={
-            "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-          }
-        />
-      )}
+      <NavPhoto imageUrl={userInfo?.photo} />
+
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-gray-200 rounded-box w-52"
       >
         <div className="ml-3 ">
           <button className="justify-between text-black ">
-            {userId && <Link to={`/profile/${userId}`}>Profile</Link>}
+            <Link to={`/profile`}>Profile</Link>
           </button>
         </div>
-        {(userType === "ADMIN" || userType === "EMPLOYEE") && (
+        {(userInfo?.userType === "ADMIN" ||
+          userInfo?.userType === "EMPLOYEE") && (
           <>
             <div className="ml-3 ">
               <button className="justify-between text-black ">
@@ -74,7 +40,7 @@ const Profile = () => {
             </div>
           </>
         )}
-        {userType === "ADMIN" && (
+        {userInfo?.userType === "ADMIN" && (
           <>
             <div className="ml-3 ">
               <button className="justify-between text-black ">

@@ -12,52 +12,41 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("jwtToken") ? true : false
   );
-  const [userType, setUserType] = useState(null);
-  const [userId, setUserId] = useState("");
+
+  const [tokenUser, setTokenUser] = useState(null);
+  const [tokenInitial, setTokenInitial] = useState("");
+  const [userInfo, setUserInfo] = useState(null);
 
   const navigate = useNavigate();
 
-  const checkUserRole = (token) => {
-    if (!token) {
-      return console.log("No token");
-    }
-    try {
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
       const decodedToken = jwtDecode(token);
       const currentDate = new Date();
       if (decodedToken.exp * 1000 < currentDate.getTime()) {
         console.log("Token expired.");
         handleLogout();
       } else {
-        setIsLoggedIn(true);
-        setUserId(decodedToken.jti);
-
-        setUserType(decodedToken.userType);
+        setTokenUser(decodedToken);
+        setTokenInitial(token);
       }
-    } catch (error) {
-      console.error("Failed to decode token", error);
-    }
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    if (token) {
-      checkUserRole(token);
-    } else {
-      setIsLoggedIn(false);
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("jwtToken");
     setIsLoggedIn(false);
-    setUserType(null);
-    setUserId();
-    navigate("/");
+    setTokenUser(null);
+    setTokenInitial("");
+    navigate("/", { replace: true });
   };
 
-  useEffect(() => {
-    checkUserRole(localStorage.getItem("jwtToken"));
-  });
+  const handleLogin = (data) => {
+    setUserInfo(data);
+    setIsLoggedIn(true);
+    navigate("/", { replace: true });
+  };
 
   return (
     <AuthContext.Provider
@@ -65,9 +54,11 @@ export const AuthProvider = ({ children }) => {
         isLoggedIn,
         setIsLoggedIn,
         handleLogout,
-        userType,
-        setUserType,
-        userId,
+        handleLogin,
+        userInfo,
+        tokenUser,
+        tokenInitial,
+        userInfo,
       }}
     >
       {children}
