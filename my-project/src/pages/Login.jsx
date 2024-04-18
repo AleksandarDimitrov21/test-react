@@ -36,7 +36,6 @@ const Login = () => {
       .then(({ data }) => {
         handleLogin(data.userInfoDto, data.accessToken);
         clearCart();
-        console.log(data);
       })
       .catch((error) => {
         console.error("Login error", error);

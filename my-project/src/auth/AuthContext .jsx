@@ -13,12 +13,13 @@ export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
 
   const navigate = useNavigate();
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
-    const token = localStorage.getItem("jwtToken");
-    if (!token) {
+    if (!token && !userInfo?.userType) {
       return;
     }
+
     const decodedToken = jwtDecode(token);
     const currentDate = new Date();
     if (decodedToken.exp * 1000 < currentDate.getTime()) {

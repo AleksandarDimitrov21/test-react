@@ -6,14 +6,14 @@ import { useAuth } from "../auth/AuthContext ";
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const { userInfo } = useAuth();
-  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
+    const jwtToken = localStorage.getItem("jwtToken");
     const fetchOrders = () => {
       axios
         .get("http://localhost:8080/orders", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${jwtToken}`,
           },
         })
         .then((response) => {
@@ -25,15 +25,17 @@ const Orders = () => {
     };
 
     if (
-      token &&
+      jwtToken &&
       (userInfo?.userType === "ADMIN" || userInfo?.userType === "EMPLOYEE")
     ) {
       fetchOrders();
     }
-  }, [userInfo, token]);
+  }, [userInfo?.userType]);
+  console.log(userInfo);
 
   const changeOrderStatus = async (orderId, newStatus) => {
-    if (!token) {
+    const jwtToken = localStorage.getItem("jwtToken");
+    if (!jwtToken) {
       console.error("No JWT token found.");
       return;
     }
@@ -43,11 +45,11 @@ const Orders = () => {
         `http://localhost:8080/orderStatusChange/${orderId}`,
         {
           newStatus: newStatus,
-          customerId: orderId,
+          employeeId: userInfo?.id,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${jwtToken}`,
           },
         }
       )
@@ -105,9 +107,7 @@ const Orders = () => {
                         minute: "2-digit",
                       })}
                     </td>
-                    <td className="border px-4 py-2">
-                      BGN {RoundedTwoDecimals(order.value)}
-                    </td>
+                    <td className="border px-4 py-2">BGN {order.value}</td>
                     <td className="border px-4 py-2">{order.status}</td>
                     <td className="border px-4 py-2 ">
                       <select

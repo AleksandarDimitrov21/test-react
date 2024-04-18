@@ -4,12 +4,10 @@ const isNotEmpty = (value) => {
   return value.trim() !== "";
 };
 
-// Function to check if a string contains only alphanumeric characters
 const isAlphanumeric = (value) => {
   return /^[a-zA-Z0-9]*$/.test(value);
 };
 
-// Function to check if a string contains only alphabetic characters
 const isAlphabetic = (value) => {
   return /^[a-zA-Z]*$/.test(value);
 };
