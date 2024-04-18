@@ -33,7 +33,6 @@ const Orders = () => {
   }, [userInfo, token]);
 
   const changeOrderStatus = async (orderId, newStatus) => {
-    const token = localStorage.getItem("token");
     if (!token) {
       console.error("No JWT token found.");
       return;
