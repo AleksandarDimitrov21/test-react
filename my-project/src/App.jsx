@@ -32,79 +32,26 @@ function App() {
           <Route path="/product" exact element={<Product />} />
           <Route path="/product/:id" element={<ShopInside />} />
 
-          <Route
-            path="/add-product"
-            element={
-              <CustomerProtected>
-                <AddProducts />
-              </CustomerProtected>
-            }
-          />
+          <Route path="/add-product" element={<AddProducts />} />
           <Route path="/users" element={<AddUser />} />
 
-          <Route
-            path="/product-display"
-            element={
-              <CustomerProtected>
-                <ProductInfo />
-              </CustomerProtected>
-            }
-          />
+          <Route path="/product-display" element={<ProductInfo />} />
           <Route path="/card" element={<CartPage />} />
 
-          <Route
-            path="/orders"
-            element={
-              <CustomerProtected>
-                <Orders />
-              </CustomerProtected>
-            }
-          />
+          <Route path="/orders" element={<Orders />} />
 
-          <Route
-            path="/edit-product/:id"
-            element={
-              <CustomerProtected>
-                <EditProducts />
-              </CustomerProtected>
-            }
-          />
+          <Route path="/edit-product/:id" element={<EditProducts />} />
           <Route path="/profile" element={<Profile />} />
 
           <Route path="/change-photo" element={<PhotoChange />} />
 
-          <Route
-            path="/orders"
-            element={
-              <CustomerProtected>
-                <Orders />
-              </CustomerProtected>
-            }
-          />
-          <Route
-            path="/product-employee"
-            element={
-              <AdminProtected>
-                <ProductEmployee />
-              </AdminProtected>
-            }
-          />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/product-employee" element={<ProductEmployee />} />
           <Route
             path="/productEmployee/:id"
-            element={
-              <AdminProtected>
-                <InsideProductEmployee />
-              </AdminProtected>
-            }
+            element={<InsideProductEmployee />}
           />
-          <Route
-            path="/revenue"
-            element={
-              <AdminProtected>
-                <Revenue />
-              </AdminProtected>
-            }
-          />
+          <Route path="/revenue" element={<Revenue />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

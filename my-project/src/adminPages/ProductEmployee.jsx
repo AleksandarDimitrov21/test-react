@@ -37,7 +37,7 @@ const ProductEmployee = () => {
 
   useEffect(() => {
     fetchDeletedProducts();
-  }, []);
+  }, [userInfo]);
 
   useEffect(() => {
     const applyFilter = () => {
