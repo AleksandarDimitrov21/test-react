@@ -22,12 +22,6 @@ const Login = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  useEffect(() => {
-    if (Object.keys(formError).length === 0) {
-      console.log(formData);
-    }
-  }, [formError]);
-
   const validate = (values) => {
     const errors = {};
 
@@ -99,11 +93,7 @@ const Login = () => {
                   Sign Up
                 </Link>
               </h6>
-              {showCaution && (
-                <p className="text-red-500 text-xs">
-                  Incorrect Username or Password.
-                </p>
-              )}
+
               <Buttom textMessage={"Login now"} />
             </form>
           </div>
