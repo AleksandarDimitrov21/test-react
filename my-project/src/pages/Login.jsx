@@ -9,12 +9,12 @@ import axios from "axios";
 const Login = () => {
   const { handleLogin } = useAuth();
   const { clearCart } = useCart();
+
   const [formError, setFormError] = useState({});
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
   const [showCaution, setShowCaution] = useState(false);
 
   const handleChange = (e) => {

@@ -127,11 +127,12 @@ const Profile = () => {
             </div>
 
             <div className=" mx-5">
-              {orders.length === 0 && (
+              {orders.length === 0 && userInfo?.userType === "CUSTOMER" && (
                 <h1 className="text-lg sm:text-2xl flex justify-center">
                   Uh-oh! It looks like you haven't placed any orders yet.
                 </h1>
               )}
+
               {orders.map((order) => (
                 <Order
                   key={order.id}
