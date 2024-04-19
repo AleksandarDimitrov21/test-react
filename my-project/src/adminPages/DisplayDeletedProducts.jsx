@@ -45,6 +45,7 @@ const DisplayDeletedProducts = ({
           />
         </figure>
         <div className="p-4">
+          <h2 className="text-lg text-black">{id}</h2>
           <h2 className="text-lg text-black">{title}</h2>
           <div className="flex items-center">
             <div className="text-xl text-gray-900 mr-2">

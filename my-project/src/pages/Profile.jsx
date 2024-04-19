@@ -55,7 +55,20 @@ const Profile = () => {
             },
           }
         );
-        setOrders(response.data);
+        const ordersWithDetails = await Promise.all(
+          response.data.map(async (order) => {
+            const detailsResponse = await axios.get(
+              `http://localhost:8080/order/${order.id}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            return { ...order, details: detailsResponse.data };
+          })
+        );
+        setOrders(ordersWithDetails);
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
@@ -101,7 +114,7 @@ const Profile = () => {
             <div className="overflow-x-auto mt-5">
               {(userInfo?.userType === "ADMIN" ||
                 userInfo?.userType === "EMPLOYEE") && (
-                <table className="table bg-zinc-800 rounded-none mb-5">
+                <table className="table bg-zinc-800 rounded-none ">
                   <Users users={users} />
                 </table>
               )}
@@ -116,6 +129,7 @@ const Profile = () => {
                   address={order.address}
                   time={order.orderDateTime}
                   price={order.value}
+                  details={order.details}
                 />
               ))}
             </div>

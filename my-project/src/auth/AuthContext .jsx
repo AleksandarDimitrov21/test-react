@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
           setUserInfo(data);
         });
     }
-  }, []);
+  }, [token]);
 
   const handleLogout = () => {
     localStorage.removeItem("jwtToken");

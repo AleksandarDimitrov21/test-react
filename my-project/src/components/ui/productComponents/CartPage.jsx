@@ -5,6 +5,7 @@ import NavBar from "../navigation/NavBar";
 import { RoundedTwoDecimals } from "../../RoundedTwoDecimals";
 import axios from "axios";
 import { useAuth } from "../../../auth/AuthContext ";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const { cartItems, clearCart } = useCart();
@@ -13,6 +14,7 @@ const CartPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const { userInfo } = useAuth();
   const token = localStorage.getItem("jwtToken");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchActualIds = async () => {
@@ -67,6 +69,7 @@ const CartPage = () => {
 
         console.log("Order created successfully:", response.data);
         clearCart();
+        navigate("/");
       } catch (error) {
         console.error("Error creating order:", error);
       }
@@ -83,7 +86,7 @@ const CartPage = () => {
           </h1>
 
           <div className="flex flex-col sm:flex-row justify-center mt-4 gap-3">
-            <div className="flex flex-col gap-20 sm:gap-10  h-[575px] overflow-y-auto shadow-xl">
+            <div className="flex flex-col gap-20 sm:gap-10  h-[575px] overflow-y-auto">
               {cartItems.length === 0 ? (
                 <p className="text-center text-lg text-gray-500">
                   Your cart is empty

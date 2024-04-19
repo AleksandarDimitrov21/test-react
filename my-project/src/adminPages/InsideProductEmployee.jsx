@@ -87,6 +87,9 @@ const InsideProductEmployee = () => {
             <>
               <h2 className="text-xl text-gray-900 mb-2">{product.category}</h2>
               <h2 className="text-3xl text-black mb-2">{product.name}</h2>
+              <h2 className="text-xl text-black mb-2">
+                Product id: {product.id}
+              </h2>
               <h2 className="text-xl text-gray-900 mb-1">
                 Model: {product.model}
               </h2>

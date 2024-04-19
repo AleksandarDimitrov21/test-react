@@ -113,7 +113,7 @@ const ProductEmployee = () => {
             type="text"
             value={searchTerm}
             onChange={handleInputChange}
-            placeholder="Search by name..."
+            placeholder="Search by id..."
             className="input input-bordered flex items-center bg-white"
           />
           <select
