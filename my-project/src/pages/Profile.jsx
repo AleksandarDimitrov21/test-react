@@ -55,20 +55,24 @@ const Profile = () => {
             },
           }
         );
-        const ordersWithDetails = await Promise.all(
-          response.data.map(async (order) => {
-            const detailsResponse = await axios.get(
-              `http://localhost:8080/order/${order.id}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-            return { ...order, details: detailsResponse.data };
-          })
-        );
-        setOrders(ordersWithDetails);
+        if (response.status === 204) {
+          setOrders([]);
+        } else {
+          const ordersWithDetails = await Promise.all(
+            response.data.map(async (order) => {
+              const detailsResponse = await axios.get(
+                `http://localhost:8080/order/${order.id}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+              return { ...order, details: detailsResponse.data };
+            })
+          );
+          setOrders(ordersWithDetails);
+        }
       } catch (error) {
         console.error("Error fetching orders:", error);
       }
@@ -123,6 +127,11 @@ const Profile = () => {
             </div>
 
             <div className=" mx-5">
+              {orders.length === 0 && (
+                <h1 className="text-lg sm:text-2xl flex justify-center">
+                  Uh-oh! It looks like you haven't placed any orders yet.
+                </h1>
+              )}
               {orders.map((order) => (
                 <Order
                   key={order.id}

@@ -53,7 +53,7 @@ const PhotoChange = () => {
   };
 
   if (redirectToProfile) {
-    return <Navigate to={`/profile/${userInfo?.id}`} replace={true} />;
+    return <Navigate to={`/profile`} replace={true} />;
   }
   return (
     <div className="bg-gradient-to-r from-indigo-300 to-violet-200">
@@ -64,12 +64,7 @@ const PhotoChange = () => {
       </Link>
 
       <div className="flex flex-col gap-5 items-center justify-center min-h-screen ">
-        <Avatar
-          photoURL={
-            newPhotoUrl ||
-            "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
-          }
-        />
+        <Avatar photoURL={newPhotoUrl || userInfo?.photo} />
         <form
           onSubmit={handlePreSubmit}
           className="flex flex-col justify-center items-center gap-4"

@@ -164,9 +164,16 @@ const ShopInside = () => {
               <p className="text-2xl mb-2 text-black">
                 <span className="text-xl">
                   BGN{" "}
-                  {product && product.currentPrice
+                  {product.discount > 0 && (
+                    <s className="text-gray-500">
+                      {product.originalPrice
+                        ? RoundedTwoDecimals(product.originalPrice)
+                        : product.originalPrice}
+                    </s>
+                  )}{" "}
+                  {product.currentPrice
                     ? RoundedTwoDecimals(product.currentPrice)
-                    : "Price unavailable"}
+                    : product.currentPrice}
                 </span>
               </p>
               {(userInfo?.userType === "ADMIN" ||
