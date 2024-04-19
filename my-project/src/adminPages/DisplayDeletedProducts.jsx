@@ -57,15 +57,7 @@ const DisplayDeletedProducts = ({
               <p className="text-red-700 font-bold text-lg">-{discount}%</p>
             )}
           </div>
-          <div className="flex items-center justify-end">
-            <button
-              className="btn bg-black hover:bg-violet-500 text-white border-none"
-              onClick={handleReturnToSale}
-            >
-              Return for Sale
-              <img src="cart2.svg" alt="cart" className="w-5 h-5 " />
-            </button>
-          </div>
+          <div className="flex items-center justify-end"></div>
         </div>
       </div>
     </>

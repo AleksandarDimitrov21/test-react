@@ -15,7 +15,7 @@ const AboutPage = () => {
 
   const renderImage = () => {
     switch (image) {
-      case 0:
+      case 5:
         return (
           <img
             src="src\assets\Elana2.jpg"
@@ -50,7 +50,7 @@ const AboutPage = () => {
             className="max-w-sm rounded-lg shadow-2xl max-h-96"
           />
         );
-      case 5:
+      case 0:
         return (
           <img
             src="src\assets\angel3.jpg"
@@ -67,13 +67,15 @@ const AboutPage = () => {
       case 0:
         return (
           <>
-            <h1 className="text-3xl  font-bold mb-5 text-violet-500 w-72">
-              Elena Dobreva
+            <h1 className="text-3xl font-bold mb-5 text-violet-500 w-72">
+              Angel Stoynov
             </h1>
             <InfoCart
-              github={"https://github.com/ElenDobreva"}
-              instagram={"https://www.instagram.com/edobreva24/?hl=en"}
-              facebook={"https://www.facebook.com/elena.dobreva.7906"}
+              github={"https://github.com/StoynovAngel"}
+              instagram={"https://www.instagram.com/angelstoynovv/?hl=en"}
+              facebook={
+                "https://www.facebook.com/profile.php?id=100022110724481"
+              }
             />
           </>
         );
@@ -138,15 +140,13 @@ const AboutPage = () => {
       case 5:
         return (
           <>
-            <h1 className="text-3xl font-bold mb-5 text-violet-500 w-72">
-              Angel Stoynov
+            <h1 className="text-3xl  font-bold mb-5 text-violet-500 w-72">
+              Elena Dobreva
             </h1>
             <InfoCart
-              github={"https://github.com/StoynovAngel"}
-              instagram={"https://www.instagram.com/angelstoynovv/?hl=en"}
-              facebook={
-                "https://www.facebook.com/profile.php?id=100022110724481"
-              }
+              github={"https://github.com/ElenDobreva"}
+              instagram={"https://www.instagram.com/edobreva24/?hl=en"}
+              facebook={"https://www.facebook.com/elena.dobreva.7906"}
             />
           </>
         );

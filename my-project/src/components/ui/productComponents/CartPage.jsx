@@ -89,7 +89,7 @@ const CartPage = () => {
             <div className="flex flex-col gap-20 sm:gap-10  h-[575px] overflow-y-auto">
               {cartItems.length === 0 ? (
                 <p className="text-center text-lg text-gray-500">
-                  Your cart is empty
+                  Your cart looks a little lonely!
                 </p>
               ) : (
                 cartItems.map((product, index) => (

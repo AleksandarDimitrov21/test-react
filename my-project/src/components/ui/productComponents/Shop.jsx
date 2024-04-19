@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../../../CartContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../auth/AuthContext ";
 
 const Shop = ({
   id,
@@ -12,6 +13,7 @@ const Shop = ({
   buttonName,
 }) => {
   const { addToCart } = useCart();
+  const { userInfo } = useAuth();
 
   const handleAddToCart = (event) => {
     event.preventDefault();
@@ -49,13 +51,15 @@ const Shop = ({
             )}
           </div>
           <div className="flex items-center justify-end">
-            <button
-              className="btn bg-black hover:bg-violet-500 text-white border-none"
-              onClick={(event) => handleAddToCart(event)}
-            >
-              {buttonName}
-              <img src="cart2.svg" alt="cart" className="w-5 h-5 " />
-            </button>
+            {userInfo?.userType === "CUSTOMER" && (
+              <button
+                className="btn bg-black hover:bg-violet-500 text-white border-none"
+                onClick={(event) => handleAddToCart(event)}
+              >
+                {buttonName}
+                <img src="cart2.svg" alt="cart" className="w-5 h-5 " />
+              </button>
+            )}
           </div>
         </div>
       </div>

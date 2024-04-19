@@ -85,27 +85,31 @@ const ShopInside = () => {
       console.error("No JWT token found.");
       return;
     }
-    try {
-      await axios.post(
-        `http://localhost:8080/productDelete/${id}`,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+    console.log(userInfo?.userType);
+    if (userInfo?.userType === "ADMIN") {
+      try {
+        await axios.delete(
+          `http://localhost:8080/productDelete/${id}`,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("Product deleted successfully!");
+        navigate("/product-employee");
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response.status);
+          console.log(error.response.data);
+          console.log(token);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
         }
-      );
-      console.log("Product deleted successfully!");
-      navigate("/product");
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.status);
-        console.log(error.response.data);
-      } else if (error.request) {
-        console.log(error.request);
-      } else {
-        console.log("Error", error.message);
       }
     }
   };
@@ -196,12 +200,14 @@ const ShopInside = () => {
               )}
 
               <div className="flex justify-center mb-2">
-                <button
-                  className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full"
-                  onClick={(event) => handleAddToCart(event)}
-                >
-                  Add to Cart
-                </button>
+                {userInfo?.userType === "CUSTOMER" && (
+                  <button
+                    className="mt-4 w-1/2 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full"
+                    onClick={(event) => handleAddToCart(event)}
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </div>
             </>
           )}
