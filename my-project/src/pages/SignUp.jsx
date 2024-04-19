@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import UserInput from "../components/ui/UserInput";
 import { Link } from "react-router-dom";
 import Buttom from "../components/ui/Buttom";
-import { isValidEmail } from "../validation/Validation";
 import { useNavigate } from "react-router-dom";
+import {
+  isValidEmail,
+  isStrongPassword,
+  isAlphabetic,
+  isNotEmpty,
+} from "../validation/Validation";
+
 const SignUp = () => {
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,9 +24,31 @@ const SignUp = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const validateForm = () => {
+    let tempErrors = {};
+    tempErrors.name =
+      isNotEmpty(formData.name) && isAlphabetic(formData.name)
+        ? ""
+        : "Name is required and must be alphabetic.";
+    tempErrors.email = isValidEmail(formData.email)
+      ? ""
+      : "Invalid email format.";
+    tempErrors.username = isNotEmpty(formData.username)
+      ? ""
+      : "Username is required.";
+
+    setErrors(tempErrors);
+    return Object.values(tempErrors).every((x) => x === "");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      setShowCaution(true);
+      return;
+    }
+    setShowCaution(false);
+
     try {
       const response = await fetch("http://localhost:8080/register", {
         method: "POST",
@@ -32,8 +61,7 @@ const SignUp = () => {
         console.log("User signed up successfully!");
         navigate("/login");
       } else {
-        setShowCaution(true);
-        console.error("Error signing up:", response);
+        console.error("Error signing up:", response.statusText);
       }
     } catch (error) {
       console.error("Error registering user:", error);
@@ -78,6 +106,15 @@ const SignUp = () => {
                 value={formData.password}
                 onChange={handleChange}
               />
+              {Object.keys(errors).map((key) => {
+                return (
+                  errors[key] && (
+                    <p key={key} className="text-red-500 text-xs">
+                      {errors[key]}
+                    </p>
+                  )
+                );
+              })}
               {showCaution && (
                 <p className="text-red-500 text-xs">
                   Incorrect Username or Password.
