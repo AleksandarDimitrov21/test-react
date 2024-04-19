@@ -93,28 +93,30 @@ const Profile = () => {
         </div>
         <div className="mt-5">
           <div>
-            <div
-              className="hero h-96 relative"
-              style={{
-                backgroundImage:
-                  "url(https://i.pinimg.com/originals/7e/28/60/7e28602ba1959db39fa98d84655fe7a2.jpg)",
-              }}
-            >
-              <div className="hero-overlay bg-opacity-10 absolute inset-0"></div>
-              <div className="hero-content flex justify-center items-center text-white">
-                <div className="max-w-md text-center">
-                  <h1 className="mb-5 text-4xl font-bold text-zinc-700">
-                    Information
-                  </h1>
-                  <Stat />
+            {userInfo?.userType === "ADMIN" && (
+              <div
+                className="hero h-96 relative"
+                style={{
+                  backgroundImage:
+                    "url(https://i.pinimg.com/originals/7e/28/60/7e28602ba1959db39fa98d84655fe7a2.jpg)",
+                }}
+              >
+                <div className="hero-overlay bg-opacity-10 absolute inset-0"></div>
+                <div className="hero-content flex justify-center items-center text-white">
+                  <div className="max-w-md text-center">
+                    <h1 className="mb-5 text-4xl font-bold text-zinc-700">
+                      Information
+                    </h1>
+                    <Stat />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div className="overflow-x-auto mt-5">
               {(userInfo?.userType === "ADMIN" ||
                 userInfo?.userType === "EMPLOYEE") && (
-                <table className="table bg-zinc-800 rounded-none ">
+                <table className="table bg-zinc-800 rounded-none  ">
                   <Users users={users} />
                 </table>
               )}

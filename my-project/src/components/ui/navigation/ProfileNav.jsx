@@ -49,11 +49,6 @@ const Profile = () => {
             </div>
           </>
         )}
-        <div className="ml-3 ">
-          <button className="justify-between text-black ">
-            <Link to="/revenue">Revenue</Link>
-          </button>
-        </div>
 
         <div className="text-black ml-3">
           <button onClick={handleLogout}>Logout</button>
