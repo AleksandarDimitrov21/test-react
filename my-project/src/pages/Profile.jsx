@@ -109,7 +109,7 @@ const Profile = () => {
                 <div className="hero-content flex justify-center items-center text-white">
                   <div className="max-w-md text-center">
                     <h1 className="mb-5 text-4xl font-bold text-zinc-700">
-                      Information
+                      Revenue:
                     </h1>
                     <Stat />
                   </div>

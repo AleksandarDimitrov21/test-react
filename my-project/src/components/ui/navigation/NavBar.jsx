@@ -5,13 +5,15 @@ import Card from "../Card";
 import { useAuth } from "../../../auth/AuthContext ";
 import { useCart } from "../../../CartContext";
 const NavBar = () => {
-  const { userInfo } = useAuth();
+  const { userInfo, isAuthenticated } = useAuth();
   const [currentPage, setCurrentPage] = useState("");
   const { totalItems, totalPrice } = useCart();
 
   useEffect(() => {
     setCurrentPage(location.pathname);
   }, [location]);
+  console.log(isAuthenticated);
+
   return (
     <div className="navbar bg-transparent fixed z-50 flex items-center justify-center ">
       <div className="flex items-center bg-gray-300 opacity-95 rounded-full py-1 shadow">
@@ -55,7 +57,7 @@ const NavBar = () => {
           </Link>
         </div>
         <div>
-          {!userInfo && (
+          {!isAuthenticated && (
             <div className="mr-0 sm:mr-2">
               <Link to="/login">
                 <h1
@@ -71,12 +73,12 @@ const NavBar = () => {
             </div>
           )}
         </div>
-        {userInfo && (
+        {userInfo?.userType === "CUSTOMER" && (
           <div className="mr-0 sm:mr-1">
             <Card cartQuantity={totalItems} cartPrice={totalPrice} />
           </div>
         )}
-        {userInfo && (
+        {isAuthenticated && (
           <div className="mr-1 sm:mr-2">
             <ProfileNav />
           </div>

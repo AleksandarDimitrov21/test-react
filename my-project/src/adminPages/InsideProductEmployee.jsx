@@ -54,7 +54,7 @@ const InsideProductEmployee = () => {
             },
           }
         );
-        navigate("/");
+        navigate("/product-employee");
       } catch (error) {
         console.error("Error returning product to sale:", error);
       }
@@ -115,14 +115,12 @@ const InsideProductEmployee = () => {
                 </span>
               </p>
               <div className="flex justify-center mb-2">
-                <Link to="/">
-                  <button
-                    className="mt-4 w-96 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full"
-                    onClick={handleReturnToSale}
-                  >
-                    Return for sale
-                  </button>
-                </Link>
+                <button
+                  className="mt-4 w-96 bg-violet-500 hover:bg-violet-400 text-white font-bold p-3 rounded-full"
+                  onClick={handleReturnToSale}
+                >
+                  Return for sale
+                </button>
               </div>
             </>
           )}

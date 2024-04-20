@@ -10,30 +10,6 @@ const DisplayDeletedProducts = ({
   discount,
   onReturnToSale,
 }) => {
-  const { userInfo } = useAuth();
-  const token = localStorage.getItem("jwtToken");
-
-  const handleReturnToSale = async () => {
-    if (userInfo?.userType === "ADMIN" && token) {
-      try {
-        await axios.post(
-          `http://localhost:8080/productReturn/${id}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        onReturnToSale(id);
-      } catch (error) {
-        console.error("Error returning product to sale:", error);
-      }
-    } else {
-      console.error("Unauthorized or no JWT token found.");
-    }
-  };
-
   return (
     <>
       <div className="relative w-full sm:max-w-xs md:max-w-md lg:max-w-lg xl:max-w-xl card shadow-xl">
