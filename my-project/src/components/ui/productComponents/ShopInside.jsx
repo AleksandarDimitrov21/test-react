@@ -13,6 +13,7 @@ const ShopInside = () => {
   const { id } = useParams();
   const { userInfo } = useAuth();
   const token = localStorage.getItem("jwtToken");
+  const [selectedDiscount, setSelectedDiscount] = useState("");
   const { addToCart } = useCart();
 
   const handleAddToCart = (event) => {
@@ -51,6 +52,7 @@ const ShopInside = () => {
 
   const fetchPromo = async (event) => {
     const newDiscount = parseInt(event.target.value, 10);
+    setSelectedDiscount("");
     if (!token) {
       console.error("No JWT token found.");
       return;
@@ -185,7 +187,14 @@ const ShopInside = () => {
                 <div className="flex flex-row items-center gap-2">
                   <h4 className="text-black">Discount: </h4>
 
-                  <select className="bg-white text-sm" onChange={fetchPromo}>
+                  <select
+                    className="bg-white text-sm"
+                    value={selectedDiscount}
+                    onChange={fetchPromo}
+                  >
+                    <option value="" disabled>
+                      Изберете отстъпка
+                    </option>
                     <option value={0}>0%</option>
                     <option value={5}>-5%</option>
                     <option value={10}>-10%</option>

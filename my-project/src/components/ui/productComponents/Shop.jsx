@@ -39,6 +39,10 @@ const Shop = ({
           />
         </figure>
         <div className="p-4">
+          {(userInfo?.userType === "EMPLOYEE" ||
+            userInfo?.userType === "ADMIN") && (
+            <h3 className="text-sm text-gray-800">Id: {id}</h3>
+          )}
           <h2 className="text-lg text-black">{title}</h2>
           <div className="flex items-center">
             <div className="text-xl text-gray-900 mr-2">

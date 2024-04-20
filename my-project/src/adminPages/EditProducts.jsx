@@ -149,49 +149,13 @@ const EditProducts = () => {
                 Description:
               </label>
               <textarea
-                className="rounded-md bg-white text-black pl-2 border min-h-10 w-56 sm:w-96 hover:bg-neutral-200"
+                className="rounded-md bg-white text-black pl-2 border max-h-96 w-56 sm:w-96 hover:bg-neutral-200"
                 name="description"
                 value={product.description}
                 onChange={handleChange}
               />
             </div>
-            {userInfo?.userType === "ADMIN" && (
-              <>
-                <div className="mb-1 flex flex-col">
-                  <Forms
-                    label={"Quantity:"}
-                    type={"number"}
-                    name={"quantity"}
-                    value={product.quantity}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="mb-1 flex flex-col">
-                  <Forms
-                    label={"Min Price"}
-                    type="number"
-                    name={"minPrice"}
-                    value={product.minPrice}
-                    onChange={handleChange}
-                  />
-                  <Forms
-                    label={"Original Price"}
-                    type="number"
-                    name={"originalPrice"}
-                    value={product.originalPrice}
-                    onChange={handleChange}
-                  />
 
-                  <Forms
-                    label={"Discount"}
-                    type="number"
-                    name={"discount"}
-                    value={product.discount}
-                    onChange={handleChange}
-                  />
-                </div>
-              </>
-            )}
             <Button
               className="bg-black border-none w-56 sm:w-96 rounded-3xl py-3 text-xl mt-2 mb-0 font-semibold text-white hover:bg-violet-500"
               variant="primary"

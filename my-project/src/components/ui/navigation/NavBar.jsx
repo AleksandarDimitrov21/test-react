@@ -12,7 +12,6 @@ const NavBar = () => {
   useEffect(() => {
     setCurrentPage(location.pathname);
   }, [location]);
-  console.log(isAuthenticated);
 
   return (
     <div className="navbar bg-transparent fixed z-50 flex items-center justify-center ">

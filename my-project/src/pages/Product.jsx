@@ -144,7 +144,7 @@ const Product = () => {
           {filteredProducts.map((product) => (
             <Link key={product.id} to={`/product/${product.id}`}>
               <Shop
-                productId={product.id}
+                id={product.id}
                 title={product.name}
                 image={product.photo}
                 discount={product.discount}
