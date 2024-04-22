@@ -20,7 +20,7 @@ const Profile = () => {
         console.error("No JWT token found.");
         return;
       }
-      if (userInfo?.userType === "ADMIN") {
+      if (userInfo?.userType === "ADMIN" || userInfo?.userType === "EMPLOYEE") {
         try {
           const response = await axios.get("http://localhost:8080/user", {
             headers: {

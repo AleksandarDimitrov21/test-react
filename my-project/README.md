@@ -13,8 +13,8 @@ Features:
 - The admin has all the features that an employee has. Additionally, he can delete products, see all users and see the revenue.
 - The customer view is fully responsive.
 
-<img src="https://imgur.com/a/ZNo80ko" alt="Home Page"/>
-<img src="https://imgur.com/a/42hLEoW" alt="Home Page Phone"/>
+<img src="https://i.imgur.com/2Am3DIP.png" alt="Home Page"/>
+<img src="https://i.imgur.com/bEWLua4.png" alt="Home Page Phone"/>
 
 ## How to install
 

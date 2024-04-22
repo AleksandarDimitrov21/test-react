@@ -18,7 +18,7 @@ const AddUser = () => {
   });
   const types = ["CUSTOMER", "EMPLOYEE"];
 
-  const addProduct = async (e) => {
+  const addUser = async (e) => {
     e.preventDefault();
     if (userInfo?.userType === "ADMIN") {
       try {
@@ -67,7 +67,7 @@ const AddUser = () => {
 
       <div className="flex items-center justify-center  min-h-screen">
         <div className="bg-white mt-20 sm:mt-5 px-14 sm:px-10 py-5 rounded-xl my-5">
-          <Form onSubmit={addProduct}>
+          <Form onSubmit={addUser}>
             <div className="mb-1 flex flex-col">
               <Forms
                 label={"Name:"}
